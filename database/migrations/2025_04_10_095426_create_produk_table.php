@@ -11,9 +11,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('produk', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_produk'); 
+            $table->id('id_produk'); // otomatis unsignedBigInteger + auto increment + primary key
             $table->string('nama', 255);
             $table->string('url', 255);
+            $table->string('deskripsi', 1024);
+            $table->string('foto', 255);
             $table->enum('tipe', ['pdf', 'video', 'image']);
             $table->enum('kategori', ['zoom_background', 'buku', 'template', 'dsb']);
             $table->timestamps(); 
