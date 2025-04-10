@@ -11,7 +11,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('agenda', function (Blueprint $table) {
-            $table->bigIncrements('id_agenda');  // Changed from id_produk to id_agenda
+            $table->id('id_agenda'); 
             $table->string('nama_agenda', 255);
             $table->unsignedBigInteger('id_user'); 
             $table->enum('status', ['selesai', 'proses', 'pending']);

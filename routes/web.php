@@ -20,15 +20,25 @@ use App\Http\Controllers\VideoController;
 // Route::get('/', function () {
 //     return view('pages.home.index');
 // });
+
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/home', [HomePageController::class, 'index'])->name('homepage.index');
+
+
 Route::get('/login', [AuthController::class, 'index'])->name('login.index');
+Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 Route::get('/list-buku', [BukuController::class, 'list'])->name('buku.list');
 Route::get('/grid-buku', [BukuController::class, 'grid'])->name('buku.grid');
+Route::get('/search-buku', [BukuController::class, 'search'])->name('buku.search');
+
 Route::get('/zoom-background', [ZoomBackgroundController::class, 'index'])->name('zoom.background');
 Route::get('/twibbon', [TwibbonController::class, 'index'])->name('twibbon.index');
 Route::get('/presentasi', [PresentasiController::class, 'index'])->name('presentasi.index');
 Route::get('/logo', [LogoController::class, 'index'])->name('logo.index');
+
+
 Route::get('/crm/data-client', [CRMController::class, 'index'])->name('crm.index');
 Route::get('/crm/permohonan-akses', [CRMController::class, 'permohonan'])->name('crm.permohonan');
 Route::get('/reference/annual-report/grid', [AnnualController::class, 'grid'])->name('annual.grid');

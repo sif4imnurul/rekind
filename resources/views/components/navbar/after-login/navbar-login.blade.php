@@ -129,7 +129,7 @@
         @click.away="dropdownOpen = false"
         class="absolute right-0 mt-2 w-36 bg-white shadow-lg py-2 z-50"
       >
-        <form method="POST" action="#">
+        <form method="POST" action="/logout">
           @csrf
           <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-[var(--sub-text)] hover:text-[var(--judul)] hover:bg-[var(--highlight-text-box)]">
             Logout

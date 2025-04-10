@@ -11,7 +11,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('crm', function (Blueprint $table) {
-            $table->bigIncrements('id_crm'); // Diubah menjadi bigIncrements
+            $table->id('id_crm'); 
             $table->unsignedBigInteger('id_user');
             $table->string('alasan')->nullable();
             $table->string('unit')->nullable();
