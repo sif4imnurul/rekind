@@ -5,7 +5,6 @@
 @section('content')
 
 <div class="w-full px-4 md:px-25 py-6 overflow-x-hidden">
-
     <div class="max-w-full bg-white">
         <div class="max-w-[1050px] mx-auto px-6 md:px-0 pt-10 pb-16 flex flex-col items-start gap-8">
             <div class="flex flex-col items-start gap-2 w-full">
@@ -15,12 +14,12 @@
                 </p>
             </div>
 
-            <!-- Logo Images -->
             <div class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 justify-items-center">
-                <img class="w-[150px] h-auto object-contain self-end" src="{{ asset('img/logo.jpg') }}" alt="Logo 1" />
-                <img class="w-[150px] h-auto object-contain self-end" src="{{ asset('img/logo-pupuk-utilitas.png') }}" alt="Logo 2" />
-                <img class="w-[150px] h-auto object-contain self-end" src="{{ asset('img/Logo-RDM.jpg') }}" alt="Logo 3" />
-                <img class="w-[150px] h-auto object-contain self-end" src="{{ asset('img/logo-puspetindo.jpg') }}" alt="Logo 4" />
+                @foreach($logos as $logo)
+                    <img class="w-[150px] h-auto object-contain self-end" 
+                         src="{{ asset('img/' . $logo->foto) }}" 
+                         alt="{{ $logo->nama }}" />
+                @endforeach
             </div>
         </div>
     </div>

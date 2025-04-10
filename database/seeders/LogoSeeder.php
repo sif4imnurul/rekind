@@ -15,7 +15,7 @@ class LogoSeeder extends Seeder
     {
         $logos = [
             [
-                'id_produk' => 4001,
+                'id_produk' => 4004,
                 'nama' => 'Logo Pupuk Utilitas',
                 'url' => 'logo-pupuk-utilitas.png',
                 'deskripsi' => 'Logo resmi dari Pupuk Utilitas.',
@@ -48,7 +48,7 @@ class LogoSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
             [
-                'id_produk' => 4004,
+                'id_produk' => 4001,
                 'nama' => 'Logo Umum',
                 'url' => 'logo.jpg',
                 'deskripsi' => 'Logo generik untuk kebutuhan umum.',
