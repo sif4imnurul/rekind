@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('url', 255);
             $table->string('deskripsi', 1024);
             $table->string('foto', 255);
-            $table->enum('tipe', ['pdf', 'video', 'image']);
-            $table->enum('kategori', ['zoom_background', 'buku', 'template', 'dsb']);
+            $table->enum('tipe', ['pdf', 'ppt', 'pptx', 'video', 'image']);
+            $table->enum('kategori', ['zoom_background', 'buku', 'template_presentasi', 'dsb']);
             $table->timestamps(); 
         });
     }

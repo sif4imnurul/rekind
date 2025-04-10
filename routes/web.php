@@ -41,7 +41,12 @@ Route::get('/search-buku', [BukuController::class, 'search'])
     ->name('buku.search');
 
 // Tampilan Presentasi
-Route::get('/presentasi', [PresentasiController::class, 'index'])->name('presentasi.index');
+Route::get('/presentasi', [PresentasiController::class, 'index'])
+    ->middleware(CekLogin::class)
+    ->name('presentasi.index');
+Route::get('/presentasi/search', [PresentasiController::class, 'index'])
+    ->middleware(CekLogin::class)
+    ->name('presentasi.search'); 
 
 Route::get('/zoom-background', [ZoomBackgroundController::class, 'index'])->name('zoom.background');
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ClientData;
 use App\Models\CRM;
+use Illuminate\Support\Facades\Auth;
 
 class CRMController extends Controller
 {
@@ -39,6 +40,6 @@ class CRMController extends Controller
         CRM::create($validatedData);
 
         // Redirect back with a success message
-        return redirect()->route('crm.permohonan.index')->with('success', 'Permohonan akses CRM berhasil diajukan.');
+        return redirect()->route('crm.permohonan')->with('success', 'Permohonan akses CRM berhasil diajukan.');
     }
 }
