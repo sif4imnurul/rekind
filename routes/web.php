@@ -54,7 +54,7 @@ Route::get('/zoom-background', [ZoomBackgroundController::class, 'index'])
 Route::get('/zoom-background/search', [ZoomBackgroundController::class, 'index'])
     ->middleware(CekLogin::class)
     ->name('zoom-background.search');
-    
+
 Route::get('/twibbon', [TwibbonController::class, 'index'])->name('twibbon.index');
 
 Route::get('/logo', [LogoController::class, 'index'])->name('logo.index');
