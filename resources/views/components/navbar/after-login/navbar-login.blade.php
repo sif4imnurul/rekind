@@ -81,8 +81,35 @@
         @click.away="dropdownOpen = false"
         class="bg-[var(--6)] py-2 md:absolute md:left-0 md:top-full md:mt-0 md:w-48 md:shadow-lg"
       >
-        <a href="#" class="block px-4 py-2 text-sm text-[var(--sub-text)] hover:bg-[var(--highlight-text-box)] hover:text-[var(--judul)]">Data Client</a>
+        <div x-data="{ showAlert: false }">
+          <a href="{{ route('crm.index') }}" @click="showAlert = true" class="block px-4 py-2 text-sm text-[var(--sub-text)] hover:bg-[var(--highlight-text-box)] hover:text-[var(--judul)]">Data Client</a>
+            <!-- ALERT POPUP -->
+            <div x-show="showAlert" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                <div class="w-full max-w-[500px] p-8 bg-white rounded-[20px] outline-1 outline-[var(--highlight-text-box)] space-y-5">
+                    <!-- Judul -->
+                    <div class="text-center text-[#1D3A6D] text-2xl font-bold leading-[22px]">
+                        PERINGATAN !
+                    </div>
+
+                    <!-- Isi pesan -->
+                    <div class="text-[#1D3A6D] text-base leading-[22px]">
+                        Anda tidak punya hak akses untuk menu ini. Hubungi Corporate Communication Department atau isi form permohonan akses jika anda hendak mengaksesnya.
+                    </div>
+
+                    <!-- Tombol OK -->
+                    <div class="flex justify-center">
+                        <button @click="showAlert = false"
+                            class="px-8 py-3 bg-[#7BB7D1] text-white text-lg font-semibold rounded-xl hover:bg-[#68a5c2] transition">
+                            OK
+                        </button>
+                        <a href="{{ route('crm.permohonan') }}"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <a href="#" class="block px-4 py-2 text-sm text-[var(--sub-text)] hover:bg-[var(--highlight-text-box)] hover:text-[var(--judul)]">Upload/Update Data Client</a>
+        <!-- kalau gada punya akses tampilin ini -->
+        <a href="{{ route('crm.permohonan') }}" class="block px-4 py-2 text-sm text-[var(--sub-text)] hover:bg-[var(--highlight-text-box)] hover:text-[var(--judul)]">Permohonan Akses</a>
       </div>
     </div>
 
