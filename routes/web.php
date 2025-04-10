@@ -16,6 +16,7 @@ use App\Http\Controllers\CompanyProfileController;
 use App\Http\Controllers\DokumentasiController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\VideoController;
+use App\Http\Middleware\CekLogin;
 
 // Route::get('/', function () {
 //     return view('pages.home.index');
@@ -24,18 +25,28 @@ use App\Http\Controllers\VideoController;
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/home', [HomePageController::class, 'index'])->name('homepage.index');
 
-
 Route::get('/login', [AuthController::class, 'index'])->name('login.index');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/list-buku', [BukuController::class, 'list'])->name('buku.list');
-Route::get('/grid-buku', [BukuController::class, 'grid'])->name('buku.grid');
-Route::get('/search-buku', [BukuController::class, 'search'])->name('buku.search');
+// Tampilan Buku
+Route::get('/list-buku', [BukuController::class, 'list'])
+    ->middleware(CekLogin::class)
+    ->name('buku.list');
+Route::get('/grid-buku', [BukuController::class, 'grid'])
+    ->middleware(CekLogin::class)
+    ->name('buku.grid');
+Route::get('/search-buku', [BukuController::class, 'search'])
+    ->middleware(CekLogin::class)
+    ->name('buku.search');
+
+// Tampilan Presentasi
+Route::get('/presentasi', [PresentasiController::class, 'index'])->name('presentasi.index');
 
 Route::get('/zoom-background', [ZoomBackgroundController::class, 'index'])->name('zoom.background');
+
 Route::get('/twibbon', [TwibbonController::class, 'index'])->name('twibbon.index');
-Route::get('/presentasi', [PresentasiController::class, 'index'])->name('presentasi.index');
+
 Route::get('/logo', [LogoController::class, 'index'])->name('logo.index');
 
 

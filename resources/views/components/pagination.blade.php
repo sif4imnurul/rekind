@@ -54,7 +54,7 @@
 
 {{-- YANG DI ATAS MASIH STATIS --}}
 
-@if ($paginator->hasPages())
+@if (isset($paginator) && method_exists($paginator, 'hasPages') && $paginator->hasPages())
     <div class="w-full py-6 flex justify-center items-center gap-6 overflow-x-auto sm:gap-4 md:gap-6 lg:gap-8">
     
         {{-- Previous Page Link --}}
