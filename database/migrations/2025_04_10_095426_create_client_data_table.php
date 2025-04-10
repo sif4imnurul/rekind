@@ -12,12 +12,15 @@ return new class extends Migration
     {
         Schema::create('client_data', function (Blueprint $table) {
             $table->id('id_client_data'); 
+            $table->unsignedBigInteger('id_user');
             $table->string('nama');
             $table->string('email')->nullable();
             $table->string('telepon')->nullable();
             $table->string('alamat_perusahaan')->nullable();
             $table->enum('status_project', ['current', 'past', 'potential']);
             $table->timestamps();
+
+            $table->foreign('id_user')->references('id_user')->on('user')->onDelete('cascade');
         });
     }
 

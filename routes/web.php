@@ -41,6 +41,7 @@ Route::get('/logo', [LogoController::class, 'index'])->name('logo.index');
 
 Route::get('/crm/data-client', [CRMController::class, 'index'])->name('crm.index');
 Route::get('/crm/permohonan-akses', [CRMController::class, 'permohonan'])->name('crm.permohonan');
+Route::post('/crm/permohonan-akses', [CRMController::class, 'store'])->name('crm.store');
 Route::get('/reference/annual-report/grid', [AnnualController::class, 'grid'])->name('annual.grid');
 Route::get('/reference/annual-report/list', [AnnualController::class, 'list'])->name('annual.list');
 Route::get('/reference/sustainability-report/grid', [SustainController::class, 'grid'])->name('sustain.grid');
