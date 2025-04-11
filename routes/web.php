@@ -66,14 +66,33 @@ Route::get('/logo', [LogoController::class, 'index'])
     ->middleware(CekLogin::class)
     ->name('logo.index');
 
-Route::get('/crm/data-client', [CRMController::class, 'index'])->name('crm.index');
-Route::get('/crm/permohonan-akses', [CRMController::class, 'permohonan'])->name('crm.permohonan');
-Route::post('/crm/permohonan-akses', [CRMController::class, 'store'])->name('crm.store');
-Route::get('/reference/annual-report/grid', [AnnualController::class, 'grid'])->name('annual.grid');
-Route::get('/reference/annual-report/list', [AnnualController::class, 'list'])->name('annual.list');
-Route::get('/reference/sustainability-report/grid', [SustainController::class, 'grid'])->name('sustain.grid');
-Route::get('/reference/sustainability-report/list', [SustainController::class, 'list'])->name('sustain.list');
-Route::get('/reference/company-profile', [CompanyProfileController::class, 'index'])->name('compro.index');
+// Tampilan CRM
+Route::get('/crm/data-client', [CRMController::class, 'index'])
+    ->middleware(CekLogin::class)
+    ->name('crm.index');
+Route::get('/crm/permohonan-akses', [CRMController::class, 'permohonan'])
+    ->middleware(CekLogin::class)
+    ->name('crm.permohonan');
+
+// Upload Permohonan Akses
+Route::post('/crm/permohonan-akses', [CRMController::class, 'store'])
+    ->name('crm.store');
+
+// Tampilan Laporan
+Route::get('/reference/annual-report/grid', [AnnualController::class, 'grid'])
+    ->name('annual.grid');
+Route::get('/reference/annual-report/list', [AnnualController::class, 'list'])
+    ->name('annual.list');
+Route::get('/reference/sustainability-report/grid', [SustainController::class, 'grid'])
+    ->name('sustain.grid');
+Route::get('/reference/sustainability-report/list', [SustainController::class, 'list'])
+    ->name('sustain.list');
+
+// Tampilan Company Profile
+Route::get('/reference/company-profile', [CompanyProfileController::class, 'index'])
+->name('compro.index');
+
+// Tampilan Dokumentasi
 Route::get('/picture/photo-video', [DokumentasiController::class, 'index'])->name('dokumentasi.index');
 Route::get('/picture/photo-video/photo', [PhotoController::class, 'index'])->name('photo.index');
 Route::get('/picture/photo-video/video', [VideoController::class, 'index'])->name('video.index');

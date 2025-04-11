@@ -132,7 +132,7 @@
                 <!-- Gambar kiri -->
                 <div class="w-[40px] flex flex-col justify-center items-start overflow-hidden ml-0">
                     <div class="flex justify-start items-start gap-[10px]">
-                        <img class="w-[39.64px] h-[56px]" src="{{ $report->gambar_url ?? asset('img/book-2.jpg') }}" alt="Report Image" />
+                        <img class="w-[39.64px] h-[56px]" src="{{ $report->foto ?? asset('img/book-2.jpg') }}" alt="Report Image" />
                     </div>
                 </div>
 
@@ -147,7 +147,7 @@
                 </div>
 
                 <!-- Icon kanan -->
-                <a href="{{ $report->file_url }}" target="_blank">
+                <a href="{{ $report->url }}" target="_blank">
                     <div class="w-[33px] h-[33px] relative ml-auto">
                         <div class="absolute left-[5.5px] top-[5.5px] w-[22px] h-[22px] text-[#7BB7D1]">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">

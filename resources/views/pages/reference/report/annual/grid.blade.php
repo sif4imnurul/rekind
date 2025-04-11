@@ -139,14 +139,14 @@
                     <div class="bg-white rounded-[20px] outline-1 outline-[#7BB7D1] p-4 flex flex-col gap-2 w-full max-w-[320px]">
                         <!-- Gambar -->
                         <div class="w-full h-[416px] overflow-hidden rounded-[16px] border border-[#7BB7D1]">
-                            <img src="{{ $report->gambar_url ?? asset('img/book-2.jpg') }}" alt="laporan"
+                            <img src="{{ $report->foto ?? asset('img/book-2.jpg') }}" alt="laporan"
                                 class="w-full h-full object-cover rounded-[16px]" />
                         </div>
 
                         <!-- Judul & Icon -->
                         <div class="flex justify-between items-center w-full">
                             <div class="text-[#1D3A6D] text-base font-bold">{{ $report->nama }}</div>
-                            <a href="{{ $report->file_url }}" target="_blank">
+                            <a href="{{ $report->url }}" target="_blank">
                                 <div class="w-[25px] h-[25px] relative">
                                     <div class="w-[24px] h-[24px] text-[#7BB7D1] absolute rounded">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 

@@ -24,67 +24,27 @@
         </h3>
         <div class="max-w-[1600px] mx-auto flex flex-wrap justify-center gap-6">
             <!-- Card -->
-            <div class="w-[327px] p-4 bg-white overflow-hidden rounded-[20px] outline-1 outline-[#7BB7D1] outline-offset-[-1px] flex flex-col gap-[13px]">
-                <img src="{{ asset('img/book-1.jpg') }}" alt="Buku" class="w-full h-[416px] rounded-[16px] border border-[#7BB7D1]" />
-                <div class="flex justify-between items-center">
-                    <div class="text-[#1D3A6D] text-[18px] font-bold leading-[22px] font-montserrat">Judul Buku</div>
-                    <div class="w-[33px] h-[33px] relative">
-                        <a href="#">
-                            <div class="w-[22px] h-[22px] absolute left-[5.5px] top-[5.5px] text-[var(--button)]">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
-                                <path d="m12 16 4-5h-3V4h-2v7H8z"></path>
-                                <path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path>
-                                </svg>
-                            </div>
-                        </a>
+            @foreach ($buku as $book)
+                <div class="w-[327px] p-4 bg-white overflow-hidden rounded-[20px] outline-1 outline-[#7BB7D1] outline-offset-[-1px] flex flex-col gap-[13px]">
+                    <img src="{{ $book->gambar ?? asset('img/book-1.jpg') }}" alt="Buku" class="w-full h-[416px] rounded-[16px] border border-[#7BB7D1]" />
+                    <div class="flex justify-between items-center">
+                        <div class="text-[#1D3A6D] text-[18px] font-bold leading-[22px] font-montserrat">{{ $book->nama }}</div>
+                        <div class="w-[33px] h-[33px] relative">
+                            <a href="{{ $book->url }}" target="_blank">
+                                <div class="w-[22px] h-[22px] absolute left-[5.5px] top-[5.5px] text-[var(--button)]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
+                                        <path d="m12 16 4-5h-3V4h-2v7H8z"></path>
+                                        <path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path>
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="h-[16px] flex items-start gap-2">
+                        <div class="text-[#BDBDBD] text-[13px] font-normal leading-[16px] font-montserrat">{{ $book->deskripsi ?? 'Deskripsi tidak tersedia' }}</div>
                     </div>
                 </div>
-                <div class="h-[16px] flex items-start gap-2">
-                    <div class="text-[#BDBDBD] text-[13px] font-normal leading-[16px] font-montserrat">Caption</div>
-                </div>
-            </div>
-
-            <!-- Card -->
-            <div class="w-[327px] p-4 bg-white overflow-hidden rounded-[20px] outline-1 outline-[#7BB7D1] outline-offset-[-1px] flex flex-col gap-[13px]">
-                <img src="{{ asset('img/book-4.jpg') }}" alt="Buku" class="w-full h-[416px] rounded-[16px] border border-[#7BB7D1]" />
-                <div class="flex justify-between items-center">
-                    <div class="text-[#1D3A6D] text-[18px] font-bold leading-[22px] font-montserrat">Judul Buku</div>
-                    <div class="w-[33px] h-[33px] relative">
-                        <a href="#">
-                            <div class="w-[22px] h-[22px] absolute left-[5.5px] top-[5.5px] text-[var(--button)]">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
-                                <path d="m12 16 4-5h-3V4h-2v7H8z"></path>
-                                <path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path>
-                                </svg>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="h-[16px] flex items-start gap-2">
-                    <div class="text-[#BDBDBD] text-[13px] font-normal leading-[16px] font-montserrat">Caption</div>
-                </div>
-            </div>
-
-            <!-- Card -->
-            <div class="w-[327px] p-4 bg-white overflow-hidden rounded-[20px] outline-1 outline-[#7BB7D1] outline-offset-[-1px] flex flex-col gap-[13px]">
-                <img src="{{ asset('img/SR2023.png') }}" alt="Buku" class="w-full h-[416px] rounded-[16px] border border-[#7BB7D1]" />
-                <div class="flex justify-between items-center">
-                    <div class="text-[#1D3A6D] text-[18px] font-bold leading-[22px] font-montserrat">Judul Buku</div>
-                    <div class="w-[33px] h-[33px] relative">
-                        <a href="#">
-                            <div class="w-[22px] h-[22px] absolute left-[5.5px] top-[5.5px] text-[var(--button)]">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
-                                <path d="m12 16 4-5h-3V4h-2v7H8z"></path>
-                                <path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path>
-                                </svg>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="h-[16px] flex items-start gap-2">
-                    <div class="text-[#BDBDBD] text-[13px] font-normal leading-[16px] font-montserrat">Caption</div>
-                </div>
-            </div>
+            @endforeach
         </div>
 
         <!-- Link Selengkapnya -->
@@ -138,34 +98,21 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full justify-items-center">
             
                 <!-- Card -->
-                <div class="relative w-[327px] h-[184px]">
-                    <img src="{{ asset('img/pict-4.jpg') }}" alt="Image" class="w-full h-full object-cover rounded-[16px] border border-[var(--button)]" />
-                    <div class="absolute bottom-2 right-2 w-[38px] h-[38px] bg-[var(--highlight-text-box)] rounded-[12px] shadow flex items-center justify-center">
-                        <div class="w-[24px] h-[24px] text-[var(--button)]">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="fill-current" viewBox="0 0 24 24"><path d="m12 16 4-5h-3V4h-2v7H8z"/><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"/></svg>
+                @foreach ($template as $item)
+                    <div class="relative w-[327px] h-[184px]">
+                        <img src="{{ $item->gambar ?? asset('img/pict-4.jpg') }}" alt="Template" class="w-full h-full object-cover rounded-[16px] border border-[var(--button)]" />
+                        <div class="absolute bottom-2 right-2 w-[38px] h-[38px] bg-[var(--highlight-text-box)] rounded-[12px] shadow flex items-center justify-center">
+                            <a href="{{ $item->url }}" target="_blank">
+                                <div class="w-[24px] h-[24px] text-[var(--button)]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="fill-current" viewBox="0 0 24 24">
+                                        <path d="m12 16 4-5h-3V4h-2v7H8z"></path>
+                                        <path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path>
+                                    </svg>
+                                </div>
+                            </a>
                         </div>
                     </div>
-                </div>
-
-                <!-- Card (copy) -->
-                <div class="relative w-[327px] h-[184px]">
-                    <img src="{{ asset('img/pict-4.jpg') }}" alt="Image" class="w-full h-full object-cover rounded-[16px] border border-[var(--button)]" />
-                    <div class="absolute bottom-2 right-2 w-[38px] h-[38px] bg-[var(--highlight-text-box)] rounded-[12px] shadow flex items-center justify-center">
-                        <div class="w-[24px] h-[24px] text-[var(--button)]">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="fill-current" viewBox="0 0 24 24"><path d="m12 16 4-5h-3V4h-2v7H8z"/><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"/></svg>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card (copy) -->
-                <div class="relative w-[327px] h-[184px]">
-                    <img src="{{ asset('img/pict-4.jpg') }}" alt="Image" class="w-full h-full object-cover rounded-[16px] border border-[var(--button)]" />
-                    <div class="absolute bottom-2 right-2 w-[38px] h-[38px] bg-[var(--highlight-text-box)] rounded-[12px] shadow flex items-center justify-center">
-                        <div class="w-[24px] h-[24px] text-[var(--button)]">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="fill-current" viewBox="0 0 24 24"><path d="m12 16 4-5h-3V4h-2v7H8z"/><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"/></svg>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
 
             <!-- Link Selengkapnya -->
