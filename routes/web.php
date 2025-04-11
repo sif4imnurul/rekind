@@ -48,6 +48,7 @@ Route::get('/presentasi/search', [PresentasiController::class, 'index'])
     ->middleware(CekLogin::class)
     ->name('presentasi.search'); 
 
+// Tampilan Background Zoom
 Route::get('/zoom-background', [ZoomBackgroundController::class, 'index'])
     ->middleware(CekLogin::class)
     ->name('zoom.background');
@@ -55,10 +56,15 @@ Route::get('/zoom-background/search', [ZoomBackgroundController::class, 'index']
     ->middleware(CekLogin::class)
     ->name('zoom-background.search');
 
-Route::get('/twibbon', [TwibbonController::class, 'index'])->name('twibbon.index');
+// Tampilan Twibbon
+Route::get('/twibbon', [TwibbonController::class, 'index'])
+    ->middleware(CekLogin::class)
+    ->name('twibbon.index');
 
-Route::get('/logo', [LogoController::class, 'index'])->name('logo.index');
-
+// Tampilan Logo
+Route::get('/logo', [LogoController::class, 'index'])
+    ->middleware(CekLogin::class)
+    ->name('logo.index');
 
 Route::get('/crm/data-client', [CRMController::class, 'index'])->name('crm.index');
 Route::get('/crm/permohonan-akses', [CRMController::class, 'permohonan'])->name('crm.permohonan');
