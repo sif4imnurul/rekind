@@ -124,256 +124,43 @@
         </div>
     </div>
 
-    <!-- list book -->
+    <!-- List Book -->
     <div class="w-full h-full relative bg-white flex flex-col justify-center items-center py-6">
-        <!-- Main content -->
-        <div class="w-full flex items-center gap-4 px-4 py-2">
-            <!-- Gambar kiri -->
-            <div class="w-[40px] flex flex-col justify-center items-start overflow-hidden ml-0">
-                <div class="flex justify-start items-start gap-[10px]">
-                    <img class="w-[39.64px] h-[56px]" src="{{ asset('img/book-2.jpg') }}" />
-                </div>
-            </div>
-
-            <!-- Teks tengah -->
-            <div class="flex-1 flex flex-col justify-center items-start overflow-hidden">
-                <div class="w-full text-[#1D3A6D] text-[20px] leading-[24px] tracking-[0.5px] font-semibold">
-                    2023
-                </div>
-                <div class="w-full h-[20px] text-[#737373] text-[14px] leading-[20px] tracking-[0.25px]">
-                    Judul Laporan
-                </div>
-            </div>
-
-            <!-- Icon kanan -->
-            <a href="#">
-                <div class="w-[33px] h-[33px] relative ml-auto">
-                    <div class="absolute left-[5.5px] top-[5.5px] w-[22px] h-[22px] text-[#7BB7D1]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="m12 16 4-5h-3V4h-2v7H8z"></path><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path></svg>
+        @foreach ($annualReports as $report)
+            <!-- Main content -->
+            <div class="w-full flex items-center gap-4 px-4 py-2">
+                <!-- Gambar kiri -->
+                <div class="w-[40px] flex flex-col justify-center items-start overflow-hidden ml-0">
+                    <div class="flex justify-start items-start gap-[10px]">
+                        <img class="w-[39.64px] h-[56px]" src="{{ $report->gambar_url ?? asset('img/book-2.jpg') }}" alt="Report Image" />
                     </div>
                 </div>
-            </a>
-        </div>
 
-        <hr class="w-full border-[var(--button)]">
-
-        <!-- Main content -->
-        <div class="w-full flex items-center gap-4 px-4 py-2">
-            <!-- Gambar kiri -->
-            <div class="w-[40px] flex flex-col justify-center items-start overflow-hidden ml-0">
-                <div class="flex justify-start items-start gap-[10px]">
-                    <img class="w-[39.64px] h-[56px]" src="{{ asset('img/book-2.jpg') }}" />
-                </div>
-            </div>
-
-            <!-- Teks tengah -->
-            <div class="flex-1 flex flex-col justify-center items-start overflow-hidden">
-                <div class="w-full text-[#1D3A6D] text-[20px] leading-[24px] tracking-[0.5px] font-semibold">
-                    2023
-                </div>
-                <div class="w-full h-[20px] text-[#737373] text-[14px] leading-[20px] tracking-[0.25px]">
-                    Judul Laporan
-                </div>
-            </div>
-
-            <!-- Icon kanan -->
-            <a href="#">
-                <div class="w-[33px] h-[33px] relative ml-auto">
-                    <div class="absolute left-[5.5px] top-[5.5px] w-[22px] h-[22px] text-[#7BB7D1]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="m12 16 4-5h-3V4h-2v7H8z"></path><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path></svg>
+                <!-- Teks tengah -->
+                <div class="flex-1 flex flex-col justify-center items-start overflow-hidden">
+                    <div class="w-full text-[#1D3A6D] text-[20px] leading-[24px] tracking-[0.5px] font-semibold">
+                        {{ $report->created_at ? $report->created_at->format('Y') : 'N/A' }}
+                    </div>
+                    <div class="w-full h-[20px] text-[#737373] text-[14px] leading-[20px] tracking-[0.25px]">
+                        {{ $report->nama }}
                     </div>
                 </div>
-            </a>
-        </div>
 
-        <hr class="w-full border-[var(--button)]">
-
-        <!-- Main content -->
-        <div class="w-full flex items-center gap-4 px-4 py-2">
-            <!-- Gambar kiri -->
-            <div class="w-[40px] flex flex-col justify-center items-start overflow-hidden ml-0">
-                <div class="flex justify-start items-start gap-[10px]">
-                    <img class="w-[39.64px] h-[56px]" src="{{ asset('img/book-2.jpg') }}" />
-                </div>
-            </div>
-
-            <!-- Teks tengah -->
-            <div class="flex-1 flex flex-col justify-center items-start overflow-hidden">
-                <div class="w-full text-[#1D3A6D] text-[20px] leading-[24px] tracking-[0.5px] font-semibold">
-                    2023
-                </div>
-                <div class="w-full h-[20px] text-[#737373] text-[14px] leading-[20px] tracking-[0.25px]">
-                    Judul Laporan
-                </div>
-            </div>
-
-            <!-- Icon kanan -->
-            <a href="#">
-                <div class="w-[33px] h-[33px] relative ml-auto">
-                    <div class="absolute left-[5.5px] top-[5.5px] w-[22px] h-[22px] text-[#7BB7D1]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="m12 16 4-5h-3V4h-2v7H8z"></path><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path></svg>
+                <!-- Icon kanan -->
+                <a href="{{ $report->file_url }}" target="_blank">
+                    <div class="w-[33px] h-[33px] relative ml-auto">
+                        <div class="absolute left-[5.5px] top-[5.5px] w-[22px] h-[22px] text-[#7BB7D1]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
+                                <path d="m12 16 4-5h-3V4h-2v7H8z"></path>
+                                <path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path>
+                            </svg>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
-
-        <hr class="w-full border-[var(--button)]">
-
-        <!-- Main content -->
-        <div class="w-full flex items-center gap-4 px-4 py-2">
-            <!-- Gambar kiri -->
-            <div class="w-[40px] flex flex-col justify-center items-start overflow-hidden ml-0">
-                <div class="flex justify-start items-start gap-[10px]">
-                    <img class="w-[39.64px] h-[56px]" src="{{ asset('img/book-2.jpg') }}" />
-                </div>
+                </a>
             </div>
 
-            <!-- Teks tengah -->
-            <div class="flex-1 flex flex-col justify-center items-start overflow-hidden">
-                <div class="w-full text-[#1D3A6D] text-[20px] leading-[24px] tracking-[0.5px] font-semibold">
-                    2023
-                </div>
-                <div class="w-full h-[20px] text-[#737373] text-[14px] leading-[20px] tracking-[0.25px]">
-                    Judul Laporan
-                </div>
-            </div>
-
-            <!-- Icon kanan -->
-            <a href="#">
-                <div class="w-[33px] h-[33px] relative ml-auto">
-                    <div class="absolute left-[5.5px] top-[5.5px] w-[22px] h-[22px] text-[#7BB7D1]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="m12 16 4-5h-3V4h-2v7H8z"></path><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path></svg>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <hr class="w-full border-[var(--button)]">
-
-        <!-- Main content -->
-        <div class="w-full flex items-center gap-4 px-4 py-2">
-            <!-- Gambar kiri -->
-            <div class="w-[40px] flex flex-col justify-center items-start overflow-hidden ml-0">
-                <div class="flex justify-start items-start gap-[10px]">
-                    <img class="w-[39.64px] h-[56px]" src="{{ asset('img/book-2.jpg') }}" />
-                </div>
-            </div>
-
-            <!-- Teks tengah -->
-            <div class="flex-1 flex flex-col justify-center items-start overflow-hidden">
-                <div class="w-full text-[#1D3A6D] text-[20px] leading-[24px] tracking-[0.5px] font-semibold">
-                    2023
-                </div>
-                <div class="w-full h-[20px] text-[#737373] text-[14px] leading-[20px] tracking-[0.25px]">
-                    Judul Laporan
-                </div>
-            </div>
-
-            <!-- Icon kanan -->
-            <a href="#">
-                <div class="w-[33px] h-[33px] relative ml-auto">
-                    <div class="absolute left-[5.5px] top-[5.5px] w-[22px] h-[22px] text-[#7BB7D1]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="m12 16 4-5h-3V4h-2v7H8z"></path><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path></svg>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <hr class="w-full border-[var(--button)]">
-
-        <!-- Main content -->
-        <div class="w-full flex items-center gap-4 px-4 py-2">
-            <!-- Gambar kiri -->
-            <div class="w-[40px] flex flex-col justify-center items-start overflow-hidden ml-0">
-                <div class="flex justify-start items-start gap-[10px]">
-                    <img class="w-[39.64px] h-[56px]" src="{{ asset('img/book-2.jpg') }}" />
-                </div>
-            </div>
-
-            <!-- Teks tengah -->
-            <div class="flex-1 flex flex-col justify-center items-start overflow-hidden">
-                <div class="w-full text-[#1D3A6D] text-[20px] leading-[24px] tracking-[0.5px] font-semibold">
-                    2023
-                </div>
-                <div class="w-full h-[20px] text-[#737373] text-[14px] leading-[20px] tracking-[0.25px]">
-                    Judul Laporan
-                </div>
-            </div>
-
-            <!-- Icon kanan -->
-            <a href="#">
-                <div class="w-[33px] h-[33px] relative ml-auto">
-                    <div class="absolute left-[5.5px] top-[5.5px] w-[22px] h-[22px] text-[#7BB7D1]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="m12 16 4-5h-3V4h-2v7H8z"></path><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path></svg>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <hr class="w-full border-[var(--button)]">
-
-        <!-- Main content -->
-        <div class="w-full flex items-center gap-4 px-4 py-2">
-            <!-- Gambar kiri -->
-            <div class="w-[40px] flex flex-col justify-center items-start overflow-hidden ml-0">
-                <div class="flex justify-start items-start gap-[10px]">
-                    <img class="w-[39.64px] h-[56px]" src="{{ asset('img/book-2.jpg') }}" />
-                </div>
-            </div>
-
-            <!-- Teks tengah -->
-            <div class="flex-1 flex flex-col justify-center items-start overflow-hidden">
-                <div class="w-full text-[#1D3A6D] text-[20px] leading-[24px] tracking-[0.5px] font-semibold">
-                    2023
-                </div>
-                <div class="w-full h-[20px] text-[#737373] text-[14px] leading-[20px] tracking-[0.25px]">
-                    Judul Laporan
-                </div>
-            </div>
-
-            <!-- Icon kanan -->
-            <a href="#">
-                <div class="w-[33px] h-[33px] relative ml-auto">
-                    <div class="absolute left-[5.5px] top-[5.5px] w-[22px] h-[22px] text-[#7BB7D1]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="m12 16 4-5h-3V4h-2v7H8z"></path><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path></svg>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <hr class="w-full border-[var(--button)]">
-
-        <!-- Main content -->
-        <div class="w-full flex items-center gap-4 px-4 py-2">
-            <!-- Gambar kiri -->
-            <div class="w-[40px] flex flex-col justify-center items-start overflow-hidden ml-0">
-                <div class="flex justify-start items-start gap-[10px]">
-                    <img class="w-[39.64px] h-[56px]" src="{{ asset('img/book-2.jpg') }}" />
-                </div>
-            </div>
-
-            <!-- Teks tengah -->
-            <div class="flex-1 flex flex-col justify-center items-start overflow-hidden">
-                <div class="w-full text-[#1D3A6D] text-[20px] leading-[24px] tracking-[0.5px] font-semibold">
-                    2023
-                </div>
-                <div class="w-full h-[20px] text-[#737373] text-[14px] leading-[20px] tracking-[0.25px]">
-                    Judul Laporan
-                </div>
-            </div>
-
-            <!-- Icon kanan -->
-            <a href="#">
-                <div class="w-[33px] h-[33px] relative ml-auto">
-                    <div class="absolute left-[5.5px] top-[5.5px] w-[22px] h-[22px] text-[#7BB7D1]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="m12 16 4-5h-3V4h-2v7H8z"></path><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path></svg>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <hr class="w-full border-[var(--button)]">
-        
+            <hr class="w-full border-[var(--button)]">
+        @endforeach
     </div>
     
     @include('components.pagination')

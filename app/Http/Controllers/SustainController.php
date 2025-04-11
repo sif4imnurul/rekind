@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ProdukModel;
 
 class SustainController extends Controller
 {
     public function grid()
     {
-        return view('pages.reference.report.sustain.grid');
+        $sustainReports = ProdukModel::where('kategori', 'laporanS')->get();
+        return view('pages.reference.report.sustain.grid', compact('sustainReports'));
     }
 
     public function list()
     {
-        return view('pages.reference.report.sustain.list');
+        $sustainReports = ProdukModel::where('kategori', 'laporanS')->get();
+        return view('pages.reference.report.sustain.list', compact('sustainReports'));
     }
 }

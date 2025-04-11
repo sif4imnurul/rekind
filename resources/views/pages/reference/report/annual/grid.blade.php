@@ -129,191 +129,38 @@
     <div class="w-full py-6">
         <div class="flex flex-wrap justify-center gap-6 px-4 max-w-7xl mx-auto">
             
-            <!-- Satu blok laporan -->
-            <div class="flex flex-col items-center gap-2">
-                <!-- Tahun di atas card -->
-                <div class="text-[#1D3A6D] text-3xl font-bold text-center">2023</div>
+            <!-- Loop through Annual Reports -->
+            @foreach ($annualReports as $report)
+                <div class="flex flex-col items-center gap-2">
+                    <!-- Tahun di atas card -->
+                    <div class="text-[#1D3A6D] text-3xl font-bold text-center">{{ $report->created_at->format('Y') ?? 'N/A' }}</div>
 
-                <!-- Card -->
-                <div class="bg-white rounded-[20px] outline-1 outline-[#7BB7D1] p-4 flex flex-col gap-2 w-full max-w-[320px]">
-                    <!-- Gambar -->
-                    <div class="w-full h-[416px] overflow-hidden rounded-[16px] border border-[#7BB7D1]">
-                    <img src="{{ asset('img/book-2.jpg') }}" alt="laporan"
-                        class="w-full h-full object-cover rounded-[16px]" />
-                    </div>
+                    <!-- Card -->
+                    <div class="bg-white rounded-[20px] outline-1 outline-[#7BB7D1] p-4 flex flex-col gap-2 w-full max-w-[320px]">
+                        <!-- Gambar -->
+                        <div class="w-full h-[416px] overflow-hidden rounded-[16px] border border-[#7BB7D1]">
+                            <img src="{{ $report->gambar_url ?? asset('img/book-2.jpg') }}" alt="laporan"
+                                class="w-full h-full object-cover rounded-[16px]" />
+                        </div>
 
-                    <!-- Judul & Icon -->
-                    <div class="flex justify-between items-center w-full">
-                        <div class="text-[#1D3A6D] text-base font-bold">Judul Laporan</div>
-                        <a href="#">
-                            <div class="w-[25px] h-[25px] relative">
-                                <div class="w-[24px] h-[24px] text-[#7BB7D1] absolute rounded">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
-                                        viewBox="0 0 24 24" class="fill-current">
-                                        <path d="m12 16 4-5h-3V4h-2v7H8z"></path>
-                                        <path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path>
-                                    </svg>
+                        <!-- Judul & Icon -->
+                        <div class="flex justify-between items-center w-full">
+                            <div class="text-[#1D3A6D] text-base font-bold">{{ $report->nama }}</div>
+                            <a href="{{ $report->file_url }}" target="_blank">
+                                <div class="w-[25px] h-[25px] relative">
+                                    <div class="w-[24px] h-[24px] text-[#7BB7D1] absolute rounded">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                                            viewBox="0 0 24 24" class="fill-current">
+                                            <path d="m12 16 4-5h-3V4h-2v7H8z"></path>
+                                            <path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path>
+                                        </svg>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Satu blok laporan -->
-            <div class="flex flex-col items-center gap-2">
-                <!-- Tahun di atas card -->
-                <div class="text-[#1D3A6D] text-3xl font-bold text-center">2023</div>
-
-                <!-- Card -->
-                <div class="bg-white rounded-[20px] outline-1 outline-[#7BB7D1] p-4 flex flex-col gap-2 w-full max-w-[320px]">
-                    <!-- Gambar -->
-                    <div class="w-full h-[416px] overflow-hidden rounded-[16px] border border-[#7BB7D1]">
-                    <img src="{{ asset('img/book-2.jpg') }}" alt="laporan"
-                        class="w-full h-full object-cover rounded-[16px]" />
-                    </div>
-
-                    <!-- Judul & Icon -->
-                    <div class="flex justify-between items-center w-full">
-                        <div class="text-[#1D3A6D] text-base font-bold">Judul Laporan</div>
-                        <a href="#">
-                            <div class="w-[25px] h-[25px] relative">
-                                <div class="w-[24px] h-[24px] text-[#7BB7D1] absolute rounded">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
-                                        viewBox="0 0 24 24" class="fill-current">
-                                        <path d="m12 16 4-5h-3V4h-2v7H8z"></path>
-                                        <path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Satu blok laporan -->
-            <div class="flex flex-col items-center gap-2">
-                <!-- Tahun di atas card -->
-                <div class="text-[#1D3A6D] text-3xl font-bold text-center">2023</div>
-
-                <!-- Card -->
-                <div class="bg-white rounded-[20px] outline-1 outline-[#7BB7D1] p-4 flex flex-col gap-2 w-full max-w-[320px]">
-                    <!-- Gambar -->
-                    <div class="w-full h-[416px] overflow-hidden rounded-[16px] border border-[#7BB7D1]">
-                    <img src="{{ asset('img/book-2.jpg') }}" alt="laporan"
-                        class="w-full h-full object-cover rounded-[16px]" />
-                    </div>
-
-                    <!-- Judul & Icon -->
-                    <div class="flex justify-between items-center w-full">
-                        <div class="text-[#1D3A6D] text-base font-bold">Judul Laporan</div>
-                        <a href="#">
-                            <div class="w-[25px] h-[25px] relative">
-                                <div class="w-[24px] h-[24px] text-[#7BB7D1] absolute rounded">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
-                                        viewBox="0 0 24 24" class="fill-current">
-                                        <path d="m12 16 4-5h-3V4h-2v7H8z"></path>
-                                        <path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Satu blok laporan -->
-            <div class="flex flex-col items-center gap-2">
-                <!-- Tahun di atas card -->
-                <div class="text-[#1D3A6D] text-3xl font-bold text-center">2023</div>
-
-                <!-- Card -->
-                <div class="bg-white rounded-[20px] outline-1 outline-[#7BB7D1] p-4 flex flex-col gap-2 w-full max-w-[320px]">
-                    <!-- Gambar -->
-                    <div class="w-full h-[416px] overflow-hidden rounded-[16px] border border-[#7BB7D1]">
-                    <img src="{{ asset('img/book-2.jpg') }}" alt="laporan"
-                        class="w-full h-full object-cover rounded-[16px]" />
-                    </div>
-
-                    <!-- Judul & Icon -->
-                    <div class="flex justify-between items-center w-full">
-                        <div class="text-[#1D3A6D] text-base font-bold">Judul Laporan</div>
-                        <a href="#">
-                            <div class="w-[25px] h-[25px] relative">
-                                <div class="w-[24px] h-[24px] text-[#7BB7D1] absolute rounded">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
-                                        viewBox="0 0 24 24" class="fill-current">
-                                        <path d="m12 16 4-5h-3V4h-2v7H8z"></path>
-                                        <path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Satu blok laporan -->
-            <div class="flex flex-col items-center gap-2">
-                <!-- Tahun di atas card -->
-                <div class="text-[#1D3A6D] text-3xl font-bold text-center">2023</div>
-
-                <!-- Card -->
-                <div class="bg-white rounded-[20px] outline-1 outline-[#7BB7D1] p-4 flex flex-col gap-2 w-full max-w-[320px]">
-                    <!-- Gambar -->
-                    <div class="w-full h-[416px] overflow-hidden rounded-[16px] border border-[#7BB7D1]">
-                    <img src="{{ asset('img/book-2.jpg') }}" alt="laporan"
-                        class="w-full h-full object-cover rounded-[16px]" />
-                    </div>
-
-                    <!-- Judul & Icon -->
-                    <div class="flex justify-between items-center w-full">
-                        <div class="text-[#1D3A6D] text-base font-bold">Judul Laporan</div>
-                        <a href="#">
-                            <div class="w-[25px] h-[25px] relative">
-                                <div class="w-[24px] h-[24px] text-[#7BB7D1] absolute rounded">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
-                                        viewBox="0 0 24 24" class="fill-current">
-                                        <path d="m12 16 4-5h-3V4h-2v7H8z"></path>
-                                        <path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Satu blok laporan -->
-            <div class="flex flex-col items-center gap-2">
-                <!-- Tahun di atas card -->
-                <div class="text-[#1D3A6D] text-3xl font-bold text-center">2023</div>
-
-                <!-- Card -->
-                <div class="bg-white rounded-[20px] outline-1 outline-[#7BB7D1] p-4 flex flex-col gap-2 w-full max-w-[320px]">
-                    <!-- Gambar -->
-                    <div class="w-full h-[416px] overflow-hidden rounded-[16px] border border-[#7BB7D1]">
-                    <img src="{{ asset('img/book-2.jpg') }}" alt="laporan"
-                        class="w-full h-full object-cover rounded-[16px]" />
-                    </div>
-
-                    <!-- Judul & Icon -->
-                    <div class="flex justify-between items-center w-full">
-                        <div class="text-[#1D3A6D] text-base font-bold">Judul Laporan</div>
-                        <a href="#">
-                            <div class="w-[25px] h-[25px] relative">
-                                <div class="w-[24px] h-[24px] text-[#7BB7D1] absolute rounded">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
-                                        viewBox="0 0 24 24" class="fill-current">
-                                        <path d="m12 16 4-5h-3V4h-2v7H8z"></path>
-                                        <path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
 
         </div>
     </div>
