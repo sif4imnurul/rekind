@@ -132,7 +132,7 @@
                 <!-- Gambar kiri -->
                 <div class="w-[40px] flex flex-col justify-center items-start overflow-hidden ml-0">
                     <div class="flex justify-start items-start gap-[10px]">
-                        <img class="w-[39.64px] h-[56px]" src="{{ $report->foto ?? asset('img/book-2.jpg') }}" alt="Report Image" />
+                        <img class="w-[39.64px] h-[56px]" src="{{ $report->foto ? asset($report->foto) : asset('img/book-2.jpg') }}" alt="Report Image" />
                     </div>
                 </div>
 

@@ -40,17 +40,15 @@
     <!-- GRID -->
     <div class="w-full px-4">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 auto-rows-[330px]">
-            @for ($i = 0; $i < 9; $i++)
-                <div class="relative group border border-[#7BB7D1] w-full h-full overflow-hidden {{ $i === 4 ? 'lg:col-span-2 lg:row-span-2' : '' }}">
-                    <img src="{{ asset('img/photo.jpg') }}" class="w-full h-full object-cover transition duration-300" />
-
-                    <!-- Hover overlay biru transparan -->
+            @foreach ($photos as $photo)
+                <div class="relative group border border-[#7BB7D1] w-full h-full overflow-hidden">
+                    <img src="{{ asset($photo->foto) }}" class="w-full h-full object-cover transition duration-300" alt="{{ $photo->nama }}" />
                     <div class="absolute inset-0 bg-[var(--button)]/90 flex flex-col items-center justify-center text-center opacity-0 group-hover:opacity-100 transition duration-300">
-                        <h3 class="text-white text-lg font-semibold mb-1">Judul Foto</h3> <!-- misal berdiskusi -->
-                        <p class="text-white text-sm">Kategori Foto</p> <!-- misal proyek balongan -->
+                        <h3 class="text-white text-lg font-semibold mb-1">{{ $photo->nama }}</h3>
+                        <p class="text-white text-sm">{{ $photo->deskripsi }}</p>
                     </div>
                 </div>
-            @endfor
+            @endforeach
         </div>
     </div>
 

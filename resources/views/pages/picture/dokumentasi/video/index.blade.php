@@ -65,33 +65,18 @@
     
     <div class="w-full flex justify-center">
         <div class="flex flex-wrap justify-center gap-6 max-w-screen-xl">
-            @for ($i = 0; $i < 6; $i++)
-                <div class="w-[327px] relative flex flex-col gap-2">
-                    <!-- Container video -->
-                    <div class="relative w-full h-[184px] rounded-xl overflow-hidden border border-[#7BB7D1] shadow-md">
-                        <video
-                            class="w-full h-full object-cover"
-                            controls
-                            playsinline
-                            preload="metadata"
-                            muted
-                        >
-                            <source src="{{ asset('vid/video.mp4') }}" type="video/mp4" />
-                            Browser kamu tidak mendukung video ini.
-                        </video>
-
-                        <!-- Durasi di pojok kanan bawah -->
-                        <div class="absolute bottom-2 right-2 bg-black bg-opacity-80 text-white text-xs leading-5 rounded-md px-2 py-0.5 font-mono z-10">
-                            12:28
-                        </div>
-                    </div>
-
-                    <!-- Judul -->
-                    <div class="text-center text-[#1D3A6D] text-sm leading-6 tracking-wider h-[85px]">
-                        Judul Video
+            @foreach ($videos as $video)
+                <div class="relative group border border-[#7BB7D1] w-full h-full overflow-hidden">
+                    <video controls class="w-full h-full object-cover">
+                        <source src="{{ asset($video->foto) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="absolute inset-0 bg-[var(--button)]/90 flex flex-col items-center justify-center text-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <h3 class="text-white text-lg font-semibold mb-1">{{ $video->nama }}</h3>
+                        <p class="text-white text-sm">{{ $video->deskripsi }}</p>
                     </div>
                 </div>
-            @endfor
+            @endforeach
         </div>
     </div>
 

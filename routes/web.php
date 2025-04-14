@@ -93,6 +93,9 @@ Route::get('/reference/company-profile', [CompanyProfileController::class, 'inde
 ->name('compro.index');
 
 // Tampilan Dokumentasi
-Route::get('/picture/photo-video', [DokumentasiController::class, 'index'])->name('dokumentasi.index');
-Route::get('/picture/photo-video/photo', [PhotoController::class, 'index'])->name('photo.index');
-Route::get('/picture/photo-video/video', [VideoController::class, 'index'])->name('video.index');
+Route::get('/picture/photo-video', [DokumentasiController::class, 'index'])
+    ->name('dokumentasi.index');
+Route::get('/picture/photo-video/photo', [PhotoController::class, 'index'])
+    ->name('photo.index');
+Route::get('/picture/photo-video/video', [VideoController::class, 'index'])
+    ->name('video.index');

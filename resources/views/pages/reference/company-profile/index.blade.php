@@ -26,7 +26,7 @@
             <!-- Card -->
             @foreach ($buku as $book)
                 <div class="w-[327px] p-4 bg-white overflow-hidden rounded-[20px] outline-1 outline-[#7BB7D1] outline-offset-[-1px] flex flex-col gap-[13px]">
-                    <img src="{{ $book->gambar ?? asset('img/book-1.jpg') }}" alt="Buku" class="w-full h-[416px] rounded-[16px] border border-[#7BB7D1]" />
+                    <img src="{{ $book->foto ? asset($book->foto) : asset('img/book-2.jpg') }}" alt="Buku" class="w-full h-[416px] rounded-[16px] border border-[#7BB7D1]" />
                     <div class="flex justify-between items-center">
                         <div class="text-[#1D3A6D] text-[18px] font-bold leading-[22px] font-montserrat">{{ $book->nama }}</div>
                         <div class="w-[33px] h-[33px] relative">
@@ -100,7 +100,7 @@
                 <!-- Card -->
                 @foreach ($template as $item)
                     <div class="relative w-[327px] h-[184px]">
-                        <img src="{{ $item->gambar ?? asset('img/pict-4.jpg') }}" alt="Template" class="w-full h-full object-cover rounded-[16px] border border-[var(--button)]" />
+                        <img src="{{ $item->foto ? asset($item->foto) : asset('img/pict-4.jpg') }}" alt="Template" class="w-full h-full object-cover rounded-[16px] border border-[var(--button)]" />
                         <div class="absolute bottom-2 right-2 w-[38px] h-[38px] bg-[var(--highlight-text-box)] rounded-[12px] shadow flex items-center justify-center">
                             <a href="{{ $item->url }}" target="_blank">
                                 <div class="w-[24px] h-[24px] text-[var(--button)]">
