@@ -12,7 +12,7 @@ class SustainController extends Controller
 {
     public function index()
     {
-        $sustainReports = ProdukModel::where('kategori', 'laporanA')->paginate(10);
+        $sustainReports = ProdukModel::where('kategori', 'laporanS')->paginate(10);
         return view('admin.references.report.sustain.index', compact('sustainReports'));
     }
     
@@ -43,7 +43,7 @@ class SustainController extends Controller
             'foto' => $fotoPath,
             'tahun' => $request->tahun,
             'tipe' => 'pdf',
-            'kategori' => 'laporanA',
+            'kategori' => 'laporanS',
         ]);
         
         return redirect()->route('admin.sustain.index')
@@ -134,7 +134,7 @@ class SustainController extends Controller
     {
         $search = $request->get('search', '');
         
-        $sustainReports = ProdukModel::where('kategori', 'laporanA')
+        $sustainReports = ProdukModel::where('kategori', 'laporanS')
             ->where('nama', 'like', '%' . $search . '%')
             ->orderBy('created_at', 'desc')
             ->paginate(3);

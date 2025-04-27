@@ -104,11 +104,11 @@
             @foreach($books as $book)
             <!-- Card -->
             <div class="w-[327px] p-4 bg-white overflow-hidden rounded-[20px] outline-1 outline-[#7BB7D1] outline-offset-[-1px] flex flex-col gap-[13px]">
-                <img src="{{ asset('img/' . $book->display_image) }}" alt="{{ $book->nama }}" class="w-full h-[416px] rounded-[16px] border border-[#7BB7D1] object-cover" />
+                <img src="{{ asset('files/' . $book->foto) }}" alt="{{ $book->nama }}" class="w-full h-[416px] rounded-[16px] border border-[#7BB7D1] object-cover" />
                 <div class="flex justify-between items-center">
                     <div class="text-[#1D3A6D] text-[18px] font-bold leading-[22px] font-montserrat">{{ $book->nama }}</div>
                     <div class="w-[33px] h-[33px] relative">
-                        <a href="{{ asset('/files/buku/' . $book->url) }}" download>
+                        <a href="{{ asset('files/' . $book->url) }}" download>
                             <div class="w-[22px] h-[22px] absolute left-[5.5px] top-[5.5px] text-[var(--button)]">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
                                     <path d="m12 16 4-5h-3V4h-2v7H8z"></path>

@@ -111,7 +111,7 @@
     <!-- Welcome -->
     <div class="bg-white rounded-xl shadow p-6 flex items-center justify-between">
         <div>
-            <h1 class="text-2xl font-bold text-[var(--judul)]">Selamat datang, {{ Auth::user()->nama }} 👋</h1>
+            {{-- <h1 class="text-2xl font-bold text-[var(--judul)]">Selamat datang, {{ Auth::user()->nama }} 👋</h1> --}}
             <p class="text-gray-500">Kelola Berkas berkas dengan mudah dan cepat!</p>
         </div>
     </div>

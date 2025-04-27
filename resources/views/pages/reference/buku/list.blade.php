@@ -858,7 +858,7 @@
             <!-- Gambar kiri -->
             <div class="w-[40px] flex flex-col justify-center items-start overflow-hidden ml-0">
                 <div class="flex justify-start items-start gap-[10px]">
-                    <img class="w-[39.64px] h-[56px] object-cover" src="{{ asset('img/' . $book->display_image) }}" alt="{{ $book->nama }}" />
+                    <img class="w-[39.64px] h-[56px] object-cover" src="{{ asset('files/' . $book->foto) }}" alt="{{ $book->nama }}" />
                 </div>
             </div>
 
@@ -874,7 +874,7 @@
 
             <!-- Icon kanan -->
             <div class="w-[33px] h-[33px] relative ml-auto">
-                <a href="{{ asset('/files/buku/' . $book->url) }}" download>
+                <a href="{{ asset('files/' . $book->url) }}" download>
                     <div class="absolute left-[5.5px] top-[5.5px] w-[22px] h-[22px] text-[#7BB7D1]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
                             <path d="m12 16 4-5h-3V4h-2v7H8z"></path>

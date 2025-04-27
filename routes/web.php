@@ -140,8 +140,7 @@ Route::delete('/admin/reference/annual-report/{id}', [AdminAnnualController::cla
 Route::get('admin/annual/search', [AdminAnnualController::class, 'search'])
     ->name('admin.annual.search');
 
-    //sustain
-
+//sustain
 Route::get('/admin/reference/sustain-report/', [AdminSustainController::class, 'index'])
     ->name('admin.sustain.index');
 
@@ -162,6 +161,9 @@ Route::put('/admin/reference/sustain-report/{id}', [AdminSustainController::clas
 
 Route::delete('/admin/reference/sustain-report/{id}', [AdminSustainController::class, 'delete'])
     ->name('admin.sustain.delete');
+
+Route::get('admin/sustain/search', [AdminSustainController::class, 'search'])
+    ->name('admin.sustain.search');
 
 // Tampilan Buku
 Route::get('/admin/reference/buku/', [AdminBukuController::class, 'index'])
@@ -184,6 +186,9 @@ Route::put('/admin/reference/buku/{id}', [AdminBukuController::class, 'update'])
 
 Route::delete('/admin/reference/buku/{id}', [AdminBukuController::class, 'delete'])
     ->name('admin.buku.delete');
+
+Route::get('admin/buku/search', [AdminBukuController::class, 'search'])
+    ->name('admin.buku.search');
 
 // Tampilan Template Presentasi
 Route::get('/admin/reference/presentasi/', [AdminPresentasiController::class, 'index'])
