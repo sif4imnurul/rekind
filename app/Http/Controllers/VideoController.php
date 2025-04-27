@@ -7,9 +7,28 @@ use App\Models\ProdukModel;
 
 class VideoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $videos = ProdukModel::where('kategori', 'dokum_video')->get();
+        $query = ProdukModel::where('kategori', 'dokum_video');
+        
+        // Search functionality
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('nama', 'like', "%{$search}%")
+                  ->orWhere('deskripsi', 'like', "%{$search}%");
+            });
+        }
+
+        // Sort functionality
+        $sort = $request->get('sort', 'newest');
+        if ($sort === 'oldest') {
+            $query->orderBy('created_at', 'asc');
+        } else {
+            $query->orderBy('created_at', 'desc');
+        }
+
+        $videos = $query->paginate(12);
         return view('pages.picture.dokumentasi.video.index', compact('videos'));
     }
 }
