@@ -60,45 +60,45 @@
     <div class="w-full h-full flex flex-col md:flex-row items-center justify-between gap-y-4 md:gap-[30px]">
         <!-- Kiri: Search Box -->
         <div class="w-full max-w-[510px] h-[62px] flex items-center gap-[10px]">
-            <div class="w-full h-[56px] min-w-[280px] max-w-[720px] bg-[#D6E4F5] overflow-hidden rounded-full flex items-center justify-center gap-[4px]">
-                <div class="flex-1 h-full flex items-center gap-[4px] px-[4px]">
-                    <div class="w-[22px] h-[48px] inline-flex flex-col items-center justify-center gap-[10px]"></div>
-                    <div class="flex-1 h-full flex items-center justify-start gap-[10px]">
-                        <div class="text-[#737373] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px]">
-                            Hinted search text
+            <form action="{{ route('sustain.grid') }}" method="GET" class="w-full">
+                <div class="w-full h-[56px] min-w-[280px] max-w-[720px] bg-[#D6E4F5] overflow-hidden rounded-full flex items-center justify-center gap-[4px]">
+                    <div class="flex-1 h-full flex items-center gap-[4px] px-[4px]">
+                        <div class="w-[22px] h-[48px] inline-flex flex-col items-center justify-center gap-[10px]"></div>
+                        <div class="flex-1 h-full flex items-center justify-start gap-[10px]">
+                            <input type="text" 
+                                name="search" 
+                                value="{{ request('search') }}"
+                                placeholder="Cari laporan..."
+                                class="w-full bg-transparent text-[#737373] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px] focus:outline-none" />
                         </div>
-                    </div>
-                    <div class="flex items-center justify-end">
-                        <div class="w-[48px] h-[48px] inline-flex flex-col items-center justify-center gap-[10px]">
-                            <div class="overflow-hidden rounded-full flex items-center justify-center gap-[10px]">
-                                <div class="p-[8px] flex items-center justify-center gap-[10px]">
-                                    <div class="w-[24px] h-[24px] relative">
-                                        <div class="absolute text-[#737373]">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path></svg>
-                                        </div>
-                                    </div>
-                                </div>
+                        <button type="submit" class="w-[48px] h-[48px] flex items-center justify-center">
+                            <div class="w-[24px] h-[24px] text-[#737373]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
+                                    <path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path>
+                                </svg>
                             </div>
-                        </div>
+                        </button>
                     </div>
                 </div>
-            </div>
+                <!-- Hidden sort input to maintain sort when searching -->
+                <input type="hidden" name="sort" value="{{ request('sort', 'newest') }}" />
+            </form>
         </div>
 
         <!-- Kanan: Sort Box -->
         <div class="w-full max-w-[510px] overflow-hidden rounded-full flex items-center justify-end gap-[4px]">
-            <div class="w-[130px] h-[56px] p-[4px] flex items-center justify-start gap-[4px]">
-            <div class="w-[22px] h-[48px] inline-flex flex-col items-center justify-center gap-[10px]"></div>
-            <div class="w-[62px] h-full flex items-center justify-start gap-[10px]">
-                <div class="text-[#737373] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px]">
-                Sort by
-                </div>
-            </div>
-            <div class="w-[16px] h-[20px] text-[#737373]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M8 16H4l6 6V2H8zm6-11v17h2V8h4l-6-6z"></path></svg>
-            </div>
-            </div>
-            <div class="w-[24px] h-[24px] relative"></div>
+            <form action="{{ request()->url() }}" method="GET" class="w-[130px] h-[56px]">
+                <!-- Preserve search parameter if exists -->
+                @if(request('search'))
+                    <input type="hidden" name="search" value="{{ request('search') }}" />
+                @endif
+                <select name="sort" 
+                        onchange="this.form.submit()"
+                        class="w-full h-full px-4 bg-transparent text-[#737373] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px] focus:outline-none cursor-pointer">
+                    <option value="newest" {{ request('sort', 'newest') === 'newest' ? 'selected' : '' }}>Terbaru</option>
+                    <option value="oldest" {{ request('sort') === 'oldest' ? 'selected' : '' }}>Terlama</option>
+                </select>
+            </form>
         </div>
     </div>
 

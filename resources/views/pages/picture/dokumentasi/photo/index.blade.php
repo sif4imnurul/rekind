@@ -16,18 +16,17 @@
         <div class="w-[207px] h-[48px] flex justify-end items-center">
         <!-- Sort Box -->
             <div class="w-full max-w-[510px] overflow-hidden rounded-full flex items-center justify-end gap-[4px]">
-                <div class="w-[130px] h-[56px] p-[4px] flex items-center justify-start gap-[4px]">
-                    <div class="w-[22px] h-[48px] inline-flex flex-col items-center justify-center gap-[10px]"></div>
-                    <div class="w-[62px] h-full flex items-center justify-start gap-[10px]">
-                        <div class="text-[#737373] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px]">
-                        Sort by
-                        </div>
-                    </div>
-                    <div class="w-[16px] h-[20px] text-[#737373]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M8 16H4l6 6V2H8zm6-11v17h2V8h4l-6-6z"></path></svg>
-                    </div>
-                </div>
-                <div class="w-[24px] h-[24px] relative"></div>
+                <form action="{{ route('photo.index') }}" method="GET" class="w-[130px] h-[56px]">
+                    @if(request('search'))
+                        <input type="hidden" name="search" value="{{ request('search') }}" />
+                    @endif
+                    <select name="sort" 
+                            onchange="this.form.submit()"
+                            class="w-full h-full px-4 bg-transparent text-[#737373] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px] focus:outline-none cursor-pointer">
+                        <option value="newest" {{ request('sort', 'newest') === 'newest' ? 'selected' : '' }}>Terbaru</option>
+                        <option value="oldest" {{ request('sort') === 'oldest' ? 'selected' : '' }}>Terlama</option>
+                    </select>
+                </form>
             </div>
         </div>
     </div>
