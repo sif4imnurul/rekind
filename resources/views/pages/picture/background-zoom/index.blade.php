@@ -293,14 +293,14 @@
                 <div class="w-[327px] space-y-2">
                     <div class="relative w-full h-[184px] rounded-[16px] overflow-hidden border border-[var(--button)]">
                         <img 
-                            src="{{ $item->gambar ? asset('storage/' . $item->gambar) : asset('img/pict-2.jpg') }}" 
+                            src="{{ $item->foto ? asset('files/' . $item->foto) : asset('img/pict-2.jpg') }}" 
                             alt="{{ $item->nama }}" 
                             class="w-full h-full object-cover"
                             onerror="this.onerror=null;this.src='{{ asset('img/pict-2.jpg') }}';"
                         />
                         <div class="absolute bottom-2 right-2 w-[38px] h-[38px] bg-[var(--highlight-text-box)] rounded-[12px] shadow flex items-center justify-center">
                             <a 
-                                href="{{ $item->gambar ? asset('storage/' . $item->gambar) : '#' }}" 
+                                href="{{ $item->foto ? asset('storage/' . $item->foto) : '#' }}" 
                                 download 
                                 class="w-[24px] h-[24px] text-[var(--button)]"
                             >
