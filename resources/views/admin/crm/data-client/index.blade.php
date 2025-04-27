@@ -10,35 +10,29 @@
         <!-- Search + Button -->
         <div class="w-full flex flex-col md:flex-row justify-between items-center gap-3">
             <!-- Search Box -->
-            <div class="w-full md:w-[60%] h-[40px] border border-[var(--button)] overflow-hidden rounded-lg  flex items-center justify-center gap-[4px]">
-                <div class="flex-1 h-full flex items-center gap-[4px] px-[4px]">
-                    <div class="w-[22px] h-[48px] inline-flex flex-col items-center justify-center gap-[10px]"></div>
-                    <div class="flex-1 h-full flex items-center justify-start gap-[10px]">
-                        <div class="text-[#737373] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px]">
-                            Hinted search text
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-end">
-                        <div class="w-[48px] h-[48px] inline-flex flex-col items-center justify-center gap-[10px]">
-                            <div class="overflow-hidden rounded-full flex items-center justify-center gap-[10px]">
-                                <div class="p-[8px] flex items-center justify-center gap-[10px]">
-                                    <div class="w-[24px] h-[24px] relative">
-                                        <div class="absolute text-[#737373]">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
-                                                <path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
+            <form action="{{ route('admin.crm.data-client.search') }}" method="GET" class="w-full md:w-[60%]">
+                <div class="h-[40px] border border-[var(--button)] overflow-hidden rounded-lg flex items-center justify-center gap-[4px]">
+                    <div class="flex-1 h-full flex items-center gap-[4px] px-[4px]">
+                        <input type="text" 
+                            name="search" 
+                            placeholder="Cari client..." 
+                            value="{{ request('search') }}"
+                            class="w-full h-full bg-transparent text-[#1D3A6D] text-base tracking-wide font-normal focus:outline-none">
+                        <button type="submit" class="w-[48px] h-[48px] flex items-center justify-center">
+                            <div class="w-[24px] h-[24px] text-[#737373]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
+                                    <path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path>
+                                </svg>
                             </div>
-                        </div>
+                        </button>
                     </div>
                 </div>
-            </div>
+            </form>
 
             <!-- Button Tambah -->
-            <a href="#" class="h-[40px] px-6 rounded-lg bg-[var(--button)] hover:bg-[var(--sub-judul)] text-white text-sm font-medium flex items-center justify-center">
-                Tambah Client
+            <a href="{{ route('admin.crm.data-client.create') }}" 
+                class="h-[40px] px-6 rounded-lg bg-[var(--button)] hover:bg-[var(--sub-judul)] text-white text-sm font-medium flex items-center justify-center">
+                    Tambah Client
             </a>
         </div>
 
@@ -56,25 +50,32 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
+                    @foreach($clients as $index => $client)
                     <tr>
-                        <td class="px-4 py-3">1</td>
-                        <td class="px-4 py-3">Budi Company</td>
-                        <td class="px-4 py-3">Divisi sekian</td>
-                        <td class="px-4 py-3">Nurul</td>
-                        <td class="px-4 py-3">081387654534</td>
+                        <td class="px-4 py-3">{{ $index + 1 }}</td>
+                        <td class="px-4 py-3">{{ $client->nama }}</td>
+                        <td class="px-4 py-3">{{ $client->user->divisi }}</td>
+                        <td class="px-4 py-3">{{ $client->user->nama ?? 'N/A' }}</td>
+                        <td class="px-4 py-3">{{ $client->telepon }}</td>
                         <td class="px-4 py-3">
                             <div class="flex flex-row">
-                                <a href="#" class="bg-yellow-300 p-2 rounded-l-lg border border-r-0">
+                                <a href="{{ route('admin.crm.data-client.edit', ['id' => $client->id_client_data]) }}"
+                                   class="bg-yellow-300 p-2 rounded-l-lg border border-r-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M19.045 7.401c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.378-.378-.88-.586-1.414-.586s-1.036.208-1.413.585L4 13.585V18h4.413L19.045 7.401zm-3-3 1.587 1.585-1.59 1.584-1.586-1.585 1.589-1.584zM6 16v-1.585l7.04-7.018 1.586 1.586L7.587 16H6zm-2 4h16v2H4z"></path></svg>
                                 </a>
-                                <a href="#" class="bg-red-300 p-2 rounded-r-lg border">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M5 20a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h2V6h-4V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H3v2h2zM9 4h6v2H9zM8 8h9v12H7V8z"></path><path d="M9 10h2v8H9zm4 0h2v8h-2z"></path></svg>
-                                </a>
+                                <form action="{{ route('admin.crm.data-client.destroy', ['id' => $client->id_client_data]) }}" 
+                                      method="POST" 
+                                      onsubmit="return confirm('Apakah anda yakin ingin menghapus client ini?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="bg-red-300 p-2 rounded-r-lg border">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M5 20a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h2V6h-4V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H3v2h2zM9 4h6v2H9zM8 8h9v12H7V8z"></path><path d="M9 10h2v8H9zm4 0h2v8h-2z"></path></svg>
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>
-                    
-                    <!-- Tambahkan baris lainnya sesuai kebutuhan -->
+                    @endforeach
                 </tbody>
             </table>
         </div>

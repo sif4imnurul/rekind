@@ -10,6 +10,7 @@ class CRM extends Model
     use HasFactory;
 
     protected $table = 'crm';
+    protected $primaryKey = 'id_crm';
 
     protected $fillable = [
         'id_user',
