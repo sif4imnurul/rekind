@@ -52,10 +52,10 @@
         </button>
         <ul class="ml-8 mt-2 space-y-1 hidden dropdown-menu">
           <li><a href="/admin/picture/zoom-background/" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Zoom Background Official</a></li>
-          <li><a href="#" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Occasional Twibbon</a></li>
-          <li><a href="#" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Official Photo</a></li>
-          <li><a href="#" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Video Stock</a></li>
-          <li><a href="#" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Flyer Ucapan</a></li>
+          <li><a href="/admin/picture/twibbon/" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Occasional Twibbon</a></li>
+          <li><a href="/admin/picture/photo/" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Official Photo</a></li>
+          <li><a href="/admin/picture/video/" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Video Stock</a></li>
+          <li><a href="/admin/picture/flyer" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Flyer Ucapan</a></li>
         </ul>
       </div>
     </li>
@@ -73,8 +73,8 @@
           </svg>
         </button>
         <ul class="ml-8 mt-2 space-y-1 hidden dropdown-menu">
-          <li><a href="#" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Data Client</a></li>
-          <li><a href="#" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Permohonan Akses</a></li>
+          <li><a href="/admin/crm/data-client/" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Data Client</a></li>
+          <li><a href="/admin/crm/permohonan/" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Permohonan Akses</a></li>
         </ul>
       </div>
     </li>
