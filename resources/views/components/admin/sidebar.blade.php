@@ -8,7 +8,7 @@
 
     <!-- Dashboard -->
     <li>
-      <a href="#" class="flex items-center px-4 py-2 rounded-lg transition hover:bg-blue-50 hover:text-[var(--judul)]">
+      <a href="/admin/dashboard" class="flex items-center px-4 py-2 rounded-lg transition hover:bg-blue-50 hover:text-[var(--judul)]">
         <svg class="w-5 h-5 mr-3 text-[var(--judul)]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
           <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8v-10h-8v10zm0-18v6h8V3h-8z" />
         </svg>
@@ -29,11 +29,11 @@
           </svg>
         </button>
         <ul class="ml-8 mt-2 space-y-1 hidden dropdown-menu">
-          <li><a href="#" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Annual Report</a></li>
-          <li><a href="#" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Sustainability Report</a></li>
-          <li><a href="#" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Buku Terbitan Corporate</a></li>
-          <li><a href="#" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Agenda Perusahaan</a></li>
-          <li><a href="#" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Template Presentasi</a></li>
+          <li><a href="/admin/reference/annual-report" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Annual Report</a></li>
+          <li><a href="/admin/reference/sustain-report" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Sustainability Report</a></li>
+          <li><a href="/admin/reference/buku" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Buku Terbitan Corporate</a></li>
+          <li><a href="/admin/reference/agenda" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Agenda Perusahaan</a></li>
+          <li><a href="/admin/reference/presentasi" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Template Presentasi</a></li>
         </ul>
       </div>
     </li>
@@ -51,7 +51,7 @@
           </svg>
         </button>
         <ul class="ml-8 mt-2 space-y-1 hidden dropdown-menu">
-          <li><a href="#" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Zoom Background Official</a></li>
+          <li><a href="/admin/picture/zoom-background/" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Zoom Background Official</a></li>
           <li><a href="#" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Occasional Twibbon</a></li>
           <li><a href="#" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Official Photo</a></li>
           <li><a href="#" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Video Stock</a></li>

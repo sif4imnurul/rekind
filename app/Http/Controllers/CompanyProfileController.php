@@ -9,8 +9,8 @@ class CompanyProfileController extends Controller
 {
     public function index()
     {
-        $buku = ProdukModel::where('kategori', 'buku')->get();
-        $template = ProdukModel::where('kategori', 'template_presentasi')->get();
+        $buku = ProdukModel::where('kategori', 'buku')->paginate(3);
+        $template = ProdukModel::where('kategori', 'template_presentasi')->paginate(3);
         return view('pages.reference.company-profile.index', compact('buku', 'template'));
     }
 }

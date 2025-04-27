@@ -18,6 +18,7 @@ class ProdukModel extends Model
         'id_produk',
         'nama',
         'url',
+        'tahun',
         'deskripsi',
         'foto',
         'tipe',

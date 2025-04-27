@@ -21,6 +21,7 @@ class TwibbonSeeder extends Seeder
                 'deskripsi' => 'Twibbon untuk memperingati Hari Ulang Tahun Rekind.',
                 'foto' => 'twibbon-hutrekind.png', // thumbnail yang disimpan lokal
                 'tipe' => 'image',
+                'tahun' => date('Y'),
                 'kategori' => 'twibbon',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -32,6 +33,7 @@ class TwibbonSeeder extends Seeder
                 'deskripsi' => 'Twibbon untuk mendukung Bulan K3 Nasional.',
                 'foto' => 'twibbon-k3.png',
                 'tipe' => 'image',
+                'tahun' => date('Y'),
                 'kategori' => 'twibbon',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -43,6 +45,7 @@ class TwibbonSeeder extends Seeder
                 'deskripsi' => 'Twibbon perayaan Hari Kemerdekaan RI.',
                 'foto' => 'twibbon-merdeka.png',
                 'tipe' => 'image',
+                'tahun' => date('Y'),
                 'kategori' => 'twibbon',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
