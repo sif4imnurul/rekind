@@ -38,21 +38,25 @@ class FlyerController extends Controller
     {
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'deskripsi' => 'required|string|max:1000'
         ]);
 
         if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $path = $file->store('public/flyers');
-            $validated['foto'] = str_replace('public/', '', $path);
+            $fotoPath = $request->file('foto')->store('flyer', 'public');
+            $validated['foto'] = $fotoPath;
         }
 
+        // Add additional fields
         $validated['kategori'] = 'flyer';
+        $validated['tipe'] = 'image';
+        $validated['url'] = 'https://example.com/flyers/' . time(); // Random URL
+        $validated['tahun'] = now()->year;
+
         ProdukModel::create($validated);
 
-        return redirect()
-            ->route('admin.flyer.index')
-            ->with('success', 'Flyer berhasil ditambahkan');
+        return redirect()->route('admin.flyer.index')
+            ->with('success', 'Flyer berhasil ditambahkan!');
     }
 
     public function edit($id)
@@ -69,24 +73,30 @@ class FlyerController extends Controller
         
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'deskripsi' => 'required|string|max:1000'
         ]);
 
         if ($request->hasFile('foto')) {
-            if ($flyer->foto) {
-                Storage::delete('public/' . $flyer->foto);
+            // Delete old file if exists
+            if ($flyer->foto && Storage::disk('public')->exists($flyer->foto)) {
+                Storage::disk('public')->delete($flyer->foto);
             }
 
-            $file = $request->file('foto');
-            $path = $file->store('public/flyers');
-            $validated['foto'] = str_replace('public/', '', $path);
+            // Store new file
+            $fotoPath = $request->file('foto')->store('flyer', 'public');
+            $validated['foto'] = $fotoPath;
         }
+
+        // Maintain existing fields
+        $validated['tipe'] = 'image';
+        $validated['url'] = $flyer->url ?? 'https://example.com/flyers/' . time();
+        $validated['tahun'] = $flyer->tahun ?? now()->year;
 
         $flyer->update($validated);
 
-        return redirect()
-            ->route('admin.flyer.index')
-            ->with('success', 'Flyer berhasil diperbarui');
+        return redirect()->route('admin.flyer.index')
+            ->with('success', 'Flyer berhasil diperbarui!');
     }
 
     public function delete($id)
@@ -94,14 +104,14 @@ class FlyerController extends Controller
         $flyer = ProdukModel::where('kategori', 'flyer')
             ->findOrFail($id);
         
-        if ($flyer->foto) {
-            Storage::delete('public/' . $flyer->foto);
+        // Delete file if exists
+        if ($flyer->foto && Storage::disk('public')->exists($flyer->foto)) {
+            Storage::disk('public')->delete($flyer->foto);
         }
         
         $flyer->delete();
 
-        return redirect()
-            ->route('admin.flyer.index')
-            ->with('success', 'Flyer berhasil dihapus');
+        return redirect()->route('admin.flyer.index')
+            ->with('success', 'Flyer berhasil dihapus!');
     }
 }

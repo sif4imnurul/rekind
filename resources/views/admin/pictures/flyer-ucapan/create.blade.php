@@ -29,6 +29,26 @@
                     </div>
                 </div>
 
+                <!-- Deskripsi -->
+                <div class="w-full p-4">
+                    <div class="w-full p-6 bg-white rounded-[20px] outline-1 outline-[var(--button)] flex flex-col gap-3">
+                        <label class="text-[var(--judul)] text-lg font-bold leading-[22px]">Deskripsi</label>
+                        <div class="relative w-full">
+                            <div class="bg-[var(--highlight-text-box)] px-4 py-1 rounded-t-md">
+                                <textarea name="deskripsi" 
+                                        rows="4"
+                                        required
+                                        placeholder="Deskripsi flyer..."
+                                        class="w-full bg-transparent text-[var(--judul)] text-base tracking-wide font-normal focus:outline-none resize-none">{{ old('deskripsi') }}</textarea>
+                            </div>
+                            <hr class="border-[1px] text-[var(--judul)]">
+                        </div>
+                        @error('deskripsi')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
                 <!-- Upload File -->
                 <div class="w-full p-4">
                     <div class="w-full p-6 bg-white rounded-[20px] outline-1 outline-[var(--button)] flex flex-col gap-3">

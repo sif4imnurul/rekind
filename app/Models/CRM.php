@@ -2,18 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class CRM extends Model
 {
-    use HasFactory;
-
     protected $table = 'crm';
     protected $primaryKey = 'id_crm';
 
     protected $fillable = [
-        'id_user',
         'nama',
         'npk',
         'unit',
@@ -21,5 +17,12 @@ class CRM extends Model
         'email',
         'telepon',
         'alasan',
+        'status',
+        'id_user'  // Make sure this is fillable
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(UserModel::class, 'id_user');
+    }
 }

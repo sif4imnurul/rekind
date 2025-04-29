@@ -39,7 +39,9 @@
                     <!-- Video -->
                     <div class="w-full aspect-[16/9] bg-black">
                         <video controls class="w-full h-full object-cover">
-                            <source src="{{ asset('storage/' . $video->video) }}" type="video/mp4">
+                            <source src="{{ asset('files/' . $video->foto) }}" type="video/mp4">
+                            <source src="{{ asset('files/' . $video->foto) }}" type="video/quicktime">
+                            <source src="{{ asset('files/' . $video->foto) }}" type="video/x-msvideo">
                             Browser kamu tidak support video.
                         </video>
                     </div>
@@ -51,7 +53,7 @@
 
                         <!-- Action Buttons -->
                         <div class="flex gap-2 mt-2">
-                            <a href="{{ asset('storage/' . $video->video) }}" 
+                            <a href="{{ asset('files/' . $video->foto) }}" 
                                download
                                class="w-[36px] h-[36px] bg-sky-300 rounded-[10px] shadow flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="black">

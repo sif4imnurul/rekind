@@ -5,8 +5,9 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CRM;
+use App\Models\UserModel;
 
-class PermohonanController extends Controller
+class CRMController extends Controller
 {
     public function index()
     {
@@ -36,19 +37,30 @@ class PermohonanController extends Controller
     public function approve($id)
     {
         $permohonan = CRM::findOrFail($id);
-        $permohonan->status = 'approved';
-        $permohonan->save();
+
+        // Update user role
+        if ($permohonan->id_user) {
+            $user = UserModel::find($permohonan->id_user);
+            if ($user) {
+                $user->role = 'userk';
+                $user->save();
+            }
+        }
+
+        // Delete the request after approval
+        $permohonan->delete();
 
         return redirect()
             ->route('admin.crm.permohonan')
-            ->with('success', 'Permohonan berhasil disetujui');
+            ->with('success', 'Permohonan berhasil disetujui dan role user telah diupdate');
     }
 
     public function reject($id)
     {
         $permohonan = CRM::findOrFail($id);
-        $permohonan->status = 'rejected';
-        $permohonan->save();
+        
+        // Delete the request after rejection
+        $permohonan->delete();
 
         return redirect()
             ->route('admin.crm.permohonan')

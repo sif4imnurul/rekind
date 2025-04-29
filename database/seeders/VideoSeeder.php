@@ -19,6 +19,7 @@ class VideoSeeder extends Seeder
                 'deskripsi' => 'Deskripsi Video 1',
                 'foto' => 'vid/video.mp4',
                 'tipe' => 'video',
+                'tahun' => date('Y'),
                 'kategori' => 'dokum_video',
                 'created_at' => now(),
                 'updated_at' => now(),

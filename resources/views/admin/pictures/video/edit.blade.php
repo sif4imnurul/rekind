@@ -51,7 +51,7 @@
                     <div class="w-full p-6 bg-white rounded-[20px] outline-1 outline-[var(--button)] flex flex-col gap-3">
                         <label class="text-[var(--judul)] text-lg font-bold leading-[22px]">Video Saat Ini</label>
                         <video controls class="w-full aspect-video rounded-lg">
-                            <source src="{{ asset('storage/' . $video->video) }}" type="video/mp4">
+                            <source src="{{ asset('files/' . $video->foto) }}" type="video/mp4">
                             Browser kamu tidak support video.
                         </video>
                     </div>
