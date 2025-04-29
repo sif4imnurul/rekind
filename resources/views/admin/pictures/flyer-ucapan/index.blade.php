@@ -44,7 +44,7 @@
                         
                         <!-- Action Buttons -->
                         <div class="absolute top-2 right-2 flex flex-col gap-2">
-                            <a href="{{ asset('storage/' . $flyer->foto) }}" 
+                            <a href="{{ asset('files/' . $flyer->foto) }}" 
                                download
                                class="w-[32px] h-[32px] bg-sky-300 rounded-[8px] shadow flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="black">

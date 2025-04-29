@@ -221,17 +221,17 @@
         @click.away="dropdownOpen = false"
         class="bg-[var(--6)] py-2 md:absolute md:left-0 md:top-full md:mt-0 md:w-48 md:shadow-lg"
       >
-        @if(auth()->user()->can('access_crm'))
-          <!-- User has CRM access -->
+        @if(auth()->user()->role == 'userk')
+          <!-- User boleh akses CRM -->
           <a href="{{ route('crm.index') }}" class="block px-4 py-2 text-sm text-[var(--sub-text)] hover:bg-[var(--highlight-text-box)] hover:text-[var(--judul)]">Data Client</a>
           <a href="#" class="block px-4 py-2 text-sm text-[var(--sub-text)] hover:bg-[var(--highlight-text-box)] hover:text-[var(--judul)]">Upload/Update Data Client</a>
         @else
-          <!-- User doesn't have CRM access -->
+          <!-- User TIDAK BOLEH akses CRM -->
           <div x-data="{ showAlert: false }">
             <a href="#" @click.prevent="showAlert = true" class="block px-4 py-2 text-sm text-[var(--sub-text)] hover:bg-[var(--highlight-text-box)] hover:text-[var(--judul)]">Data Client</a>
             <a href="#" @click.prevent="showAlert = true" class="block px-4 py-2 text-sm text-[var(--sub-text)] hover:bg-[var(--highlight-text-box)] hover:text-[var(--judul)]">Upload/Update Data Client</a>
-            
-            <!-- Alert Modal - Removed x-transition and using display:none by default -->
+    
+            <!-- Modal Warning -->
             <div x-show="showAlert" style="display: none;" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
               <div class="bg-white rounded-xl max-w-md w-full p-6 space-y-4">
                 <h3 class="text-xl font-bold text-[#1D3A6D] text-center">PERINGATAN!</h3>
@@ -250,12 +250,13 @@
             </div>
           </div>
         @endif
-        
-        <!-- Always show this link -->
+    
+        <!-- Link permohonan akses selalu tampil -->
         <a href="{{ route('crm.permohonan') }}" class="block px-4 py-2 text-sm text-[var(--sub-text)] hover:bg-[var(--highlight-text-box)] hover:text-[var(--judul)]">Permohonan Akses</a>
       </div>
     </div>
     @endauth
+    
 
     <!-- Avatar Dropdown -->
     @auth

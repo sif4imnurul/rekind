@@ -31,11 +31,16 @@ class AuthController extends Controller
         if ($user) {
             Log::info('User ditemukan: ', ['id' => $user->id_user, 'nama' => $user->nama]);
             Auth::login($user);
-            // dd(Auth::check(), Auth::user());
             
             if (Auth::check()) {
                 Log::info('Auth berhasil, user_id: ' . Auth::id());
-                return redirect()->intended('/home')->with('success', 'Login berhasil!');
+                
+                // Redirect berdasarkan role user
+                if ($user->role === 'admin') {
+                    return redirect()->intended('/admin/dashboard')->with('success', 'Login berhasil!');
+                } else {
+                    return redirect()->intended('/home')->with('success', 'Login berhasil!');
+                }
             } else {
                 Log::error('Auth gagal setelah login()');
                 return back()->with('error', 'Auth gagal, silakan coba lagi.');
@@ -45,6 +50,7 @@ class AuthController extends Controller
         Log::warning('User tidak ditemukan: ', ['nama' => $request->nama]);
         return back()->withInput($request->only('nama'))->with('error', 'Nama atau NPK tidak valid.');
     }
+
     
     // Proses logout user
     public function logout(Request $request)

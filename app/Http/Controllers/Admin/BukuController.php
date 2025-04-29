@@ -30,9 +30,14 @@ class BukuController extends Controller
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Max 2MB
         ]);
         
-        // Handle file uploads
-        $pdfPath = $request->file('url')->store('books/pdf', 'public');
-        $fotoPath = $request->file('foto')->store('books/images', 'public');
+        // Handle file uploads dengan menyimpan nama original
+        $pdfFile = $request->file('url');
+        $pdfOriginalName = $pdfFile->getClientOriginalName();
+        $pdfPath = $pdfFile->storeAs('books/pdf', $pdfOriginalName, 'public');
+        
+        $fotoFile = $request->file('foto');
+        $fotoOriginalName = $fotoFile->getClientOriginalName();
+        $fotoPath = $fotoFile->storeAs('books/images', $fotoOriginalName, 'public');
         
         // Create new record
         ProdukModel::create([
@@ -73,12 +78,14 @@ class BukuController extends Controller
     
         $book = ProdukModel::findOrFail($id);
     
-        // Update file if new file is uploaded
+        // Update file if new file is uploaded (dengan nama original)
         if ($request->hasFile('url')) {
             if ($book->url && Storage::disk('public')->exists($book->url)) {
                 Storage::disk('public')->delete($book->url);
             }
-            $pdfPath = $request->file('url')->store('books/pdf', 'public');
+            $pdfFile = $request->file('url');
+            $pdfOriginalName = $pdfFile->getClientOriginalName();
+            $pdfPath = $pdfFile->storeAs('books/pdf', $pdfOriginalName, 'public');
             $book->url = $pdfPath;
         }
     
@@ -86,7 +93,9 @@ class BukuController extends Controller
             if ($book->foto && Storage::disk('public')->exists($book->foto)) {
                 Storage::disk('public')->delete($book->foto);
             }
-            $fotoPath = $request->file('foto')->store('books/images', 'public');
+            $fotoFile = $request->file('foto');
+            $fotoOriginalName = $fotoFile->getClientOriginalName();
+            $fotoPath = $fotoFile->storeAs('books/images', $fotoOriginalName, 'public');
             $book->foto = $fotoPath;
         }
     

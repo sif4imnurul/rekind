@@ -7,12 +7,11 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\ProdukModel;
 
-
 class SustainController extends Controller
 {
     public function index()
     {
-        $sustainReports = ProdukModel::where('kategori', 'laporanS')->paginate(10);
+        $sustainReports = ProdukModel::where('kategori', 'laporanS')->paginate(9);
         return view('admin.references.report.sustain.index', compact('sustainReports'));
     }
     
@@ -31,9 +30,14 @@ class SustainController extends Controller
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Max 2MB
         ]);
         
-        // Handle file uploads
-        $pdfPath = $request->file('url')->store('sustain/pdf', 'public');
-        $fotoPath = $request->file('foto')->store('sustain/images', 'public');
+        // Handle file uploads dengan menyimpan nama original
+        $pdfFile = $request->file('url');
+        $pdfOriginalName = $pdfFile->getClientOriginalName();
+        $pdfPath = $pdfFile->storeAs('sustain/pdf', $pdfOriginalName, 'public');
+        
+        $fotoFile = $request->file('foto');
+        $fotoOriginalName = $fotoFile->getClientOriginalName();
+        $fotoPath = $fotoFile->storeAs('sustain/images', $fotoOriginalName, 'public');
         
         // Create new record
         ProdukModel::create([
@@ -75,12 +79,14 @@ class SustainController extends Controller
     
         $sustainReport = ProdukModel::findOrFail($id);
     
-        // Update file if new file is uploaded
+        // Update file if new file is uploaded (dengan nama original)
         if ($request->hasFile('url')) {
             if ($sustainReport->url && Storage::disk('public')->exists($sustainReport->url)) {
                 Storage::disk('public')->delete($sustainReport->url);
             }
-            $pdfPath = $request->file('url')->store('sustain/pdf', 'public');
+            $pdfFile = $request->file('url');
+            $pdfOriginalName = $pdfFile->getClientOriginalName();
+            $pdfPath = $pdfFile->storeAs('sustain/pdf', $pdfOriginalName, 'public');
             $sustainReport->url = $pdfPath;
         }
     
@@ -88,14 +94,15 @@ class SustainController extends Controller
             if ($sustainReport->foto && Storage::disk('public')->exists($sustainReport->foto)) {
                 Storage::disk('public')->delete($sustainReport->foto);
             }
-            $fotoPath = $request->file('foto')->store('sustain/images', 'public');
+            $fotoFile = $request->file('foto');
+            $fotoOriginalName = $fotoFile->getClientOriginalName();
+            $fotoPath = $fotoFile->storeAs('sustain/images', $fotoOriginalName, 'public');
             $sustainReport->foto = $fotoPath;
         }
     
         // Update other fields
         $sustainReport->nama = $request->nama;
         $sustainReport->deskripsi = $request->deskripsi;
-        // $sustainReport->tipe ='pdf';
         $sustainReport->tahun = $request->tahun;
         $sustainReport->save();
     
@@ -103,24 +110,17 @@ class SustainController extends Controller
             ->with('success', 'Laporan tahunan berhasil diperbarui!');
     }
     
-
     public function delete($id)
     {
         $sustainReport = ProdukModel::findOrFail($id);
     
         // Hapus file jika ada
-        if ($sustainReport->url) {
-            $pdfPath = public_path('files/' . $sustainReport->url);
-            if (file_exists($pdfPath)) {
-                unlink($pdfPath); // Hapus file PDF
-            }
+        if ($sustainReport->url && Storage::disk('public')->exists($sustainReport->url)) {
+            Storage::disk('public')->delete($sustainReport->url);
         }
     
-        if ($sustainReport->foto) {
-            $fotoPath = public_path('files/' . $sustainReport->foto);
-            if (file_exists($fotoPath)) {
-                unlink($fotoPath); // Hapus foto
-            }
+        if ($sustainReport->foto && Storage::disk('public')->exists($sustainReport->foto)) {
+            Storage::disk('public')->delete($sustainReport->foto);
         }
     
         $sustainReport->delete();
@@ -129,7 +129,6 @@ class SustainController extends Controller
             ->with('success', 'Laporan tahunan berhasil dihapus!');
     }
     
-
     public function search(Request $request)
     {
         $search = $request->get('search', '');
@@ -137,7 +136,7 @@ class SustainController extends Controller
         $sustainReports = ProdukModel::where('kategori', 'laporanS')
             ->where('nama', 'like', '%' . $search . '%')
             ->orderBy('created_at', 'desc')
-            ->paginate(3);
+            ->paginate(9);
         
         return view('admin.references.report.sustain.index', compact('sustainReports'));
     }

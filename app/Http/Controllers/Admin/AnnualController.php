@@ -31,9 +31,14 @@ class AnnualController extends Controller
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Max 2MB
         ]);
         
-        // Handle file uploads
-        $pdfPath = $request->file('url')->store('annual/pdf', 'public');
-        $fotoPath = $request->file('foto')->store('annual/images', 'public');
+        // Handle file uploads dengan menyimpan nama original
+        $pdfFile = $request->file('url');
+        $pdfOriginalName = $pdfFile->getClientOriginalName();
+        $pdfPath = $pdfFile->storeAs('annual/pdf', $pdfOriginalName, 'public');
+        
+        $fotoFile = $request->file('foto');
+        $fotoOriginalName = $fotoFile->getClientOriginalName();
+        $fotoPath = $fotoFile->storeAs('annual/images', $fotoOriginalName, 'public');
         
         // Create new record
         ProdukModel::create([
@@ -75,12 +80,14 @@ class AnnualController extends Controller
     
         $annualReport = ProdukModel::findOrFail($id);
     
-        // Update file if new file is uploaded
+        // Update file if new file is uploaded (dengan nama original)
         if ($request->hasFile('url')) {
             if ($annualReport->url && Storage::disk('public')->exists($annualReport->url)) {
                 Storage::disk('public')->delete($annualReport->url);
             }
-            $pdfPath = $request->file('url')->store('annual/pdf', 'public');
+            $pdfFile = $request->file('url');
+            $pdfOriginalName = $pdfFile->getClientOriginalName();
+            $pdfPath = $pdfFile->storeAs('annual/pdf', $pdfOriginalName, 'public');
             $annualReport->url = $pdfPath;
         }
     
@@ -88,14 +95,15 @@ class AnnualController extends Controller
             if ($annualReport->foto && Storage::disk('public')->exists($annualReport->foto)) {
                 Storage::disk('public')->delete($annualReport->foto);
             }
-            $fotoPath = $request->file('foto')->store('annual/images', 'public');
+            $fotoFile = $request->file('foto');
+            $fotoOriginalName = $fotoFile->getClientOriginalName();
+            $fotoPath = $fotoFile->storeAs('annual/images', $fotoOriginalName, 'public');
             $annualReport->foto = $fotoPath;
         }
     
         // Update other fields
         $annualReport->nama = $request->nama;
         $annualReport->deskripsi = $request->deskripsi;
-        // $annualReport->tipe ='pdf';
         $annualReport->tahun = $request->tahun;
         $annualReport->save();
     
@@ -103,24 +111,17 @@ class AnnualController extends Controller
             ->with('success', 'Laporan tahunan berhasil diperbarui!');
     }
     
-
     public function delete($id)
     {
         $annualReport = ProdukModel::findOrFail($id);
     
         // Hapus file jika ada
-        if ($annualReport->url) {
-            $pdfPath = public_path('files/' . $annualReport->url);
-            if (file_exists($pdfPath)) {
-                unlink($pdfPath); // Hapus file PDF
-            }
+        if ($annualReport->url && Storage::disk('public')->exists($annualReport->url)) {
+            Storage::disk('public')->delete($annualReport->url);
         }
     
-        if ($annualReport->foto) {
-            $fotoPath = public_path('files/' . $annualReport->foto);
-            if (file_exists($fotoPath)) {
-                unlink($fotoPath); // Hapus foto
-            }
+        if ($annualReport->foto && Storage::disk('public')->exists($annualReport->foto)) {
+            Storage::disk('public')->delete($annualReport->foto);
         }
     
         $annualReport->delete();
@@ -129,7 +130,6 @@ class AnnualController extends Controller
             ->with('success', 'Laporan tahunan berhasil dihapus!');
     }
     
-
     public function search(Request $request)
     {
         $search = $request->get('search', '');
@@ -137,7 +137,7 @@ class AnnualController extends Controller
         $annualReports = ProdukModel::where('kategori', 'laporanA')
             ->where('nama', 'like', '%' . $search . '%')
             ->orderBy('created_at', 'desc')
-            ->paginate(3);
+            ->paginate(10);
         
         return view('admin.references.report.annual.index', compact('annualReports'));
     }

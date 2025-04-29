@@ -129,7 +129,7 @@
     <div class="w-full py-6">
         <div class="flex flex-wrap justify-center gap-6 px-4 max-w-7xl mx-auto">
             
-            <!-- Loop through Annual Reports -->
+            <!-- Loop through Sustainability Reports -->
             @foreach ($sustainReports as $report)
                 <div class="flex flex-col items-center gap-2">
                     <!-- Tahun di atas card -->
@@ -139,14 +139,15 @@
                     <div class="bg-white rounded-[20px] outline-1 outline-[#7BB7D1] p-4 flex flex-col gap-2 w-full max-w-[320px]">
                         <!-- Gambar -->
                         <div class="w-full h-[416px] overflow-hidden rounded-[16px] border border-[#7BB7D1]">
-                            <img src="{{ $report->foto ? asset($report->foto) : asset('img/book-2.jpg') }}" alt="laporan"
+                            <img src="{{ $report->foto ? asset('files/' . $report->foto) : asset('img/book-2.jpg') }}" alt="laporan"
                                 class="w-full h-full object-cover rounded-[16px]" />
                         </div>
 
                         <!-- Judul & Icon -->
                         <div class="flex justify-between items-center w-full">
                             <div class="text-[#1D3A6D] text-base font-bold">{{ $report->nama }}</div>
-                            <a href="{{ $report->url }}" target="_blank">
+                            <!-- Changed to download link -->
+                            <a href="{{ asset('files/' . $report->url) }}" download>
                                 <div class="w-[25px] h-[25px] relative">
                                     <div class="w-[24px] h-[24px] text-[#7BB7D1] absolute rounded">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
@@ -165,7 +166,9 @@
         </div>
     </div>
 
-    @include('components.pagination')
+    <div class="w-full flex justify-center mt-8">
+        {{ $sustainReports->appends(request()->query())->links('components.pagination') }}
+    </div>
 
 </div>
 
