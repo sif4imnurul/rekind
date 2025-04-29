@@ -11,7 +11,7 @@ class VideoController extends Controller
 {
     public function index()
     {
-        $videos = ProdukModel::where('kategori', 'video')
+        $videos = ProdukModel::where('kategori', 'dokum_video')
             ->orderBy('created_at', 'desc')
             ->paginate(9);
         return view('admin.pictures.video.index', compact('videos'));
@@ -21,7 +21,7 @@ class VideoController extends Controller
     {
         $search = $request->get('search');
         
-        $videos = ProdukModel::where('kategori', 'video')
+        $videos = ProdukModel::where('kategori', 'dokum_video')
             ->where(function($query) use ($search) {
                 $query->where('nama', 'like', "%{$search}%")
                     ->orWhere('deskripsi', 'like', "%{$search}%");
@@ -41,72 +41,82 @@ class VideoController extends Controller
     {
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
+            'deskripsi' => 'required|string|max:1000',
             'video' => 'required|mimes:mp4,mov,avi|max:102400' // 100MB max
         ]);
 
         if ($request->hasFile('video')) {
-            $file = $request->file('video');
-            $path = $file->store('public/videos');
-            $validated['video'] = str_replace('public/', '', $path);
+            $videoPath = $request->file('video')->store('vid', 'public');
+            $validated['foto'] = $videoPath; // Using 'foto' field for video path
         }
 
-        $validated['kategori'] = 'video';
+        // Add additional fields
+        $validated['kategori'] = 'dokum_video';
+        $validated['tipe'] = 'video';
+        $validated['url'] = 'https://example.com/videos/' . time(); // Random URL
+
         ProdukModel::create($validated);
 
         return redirect()
             ->route('admin.video.index')
-            ->with('success', 'Video berhasil ditambahkan');
+            ->with('success', 'Video berhasil ditambahkan!');
     }
 
     public function edit($id)
     {
-        $video = ProdukModel::where('kategori', 'video')
+        $video = ProdukModel::where('kategori', 'dokum_video')
             ->findOrFail($id);
         return view('admin.pictures.video.edit', compact('video'));
     }
 
     public function update(Request $request, $id)
     {
-        $video = ProdukModel::where('kategori', 'video')
+        $video = ProdukModel::where('kategori', 'dokum_video')
             ->findOrFail($id);
         
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
+            'deskripsi' => 'required|string|max:1000',
             'video' => 'nullable|mimes:mp4,mov,avi|max:102400' // 100MB max
         ]);
 
         if ($request->hasFile('video')) {
-            if ($video->video) {
-                Storage::delete('public/' . $video->video);
+            // Delete old file if exists
+            if ($video->foto && Storage::disk('public')->exists($video->foto)) {
+                Storage::disk('public')->delete($video->foto);
             }
 
-            $file = $request->file('video');
-            $path = $file->store('public/videos');
-            $validated['video'] = str_replace('public/', '', $path);
+            // Store new file
+            $videoPath = $request->file('video')->store('vid', 'public');
+            $validated['foto'] = $videoPath;
         }
+
+        // Maintain existing fields
+        $validated['tipe'] = 'video';
+        $validated['kategori'] = 'dokum_video';
+        $validated['url'] = $video->url ?? 'https://example.com/videos/' . time();
 
         $video->update($validated);
 
         return redirect()
             ->route('admin.video.index')
-            ->with('success', 'Video berhasil diperbarui');
+            ->with('success', 'Video berhasil diperbarui!');
     }
 
     public function delete($id)
     {
-        $video = ProdukModel::where('kategori', 'video')
+        $video = ProdukModel::where('kategori', 'dokum_video')
             ->findOrFail($id);
         
-        if ($video->video) {
-            Storage::delete('public/' . $video->video);
+        // Delete file if exists
+        if ($video->foto && Storage::disk('public')->exists($video->foto)) {
+            Storage::disk('public')->delete($video->foto);
         }
         
         $video->delete();
 
         return redirect()
             ->route('admin.video.index')
-            ->with('success', 'Video berhasil dihapus');
+            ->with('success', 'Video berhasil dihapus!');
     }
 }

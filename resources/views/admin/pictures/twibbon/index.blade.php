@@ -4,6 +4,11 @@
 
 @section('content')
 <div class="w-full overflow-x-hidden">
+    @if (session('success'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <span class="block sm:inline">{{ session('status') }}</span>
+        </div>
+    @endif
     <div class="w-full h-full relative bg-white flex flex-col py-4 px-4 gap-6 rounded-md">
         <!-- Search + Button -->
         <div class="w-full flex flex-col md:flex-row justify-between items-center gap-3">
@@ -36,7 +41,7 @@
                 <div class="bg-white border border-[var(--button)] rounded-[16px] shadow overflow-hidden flex flex-col transition hover:shadow-lg">
                     <!-- Gambar -->
                     <div class="relative w-full aspect-[1/1] bg-gray-100">
-                        <img src="{{ asset('storage/' . $twibbon->foto) }}" alt="{{ $twibbon->nama }}" class="w-full h-full object-cover" />
+                        <img src="{{ asset('files/' . $twibbon->foto) }}" alt="{{ $twibbon->nama }}" class="w-full h-full object-cover" />
                         
                         <!-- Action Buttons -->
                         <div class="absolute top-2 right-2 flex flex-col gap-2">
@@ -72,6 +77,7 @@
                     <!-- Isi Card -->
                     <div class="p-3 text-center">
                         <h3 class="text-md font-semibold text-[var(--judul)] truncate">{{ $twibbon->nama }}</h3>
+                        <p class="text-sm text-gray-600 mt-1 line-clamp-2">{{ $twibbon->deskripsi }}</p>
                     </div>
                 </div>
             @empty

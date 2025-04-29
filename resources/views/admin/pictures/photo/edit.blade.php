@@ -12,7 +12,7 @@
                 <!-- Judul Foto -->
                 <div class="w-full md:w-1/2 p-4">
                     <div class="w-full p-6 bg-white rounded-[20px] outline-1 outline-[var(--button)] flex flex-col gap-3">
-                        <label class="text-[var(--judul)] text-lg font-bold leading-[22px]">Kategori Foto</label>
+                        <label class="text-[var(--judul)] text-lg font-bold leading-[22px]">Judul Foto</label>
                         <div class="relative w-full h-14">
                             <div class="bg-[var(--highlight-text-box)] px-4 py-1 rounded-t-md flex items-center h-12">
                                 <input type="text" 
@@ -53,7 +53,7 @@
                 <div class="w-full p-4">
                     <div class="w-full p-6 bg-white rounded-[20px] outline-1 outline-[var(--button)] flex flex-col gap-3">
                         <label class="text-[var(--judul)] text-lg font-bold leading-[22px]">Foto Saat Ini</label>
-                        <img src="{{ asset('storage/' . $photo->foto) }}" 
+                        <img src="{{ asset('files/' . $photo->foto) }}" 
                              alt="{{ $photo->nama }}" 
                              class="w-48 h-48 object-cover rounded-lg">
                     </div>

@@ -38,7 +38,7 @@
                 <div class="bg-white border border-[var(--button)] rounded-[16px] shadow overflow-hidden flex flex-col transition hover:shadow-lg">
                     <!-- Gambar Flyer -->
                     <div class="w-full aspect-[3/4] relative">
-                        <img src="{{ asset('storage/' . $flyer->foto) }}" 
+                        <img src="{{ asset('files/' . $flyer->foto) }}" 
                              alt="{{ $flyer->nama }}" 
                              class="w-full h-full object-cover" />
                         

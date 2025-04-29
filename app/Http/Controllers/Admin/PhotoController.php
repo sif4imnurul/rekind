@@ -11,7 +11,7 @@ class PhotoController extends Controller
 {
     public function index()
     {
-        $photos = ProdukModel::where('kategori', 'photo')
+        $photos = ProdukModel::where('kategori', 'dokum_foto')
             ->orderBy('created_at', 'desc')
             ->paginate(9);
         return view('admin.pictures.photo.index', compact('photos'));
@@ -21,7 +21,7 @@ class PhotoController extends Controller
     {
         $search = $request->get('search');
         
-        $photos = ProdukModel::where('kategori', 'photo')
+        $photos = ProdukModel::where('kategori', 'dokum_foto')
             ->where(function($query) use ($search) {
                 $query->where('nama', 'like', "%{$search}%")
                     ->orWhere('deskripsi', 'like', "%{$search}%");
@@ -41,72 +41,78 @@ class PhotoController extends Controller
     {
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
-            'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'deskripsi' => 'required|string|max:1000'
         ]);
 
         if ($request->hasFile('foto')) {
-            $file = $request->file('foto');
-            $path = $file->store('public/photos');
-            $validated['foto'] = str_replace('public/', '', $path);
+            $fotoPath = $request->file('foto')->store('photo/images', 'public');
+            $validated['foto'] = $fotoPath;
         }
 
-        $validated['kategori'] = 'photo';
+        // Add additional fields
+        $validated['kategori'] = 'dokum_foto';
+        $validated['tipe'] = 'image';
+        $validated['url'] = 'https://example.com/photos/' . time(); // Random URL
+
         ProdukModel::create($validated);
 
-        return redirect()
-            ->route('admin.photo.index')
-            ->with('success', 'Foto berhasil ditambahkan');
+        return redirect()->route('admin.photo.index')
+            ->with('success', 'Foto berhasil ditambahkan!');
     }
 
     public function edit($id)
     {
-        $photo = ProdukModel::where('kategori', 'photo')
+        $photo = ProdukModel::where('kategori', 'dokum_foto')
             ->findOrFail($id);
         return view('admin.pictures.photo.edit', compact('photo'));
     }
 
     public function update(Request $request, $id)
     {
-        $photo = ProdukModel::where('kategori', 'photo')
+        $photo = ProdukModel::where('kategori', 'dokum_foto')
             ->findOrFail($id);
         
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'deskripsi' => 'required|string|max:1000'
         ]);
 
         if ($request->hasFile('foto')) {
-            if ($photo->foto) {
-                Storage::delete('public/' . $photo->foto);
+            // Delete old file if exists
+            if ($photo->foto && Storage::disk('public')->exists($photo->foto)) {
+                Storage::disk('public')->delete($photo->foto);
             }
 
-            $file = $request->file('foto');
-            $path = $file->store('public/photos');
-            $validated['foto'] = str_replace('public/', '', $path);
+            // Store new file in correct path
+            $fotoPath = $request->file('foto')->store('photo/images', 'public');
+            $validated['foto'] = $fotoPath;
         }
+
+        // Maintain existing fields
+        $validated['tipe'] = 'image';
+        $validated['url'] = $photo->url ?? 'https://example.com/photos/' . time();
 
         $photo->update($validated);
 
-        return redirect()
-            ->route('admin.photo.index')
-            ->with('success', 'Foto berhasil diperbarui');
+        return redirect()->route('admin.photo.index')
+            ->with('success', 'Foto berhasil diperbarui!');
     }
 
     public function delete($id)
     {
-        $photo = ProdukModel::where('kategori', 'photo')
+        $photo = ProdukModel::where('kategori', 'dokum_foto')
             ->findOrFail($id);
         
-        if ($photo->foto) {
-            Storage::delete('public/' . $photo->foto);
+        // Delete file if exists
+        if ($photo->foto && Storage::disk('public')->exists($photo->foto)) {
+            Storage::disk('public')->delete($photo->foto);
         }
         
         $photo->delete();
 
-        return redirect()
-            ->route('admin.photo.index')
-            ->with('success', 'Foto berhasil dihapus');
+        return redirect()->route('admin.photo.index')
+            ->with('success', 'Foto berhasil dihapus!');
     }
 }
