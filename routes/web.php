@@ -27,7 +27,7 @@ use App\Http\Controllers\Admin\PhotoController as AdminPhotoController;
 use App\Http\Controllers\Admin\VideoController as AdminVideoController;
 use App\Http\Controllers\Admin\FlyerController as AdminFlyerController;
 use App\Http\Controllers\Admin\DataClientController as AdminDataClientController;
-use App\Http\Controllers\Admin\PermohonanController as AdminPermohonanController;
+use App\Http\Controllers\Admin\CRMController as AdminCRMController;
 use App\Http\Middleware\CekLogin;
 
 // Route::get('/', function () {
@@ -342,13 +342,13 @@ Route::delete('/admin/crm/data-client/{id}', [AdminDataClientController::class, 
     ->name('admin.crm.data-client.destroy');
 
 // Tampilan Permohonan/CRM
-Route::get('/admin/crm/permohonan', [AdminPermohonanController::class, 'index'])
+Route::get('/admin/crm/permohonan', [AdminCRMController::class, 'index'])
     ->name('admin.crm.permohonan');
-Route::get('/admin/crm/permohonan/search', [AdminPermohonanController::class, 'search'])
+Route::get('/admin/crm/permohonan/search', [AdminCRMController::class, 'search'])
     ->name('admin.crm.permohonan.search');
-Route::get('/admin/crm/permohonan/{id}', [AdminPermohonanController::class, 'show'])
+Route::get('/admin/crm/permohonan/{id}', [AdminCRMController::class, 'show'])
     ->name('admin.crm.permohonan.show');
-Route::put('/admin/crm/permohonan/{id}/approve', [AdminPermohonanController::class, 'approve'])
+Route::put('/admin/crm/permohonan/{id}/approve', [AdminCRMController::class, 'approve'])
     ->name('admin.crm.permohonan.approve');
-Route::put('/admin/crm/permohonan/{id}/reject', [AdminPermohonanController::class, 'reject'])
+Route::put('/admin/crm/permohonan/{id}/reject', [AdminCRMController::class, 'reject'])
     ->name('admin.crm.permohonan.reject');
