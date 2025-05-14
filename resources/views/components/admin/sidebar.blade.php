@@ -82,8 +82,6 @@
           </ul>
         </div>
       </li>
-    </ul>
-  </nav>
 
     <!-- Edit Profile -->
     <li>
@@ -94,6 +92,8 @@
         Edit Profile
       </a>
     </li>
+    </ul>
+  </nav>
 
   <!-- Logout button positioned at the bottom of the sidebar -->
   <div class="p-4 mt-auto border-t border-gray-200">
