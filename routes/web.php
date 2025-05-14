@@ -179,6 +179,9 @@ Route::get('/picture/photo-video/video', [VideoController::class, 'index'])
 Route::get('/flyer-ucapan', [FlyerController::class, 'index'])
     ->middleware(IsUserB::class)
     ->name('flyer-ucapan.index');
+Route::get('/flyer-ucapan/search', [FlyerController::class, 'search'])
+    ->middleware(IsUserB::class)
+    ->name('flyer.search');
 
 // Tampilan Media Monitoring
 Route::get('/meida-monitoring', [TwibbonController::class, 'index'])

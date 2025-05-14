@@ -69,9 +69,14 @@
         </div>
     </div>
 
-    <!-- Grid -->
+    <!-- Grid dengan posisi tengah untuk 1-2 items -->
     <div class="w-full px-4 py-6">
-        <div class="mx-auto max-w-screen-xl grid justify-center grid-cols-[repeat(auto-fit,minmax(327px,1fr))] gap-6">
+        @php
+            $itemCount = count($items);
+            $gridClass = $itemCount <= 2 ? 'justify-center' : 'justify-start';
+        @endphp
+        
+        <div class="mx-auto max-w-screen-xl flex flex-wrap {{ $gridClass }} gap-6">
             @foreach($items as $item)
             <!-- Card -->
             <div class="w-[327px] p-4 bg-white overflow-hidden rounded-[20px] outline-1 outline-[var(--button)] outline-offset-[-1px] flex flex-col gap-[13px]">
