@@ -20,6 +20,8 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\AnnualController as AdminAnnualController;
 use App\Http\Controllers\Admin\SustainController as AdminSustainController;
 use App\Http\Controllers\Admin\BukuController as AdminBukuController;
+use App\Http\Controllers\Admin\AgendaController as AdminAgendaController;
+use App\Http\Controllers\Admin\MediaMonitoringController as AdminMediaMonitoringController;
 use App\Http\Controllers\Admin\PresentasiController as AdminPresentasiController;
 use App\Http\Controllers\Admin\ZoomBackgroundController as AdminZoomBackgroundController;
 use App\Http\Controllers\Admin\TwibbonController as AdminTwibbonController;
@@ -230,6 +232,29 @@ Route::delete('/admin/reference/buku/{id}', [AdminBukuController::class, 'delete
 Route::get('admin/buku/search', [AdminBukuController::class, 'search'])
     ->name('admin.buku.search')
     ->middleware(IsAdmin::class);
+
+// Tampilan Agenda
+Route::prefix('admin/reference/agenda')->middleware(IsAdmin::class)->group(function () {
+    Route::get('/', [AdminAgendaController::class, 'index'])->name('admin.agenda.index');
+    Route::get('/create', [AdminAgendaController::class, 'create'])->name('admin.agenda.create');
+    Route::post('/', [AdminAgendaController::class, 'store'])->name('admin.agenda.store');
+    Route::get('/search', [AdminAgendaController::class, 'search'])->name('admin.agenda.search');
+    Route::get('/{id}', [AdminAgendaController::class, 'show'])->name('admin.agenda.show');
+    Route::get('/{id}/edit', [AdminAgendaController::class, 'edit'])->name('admin.agenda.edit');
+    Route::put('/{id}', [AdminAgendaController::class, 'update'])->name('admin.agenda.update');
+    Route::delete('/{id}', [AdminAgendaController::class, 'delete'])->name('admin.agenda.delete');
+});
+
+// Tampilan Media Monitoring
+Route::prefix('admin/reference/media-monitoring')->middleware(IsAdmin::class)->group(function () {
+    Route::get('/', [AdminMediaMonitoringController::class, 'index'])->name('admin.media-monitoring.index');
+    Route::get('/create', [AdminMediaMonitoringController::class, 'create'])->name('admin.media-monitoring.create');
+    Route::post('/', [AdminMediaMonitoringController::class, 'store'])->name('admin.media-monitoring.store');
+    Route::get('/{id}/edit', [AdminMediaMonitoringController::class, 'edit'])->name('admin.media-monitoring.edit');
+    Route::put('/{id}', [AdminMediaMonitoringController::class, 'update'])->name('admin.media-monitoring.update');
+    Route::delete('/{id}', [AdminMediaMonitoringController::class, 'delete'])->name('admin.media-monitoring.delete');
+    Route::get('/search', [AdminMediaMonitoringController::class, 'search'])->name('admin.media-monitoring.search');
+});
 
 // Tampilan Template Presentasi
 Route::get('/admin/reference/presentasi/', [AdminPresentasiController::class, 'index'])
