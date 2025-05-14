@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     @if($book->url)
-                        <a href="{{ asset('/files/' . $book->foto) }}" target="_blank"
+                        <a href="{{ asset('/files/' . $book->url) }}" target="_blank"
                             class="mt-2 bg-[var(--button)] text-white font-semibold py-2 px-4 rounded-xl hover:bg-[#65A6C6] transition text-center w-fit">
                             Download PDF
                         </a>

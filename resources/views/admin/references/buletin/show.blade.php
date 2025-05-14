@@ -42,7 +42,7 @@
                         @endif
                     </div>
                     @if($buletin->url)
-                        <a href="{{ asset('/files/' . $buletin->pdf) }}" 
+                        <a href="{{ asset('/files/' . $buletin->url) }}" 
                            target="_blank"
                            class="mt-2 bg-[var(--button)] text-white font-semibold py-2 px-4 rounded-xl hover:bg-[#65A6C6] transition text-center w-fit">
                             Download PDF

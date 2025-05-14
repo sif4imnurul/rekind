@@ -20,6 +20,7 @@ use App\Http\Controllers\CompanyProfileController;
 use App\Http\Controllers\DokumentasiController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\AnnualController as AdminAnnualController;
 use App\Http\Controllers\Admin\SustainController as AdminSustainController;
@@ -197,6 +198,14 @@ Route::get('/meida-monitoring', [TwibbonController::class, 'index'])
 Route::get('/admin/dashboard/', [AdminDashboardController::class, 'index'])
     ->middleware(IsAdmin::class)
     ->name('admin.dashboard.index');
+
+// Edit Profil
+Route::middleware(IsAdmin::class)->group(function () {
+    Route::get('/admin/profile/edit', [AdminProfileController::class, 'edit'])
+        ->name('admin.profile.edit');
+    Route::put('/admin/profile/update', [AdminProfileController::class, 'update'])
+        ->name('admin.profile.update');
+});
 
 // Tampilan Laporan Annual dan Sustain
 Route::get('/admin/reference/annual-report/', [AdminAnnualController::class, 'index'])
