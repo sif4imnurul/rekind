@@ -13,6 +13,8 @@ use App\Http\Controllers\PresentasiController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\CRMController;
 use App\Http\Controllers\AnnualController;
+use App\Http\Controllers\BuletinController;
+use App\Http\Controllers\FlyerController;
 use App\Http\Controllers\SustainController;
 use App\Http\Controllers\CompanyProfileController;
 use App\Http\Controllers\DokumentasiController;
@@ -47,6 +49,34 @@ Route::get('/login', [AuthController::class, 'index'])->name('login.index');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+
+
+
+// Tampilan Laporan
+Route::get('/reference/annual-report/grid', [AnnualController::class, 'grid'])
+    ->middleware(IsUserB::class)
+    ->name('annual.grid');
+Route::get('/reference/annual-report/list', [AnnualController::class, 'list'])
+    ->middleware(IsUserB::class)
+    ->name('annual.list');
+Route::get('/reference/sustainability-report/grid', [SustainController::class, 'grid'])
+    ->middleware(IsUserB::class)
+    ->name('sustain.grid');
+Route::get('/reference/sustainability-report/list', [SustainController::class, 'list'])
+    ->middleware(IsUserB::class)
+    ->name('sustain.list');
+
+// Tampilan Buletin
+Route::get('/list-buletin', [BuletinController::class, 'list'])
+    ->middleware(IsUserB::class)
+    ->name('buletin.list');
+Route::get('/grid-buletin', [BuletinController::class, 'grid'])
+    ->middleware(IsUserB::class)
+    ->name('buletin.grid');
+Route::get('/search-buletin', [BuletinController::class, 'search'])
+    ->middleware(IsUserB::class)
+    ->name('buletin.search');
+
 // Tampilan Buku
 Route::get('/list-buku', [BukuController::class, 'list'])
     ->middleware(IsUserB::class)
@@ -74,8 +104,7 @@ Route::get('/hasil-survey/skl', [HasilSurveyController::class, 'skl'])
 Route::get('/hasil-survey/testimoni', [HasilSurveyController::class, 'testimoni'])
     ->middleware(IsUserB::class)
     ->name('survey.testimoni');
-
-
+    
 // Tampilan Agenda
 Route::get('/list-agenda', [AgendaController::class, 'list'])
     ->middleware(IsUserB::class)
@@ -129,20 +158,6 @@ Route::post('/crm/permohonan-akses', [CRMController::class, 'store'])
     ->middleware(IsUserB::class)
     ->name('crm.store');
 
-// Tampilan Laporan
-Route::get('/reference/annual-report/grid', [AnnualController::class, 'grid'])
-    ->middleware(IsUserB::class)
-    ->name('annual.grid');
-Route::get('/reference/annual-report/list', [AnnualController::class, 'list'])
-    ->middleware(IsUserB::class)
-    ->name('annual.list');
-Route::get('/reference/sustainability-report/grid', [SustainController::class, 'grid'])
-    ->middleware(IsUserB::class)
-    ->name('sustain.grid');
-Route::get('/reference/sustainability-report/list', [SustainController::class, 'list'])
-    ->middleware(IsUserB::class)
-    ->name('sustain.list');
-
 // Tampilan Company Profile
 Route::get('/reference/company-profile', [CompanyProfileController::class, 'index'])
     ->middleware(IsUserB::class)
@@ -159,11 +174,16 @@ Route::get('/picture/photo-video/video', [VideoController::class, 'index'])
     ->middleware(IsUserB::class)
     ->name('video.index');
 
+// Tampilan Flyer Ucapan
+Route::get('/flyer-ucapan', [FlyerController::class, 'index'])
+    ->middleware(IsUserB::class)
+    ->name('flyer-ucapan.index');
 
 // Tampilan Media Monitoring
 Route::get('/meida-monitoring', [TwibbonController::class, 'index'])
     ->middleware(IsUserB::class)
     ->name('twibbon.index');
+    
 
 // =========================================================================================================================
 // |                                                           Route Admin                                                 |

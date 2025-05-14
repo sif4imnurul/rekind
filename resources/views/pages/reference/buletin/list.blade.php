@@ -8,17 +8,16 @@
     <div class="max-w-full flex justify-between items-start">
         <!-- Kiri -->
         <div class="w-[662px] overflow-hidden flex flex-col justify-start items-start gap-[10px]">
-        <div class="text-[#1D3A6D] text-[24px] font-bold leading-[32px] tracking-[0.10px] font-montserrat">Buletin</div>
-        <div class="text-[#737373] text-[14px] font-normal leading-[20px] tracking-[0.20px] font-montserrat">Kumpulan Berita, Informasi, dan Wawasan Terbaru</div>
+            <div class="text-[#1D3A6D] text-[24px] font-bold leading-[32px] tracking-[0.10px] font-montserrat">Buletin</div>
+            <div class="text-[#737373] text-[14px] font-normal leading-[20px] tracking-[0.20px] font-montserrat">Kumpulan Berita, Informasi, dan Wawasan Terbaru</div>
         </div>
 
-        
         <!-- Kanan -->
         <div class="w-[207px] h-[48px] flex justify-end items-center">
-            <!-- Left Button -->
+            <!-- Left Button - Grid -->
             <div class="flex-1 h-[48px] py-[4px] flex justify-center items-center">
                 <div class="flex-1 self-stretch overflow-hidden rounded-l-full outline-1 outline-[#7BB7D1] outline-offset-[-1px] flex flex-col justify-center items-center">
-                    <a href="{{ route('buletin.grid') }}">
+                    <a href="{{ route('buletin.grid', request()->query()) }}">
                         <div class="self-stretch flex-1 px-[12px] py-[10px] flex justify-center items-center gap-[8px]">
                             <div class="w-[24px] h-[24px] relative">
                                 <div class="absolute text-[#1D3A6D]">
@@ -30,10 +29,10 @@
                 </div>
             </div>
 
-            <!-- Right Button -->
+            <!-- Right Button - List (Active) -->
             <div class="flex-1 h-[48px] py-[4px] flex justify-center items-center">
-                <div class="flex-1 self-stretch bg-[var(--highlight-text-box)] overflow-hidden rounded-r-full outline-1 outline-[#7BB7D1] outline-offset-[-1px] flex flex-col justify-center items-center gap-[10px]">
-                    <a href="{{ route('buletin.list') }}">
+                <div class="flex-1 self-stretch bg-[#D6E4F5] overflow-hidden rounded-r-full outline-1 outline-[#7BB7D1] outline-offset-[-1px] flex flex-col justify-center items-center gap-[10px]">
+                    <a href="{{ route('buletin.list', request()->query()) }}">
                         <div class="self-stretch flex-1 px-[12px] py-[10px] flex justify-center items-center gap-[8px]">
                             <div class="w-[24px] h-[24px] relative">
                                 <div class="absolute text-[#1D3A6D]">
@@ -60,259 +59,124 @@
     <div class="w-full h-full flex flex-col md:flex-row items-center justify-between gap-y-4 md:gap-[30px]">
         <!-- Kiri: Search Box -->
         <div class="w-full max-w-[510px] h-[62px] flex items-center gap-[10px]">
-            <div class="w-full h-[56px] min-w-[280px] max-w-[720px] bg-[var(--highlight-text-box)] overflow-hidden rounded-full flex items-center justify-center gap-[4px]">
-                <div class="flex-1 h-full flex items-center gap-[4px] px-[4px]">
-                    <div class="w-[22px] h-[48px] inline-flex flex-col items-center justify-center gap-[10px]"></div>
-                    <div class="flex-1 h-full flex items-center justify-start gap-[10px]">
-                        <div class="text-[#737373] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px]">
-                            Hinted search text
+            <form action="{{ route('buletin.search') }}" method="GET" class="w-full">
+                <input type="hidden" name="sort" value="{{ request('sort', 'terbaru') }}">
+                <div class="w-full h-[56px] min-w-[280px] max-w-[720px] bg-[#D6E4F5] overflow-hidden rounded-full flex items-center justify-center gap-[4px]">
+                    <div class="flex-1 h-full flex items-center gap-[4px] px-[4px]">
+                        <div class="w-[22px] h-[48px] inline-flex flex-col items-center justify-center gap-[10px]"></div>
+                        <div class="flex-1 h-full flex items-center justify-start gap-[10px]">
+                            <input type="text" name="search" placeholder="Cari buletin..." value="{{ $search ?? '' }}" class="w-full bg-transparent border-none outline-none text-[#737373] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px]">
                         </div>
-                    </div>
-                    <div class="flex items-center justify-end">
-                        <div class="w-[48px] h-[48px] inline-flex flex-col items-center justify-center gap-[10px]">
-                            <div class="overflow-hidden rounded-full flex items-center justify-center gap-[10px]">
-                                <div class="p-[8px] flex items-center justify-center gap-[10px]">
-                                    <div class="w-[24px] h-[24px] relative">
-                                        <div class="absolute text-[#737373]">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path></svg>
-                                        </div>
+                        <button type="submit" class="w-[48px] h-[48px] cursor-pointer flex items-center justify-center rounded-full hover:bg-[#C5D7EB] transition-colors">
+                            <div class="p-[8px] flex items-center justify-center">
+                                <div class="w-[24px] h-[24px] relative">
+                                    <div class="absolute text-[#737373]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path></svg>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
 
         <!-- Kanan: Sort Box -->
         <div class="w-full max-w-[510px] overflow-hidden rounded-full flex items-center justify-end gap-[4px]">
             <div class="w-[130px] h-[56px] p-[4px] flex items-center justify-start gap-[4px]">
-            <div class="w-[22px] h-[48px] inline-flex flex-col items-center justify-center gap-[10px]"></div>
-            <div class="w-[62px] h-full flex items-center justify-start gap-[10px]">
-                <div class="text-[#737373] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px]">
-                Sort by
+                <div class="w-[22px] h-[48px] inline-flex flex-col items-center justify-center gap-[10px]"></div>
+                <select id="sort-select" class="bg-transparent border-none text-[#737373] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px] cursor-pointer">
+                    <option value="terbaru" {{ (request('sort') == 'terbaru' || !request('sort')) ? 'selected' : '' }}>Terbaru</option>
+                    <option value="terlama" {{ request('sort') == 'terlama' ? 'selected' : '' }}>Terlama</option>
+                    <option value="a-z" {{ request('sort') == 'a-z' ? 'selected' : '' }}>A-Z</option>
+                    <option value="z-a" {{ request('sort') == 'z-a' ? 'selected' : '' }}>Z-A</option>
+                </select>
+                <div class="w-[16px] h-[20px] text-[#737373]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M8 16H4l6 6V2H8zm6-11v17h2V8h4l-6-6z"></path></svg>
                 </div>
-            </div>
-            <div class="w-[16px] h-[20px] text-[#737373]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M8 16H4l6 6V2H8zm6-11v17h2V8h4l-6-6z"></path></svg>
-            </div>
             </div>
             <div class="w-[24px] h-[24px] relative"></div>
         </div>
     </div>
 
-
-    <!-- list book -->
+    <!-- List buletin -->
     <div class="w-full h-full relative bg-white flex flex-col justify-center items-center py-6">
+        @foreach($bulletins as $buletin)
         <!-- Main content -->
         <div class="w-full flex items-center gap-4 px-4 py-2">
             <!-- Gambar kiri -->
             <div class="w-[40px] flex flex-col justify-center items-start overflow-hidden ml-0">
-            <div class="flex justify-start items-start gap-[10px]">
-                <img class="w-[39.64px] h-[56px]" src="{{ asset('img/book-1.jpg') }}" alt="Buletin"/>
-            </div>
+                <div class="flex justify-start items-start gap-[10px]">
+                    <img class="w-[39.64px] h-[56px] object-cover" src="{{ asset('img/' . ($buletin->display_image ?? 'book-1.jpg')) }}" alt="{{ $buletin->nama }}" />
+                </div>
             </div>
 
             <!-- Teks tengah -->
             <div class="flex-1 flex flex-col justify-center items-start overflow-hidden">
-            <div class="w-full text-[#1D3A6D] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px]">
-                Judul Buletin
-            </div>
-            <div class="w-full h-[20px] text-[#737373] text-[14px] font-roboto font-normal leading-[20px] tracking-[0.25px]">
-                Caption
-            </div>
+                <div class="w-full text-[#1D3A6D] text-[16px] font-roboto font-bold leading-[24px] tracking-[0.5px]">
+                    {{ $buletin->nama }}
+                </div>
+                <div class="w-full text-[#737373] text-[14px] font-roboto font-normal leading-[20px] tracking-[0.25px]">
+                    {{ Str::limit($buletin->deskripsi, 100) }}
+                </div>
             </div>
 
             <!-- Icon kanan -->
             <div class="w-[33px] h-[33px] relative ml-auto">
-                <div class="absolute left-[5.5px] top-[5.5px] w-[22px] h-[22px] text-[#7BB7D1]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="m12 16 4-5h-3V4h-2v7H8z"></path><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path></svg>
-                </div>
+                <a href="{{ asset('files/' . $buletin->url) }}" download>
+                    <div class="absolute left-[5.5px] top-[5.5px] w-[22px] h-[22px] text-[#7BB7D1]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
+                            <path d="m12 16 4-5h-3V4h-2v7H8z"></path>
+                            <path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path>
+                        </svg>
+                    </div>
+                </a>
             </div>
         </div>
 
+        @if(!$loop->last)
         <hr class="w-full border-[var(--button)]">
-
-        <!-- Main content -->
-        <div class="w-full flex items-center gap-4 px-4 py-2">
-            <!-- Gambar kiri -->
-            <div class="w-[40px] flex flex-col justify-center items-start overflow-hidden ml-0">
-            <div class="flex justify-start items-start gap-[10px]">
-                <img class="w-[39.64px] h-[56px]" src="{{ asset('img/book-1.jpg') }}" alt="Buletin"/>
-            </div>
-            </div>
-
-            <!-- Teks tengah -->
-            <div class="flex-1 flex flex-col justify-center items-start overflow-hidden">
-            <div class="w-full text-[#1D3A6D] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px]">
-                Judul Buletin
-            </div>
-            <div class="w-full h-[20px] text-[#737373] text-[14px] font-roboto font-normal leading-[20px] tracking-[0.25px]">
-                Caption
-            </div>
-            </div>
-
-            <!-- Icon kanan -->
-            <div class="w-[33px] h-[33px] relative ml-auto">
-                <div class="absolute left-[5.5px] top-[5.5px] w-[22px] h-[22px] text-[#7BB7D1]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="m12 16 4-5h-3V4h-2v7H8z"></path><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path></svg>
-                </div>
-            </div>
-        </div>
-
-        <hr class="w-full border-[var(--button)]">
-
-        <!-- Main content -->
-        <div class="w-full flex items-center gap-4 px-4 py-2">
-            <!-- Gambar kiri -->
-            <div class="w-[40px] flex flex-col justify-center items-start overflow-hidden ml-0">
-            <div class="flex justify-start items-start gap-[10px]">
-                <img class="w-[39.64px] h-[56px]" src="{{ asset('img/book-1.jpg') }}" alt="Buletin"/>
-            </div>
-            </div>
-
-            <!-- Teks tengah -->
-            <div class="flex-1 flex flex-col justify-center items-start overflow-hidden">
-            <div class="w-full text-[#1D3A6D] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px]">
-                Judul Buletin
-            </div>
-            <div class="w-full h-[20px] text-[#737373] text-[14px] font-roboto font-normal leading-[20px] tracking-[0.25px]">
-                Caption
-            </div>
-            </div>
-
-            <!-- Icon kanan -->
-            <div class="w-[33px] h-[33px] relative ml-auto">
-                <div class="absolute left-[5.5px] top-[5.5px] w-[22px] h-[22px] text-[#7BB7D1]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="m12 16 4-5h-3V4h-2v7H8z"></path><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path></svg>
-                </div>
-            </div>
-        </div>
-
-        <hr class="w-full border-[var(--button)]">
-
-        <!-- Main content -->
-        <div class="w-full flex items-center gap-4 px-4 py-2">
-            <!-- Gambar kiri -->
-            <div class="w-[40px] flex flex-col justify-center items-start overflow-hidden ml-0">
-            <div class="flex justify-start items-start gap-[10px]">
-                <img class="w-[39.64px] h-[56px]" src="{{ asset('img/book-1.jpg') }}" alt="Buletin"/>
-            </div>
-            </div>
-
-            <!-- Teks tengah -->
-            <div class="flex-1 flex flex-col justify-center items-start overflow-hidden">
-            <div class="w-full text-[#1D3A6D] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px]">
-                Judul Buletin
-            </div>
-            <div class="w-full h-[20px] text-[#737373] text-[14px] font-roboto font-normal leading-[20px] tracking-[0.25px]">
-                Caption
-            </div>
-            </div>
-
-            <!-- Icon kanan -->
-            <div class="w-[33px] h-[33px] relative ml-auto">
-                <div class="absolute left-[5.5px] top-[5.5px] w-[22px] h-[22px] text-[#7BB7D1]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="m12 16 4-5h-3V4h-2v7H8z"></path><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path></svg>
-                </div>
-            </div>
-        </div>
-
-        <hr class="w-full border-[var(--button)]">
-
-        <!-- Main content -->
-        <div class="w-full flex items-center gap-4 px-4 py-2">
-            <!-- Gambar kiri -->
-            <div class="w-[40px] flex flex-col justify-center items-start overflow-hidden ml-0">
-            <div class="flex justify-start items-start gap-[10px]">
-                <img class="w-[39.64px] h-[56px]" src="{{ asset('img/book-1.jpg') }}" alt="Buletin"/>
-            </div>
-            </div>
-
-            <!-- Teks tengah -->
-            <div class="flex-1 flex flex-col justify-center items-start overflow-hidden">
-            <div class="w-full text-[#1D3A6D] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px]">
-                Judul Buletin
-            </div>
-            <div class="w-full h-[20px] text-[#737373] text-[14px] font-roboto font-normal leading-[20px] tracking-[0.25px]">
-                Caption
-            </div>
-            </div>
-
-            <!-- Icon kanan -->
-            <div class="w-[33px] h-[33px] relative ml-auto">
-                <div class="absolute left-[5.5px] top-[5.5px] w-[22px] h-[22px] text-[#7BB7D1]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="m12 16 4-5h-3V4h-2v7H8z"></path><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path></svg>
-                </div>
-            </div>
-        </div>
-
-        <hr class="w-full border-[var(--button)]">
-
-        <!-- Main content -->
-        <div class="w-full flex items-center gap-4 px-4 py-2">
-            <!-- Gambar kiri -->
-            <div class="w-[40px] flex flex-col justify-center items-start overflow-hidden ml-0">
-            <div class="flex justify-start items-start gap-[10px]">
-                <img class="w-[39.64px] h-[56px]" src="{{ asset('img/book-1.jpg') }}" alt="Buletin"/>
-            </div>
-            </div>
-
-            <!-- Teks tengah -->
-            <div class="flex-1 flex flex-col justify-center items-start overflow-hidden">
-            <div class="w-full text-[#1D3A6D] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px]">
-                Judul Buletin
-            </div>
-            <div class="w-full h-[20px] text-[#737373] text-[14px] font-roboto font-normal leading-[20px] tracking-[0.25px]">
-                Caption
-            </div>
-            </div>
-
-            <!-- Icon kanan -->
-            <div class="w-[33px] h-[33px] relative ml-auto">
-                <div class="absolute left-[5.5px] top-[5.5px] w-[22px] h-[22px] text-[#7BB7D1]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="m12 16 4-5h-3V4h-2v7H8z"></path><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path></svg>
-                </div>
-            </div>
-        </div>
-
-        <hr class="w-full border-[var(--button)]">
-
-        <!-- Main content -->
-        <div class="w-full flex items-center gap-4 px-4 py-2">
-            <!-- Gambar kiri -->
-            <div class="w-[40px] flex flex-col justify-center items-start overflow-hidden ml-0">
-            <div class="flex justify-start items-start gap-[10px]">
-                <img class="w-[39.64px] h-[56px]" src="{{ asset('img/book-1.jpg') }}" alt="Buletin"/>
-            </div>
-            </div>
-
-            <!-- Teks tengah -->
-            <div class="flex-1 flex flex-col justify-center items-start overflow-hidden">
-            <div class="w-full text-[#1D3A6D] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px]">
-                Judul Buletin
-            </div>
-            <div class="w-full h-[20px] text-[#737373] text-[14px] font-roboto font-normal leading-[20px] tracking-[0.25px]">
-                Caption
-            </div>
-            </div>
-
-            <!-- Icon kanan -->
-            <div class="w-[33px] h-[33px] relative ml-auto">
-                <div class="absolute left-[5.5px] top-[5.5px] w-[22px] h-[22px] text-[#7BB7D1]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="m12 16 4-5h-3V4h-2v7H8z"></path><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path></svg>
-                </div>
-            </div>
-        </div>
-
-        <hr class="w-full border-[var(--button)]">
-
+        @endif
+        @endforeach
     </div>
     
-    @include('components.pagination')
-
-
+    <!-- Pagination -->
+    <div class="w-full flex justify-center mt-8">
+        {{ $bulletins->appends(request()->query())->links('components.pagination') }}
+    </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle sort functionality
+        const sortSelect = document.getElementById('sort-select');
+        
+        sortSelect.addEventListener('change', function() {
+            const sortValue = this.value;
+            const currentUrl = new URL(window.location.href);
+            
+            // Simpan parameter search jika ada
+            const searchParam = currentUrl.searchParams.get('search');
+            
+            // Set parameter sort baru
+            currentUrl.searchParams.set('sort', sortValue);
+            
+            // Pastikan parameter search tetap ada
+            if (searchParam) {
+                currentUrl.searchParams.set('search', searchParam);
+            }
+            
+            window.location.href = currentUrl.toString();
+        });
+                
+        // Mengurutkan berdasarkan dropdown 
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentSort = urlParams.get('sort');
+
+        if (currentSort) {
+            sortSelect.value = currentSort;
+        }
+    });
+</script>
 
 @endsection

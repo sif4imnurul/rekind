@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class AgendaController extends Controller
 {
-        public function list(Request $request)
+    public function list(Request $request)
     {
         return view('pages.reference.agenda.list');
     }
