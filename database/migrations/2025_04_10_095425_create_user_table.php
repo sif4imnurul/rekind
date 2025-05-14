@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('role', ['admin', 'userb', 'userk']);
             $table->string('telepon')->nullable();
             $table->text('alamat')->nullable();
+            $table->date('tanggal_lahir');
             $table->timestamps();
         });
     }
