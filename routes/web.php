@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\HasilSurveyController;
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ZoomBackgroundController;
 use App\Http\Controllers\TwibbonController;
 use App\Http\Controllers\PresentasiController;
@@ -55,6 +57,38 @@ Route::get('/grid-buku', [BukuController::class, 'grid'])
 Route::get('/search-buku', [BukuController::class, 'search'])
     ->middleware(IsUserB::class)
     ->name('buku.search');
+
+// Tampilan Hasil Survey 
+Route::get('/hasil-survey/awareness', [HasilSurveyController::class, 'awareness'])
+    ->middleware(IsUserB::class)
+    ->name('survey.awareness');
+Route::get('/hasil-survey/position', [HasilSurveyController::class, 'position'])
+    ->middleware(IsUserB::class)
+    ->name('survey.position');
+Route::get('/hasil-survey/cse', [HasilSurveyController::class, 'cse'])
+    ->middleware(IsUserB::class)
+    ->name('survey.cse');
+Route::get('/hasil-survey/skl', [HasilSurveyController::class, 'skl'])
+    ->middleware(IsUserB::class)
+    ->name('survey.skl');
+Route::get('/hasil-survey/testimoni', [HasilSurveyController::class, 'testimoni'])
+    ->middleware(IsUserB::class)
+    ->name('survey.testimoni');
+
+
+// Tampilan Agenda
+Route::get('/list-agenda', [AgendaController::class, 'list'])
+    ->middleware(IsUserB::class)
+    ->name('agenda.list');
+Route::get('/grid-agenda', [AgendaController::class, 'grid'])
+    ->middleware(IsUserB::class)
+    ->name('agenda.grid');
+Route::get('/show-agenda', [AgendaController::class, 'show'])
+    ->middleware(IsUserB::class)
+    ->name('agenda.show');
+Route::get('/search-agenda', [AgendaController::class, 'search'])
+    ->middleware(IsUserB::class)
+    ->name('agenda.search');
 
 // Tampilan Presentasi
 Route::get('/presentasi', [PresentasiController::class, 'index'])
@@ -124,6 +158,12 @@ Route::get('/picture/photo-video/photo', [PhotoController::class, 'index'])
 Route::get('/picture/photo-video/video', [VideoController::class, 'index'])
     ->middleware(IsUserB::class)
     ->name('video.index');
+
+
+// Tampilan Media Monitoring
+Route::get('/meida-monitoring', [TwibbonController::class, 'index'])
+    ->middleware(IsUserB::class)
+    ->name('twibbon.index');
 
 // =========================================================================================================================
 // |                                                           Route Admin                                                 |

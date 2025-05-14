@@ -24,16 +24,16 @@
         <!-- Button 1 -->
         <div class="h-16 flex justify-center items-center">
             <div class="w-full h-full bg-white rounded-[30px] outline-1 outline-[var(--button)] flex justify-center items-center px-3">
-                <a href="#" class="text-[var(--sub-text)] text-base font-normal text-center">
+                <a href="{{ route('survey.awareness') }}" class="text-[var(--sub-text)] text-base font-normal text-center">
                     Brand Awareness
                 </a>
             </div>
         </div>
 
-        <!-- Button 2 -->
+        <!-- Button 2 (Active) -->
         <div class="h-16 flex justify-center items-center">
             <div class="w-full h-full bg-[var(--button)] rounded-[30px] outline-1 outline-[var(--button)] flex justify-center items-center px-3">
-                <a href="#" class="text-white text-base font-normal text-center">
+                <a href="{{ route('survey.position') }}" class="text-white text-base font-normal text-center">
                     Brand Positioning
                 </a>
             </div>
@@ -42,7 +42,7 @@
         <!-- Button 3 -->
         <div class="h-16 flex justify-center items-center">
             <div class="w-full h-full bg-white rounded-[30px] outline-1 outline-[var(--button)] flex justify-center items-center px-3">
-                <a href="#" class="text-[var(--sub-text)] text-base font-normal text-center">
+                <a href="{{ route('survey.cse') }}" class="text-[var(--sub-text)] text-base font-normal text-center">
                     Customer Satisfaction & Engagement
                 </a>
             </div>
@@ -51,7 +51,7 @@
         <!-- Button 4 -->
         <div class="h-16 flex justify-center items-center">
             <div class="w-full h-full bg-white rounded-[30px] outline-1 outline-[var(--button)] flex justify-center items-center px-3">
-                <a href="#" class="text-[var(--sub-text)] text-base font-normal text-center">
+                <a href="{{ route('survey.skl') }}" class="text-[var(--sub-text)] text-base font-normal text-center">
                     SKL (Survey Kepuasan Layanan)
                 </a>
             </div>

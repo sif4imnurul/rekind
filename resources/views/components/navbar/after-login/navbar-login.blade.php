@@ -178,8 +178,8 @@
         <a href="#" class="block px-4 py-2 text-sm text-[var(--sub-text)] hover:bg-[var(--highlight-text-box)] hover:text-[var(--judul)]">Buletin</a>
         <a href="{{ route('compro.index') }}" class="block px-4 py-2 text-sm text-[var(--sub-text)] hover:bg-[var(--highlight-text-box)] hover:text-[var(--judul)]">Company Profile</a>
         <a href="{{ route('buku.grid') }}" class="block px-4 py-2 text-sm text-[var(--sub-text)] hover:bg-[var(--highlight-text-box)] hover:text-[var(--judul)]">Buku Terbitan Coorporate</a>
-        <a href="#" class="block px-4 py-2 text-sm text-[var(--sub-text)] hover:bg-[var(--highlight-text-box)] hover:text-[var(--judul)]">Hasil Survey Brand</a>
-        <a href="#" class="block px-4 py-2 text-sm text-[var(--sub-text)] hover:bg-[var(--highlight-text-box)] hover:text-[var(--judul)]">Agenda Perusahaan</a>
+        <a href="{{ route('survey.awareness') }}" class="block px-4 py-2 text-sm text-[var(--sub-text)] hover:bg-[var(--highlight-text-box)] hover:text-[var(--judul)]">Hasil Survey Brand</a>
+        <a href="{{ route('agenda.grid') }}" class="block px-4 py-2 text-sm text-[var(--sub-text)] hover:bg-[var(--highlight-text-box)] hover:text-[var(--judul)]">Agenda Perusahaan</a>
         <a href="{{ route('presentasi.index') }}" class="block px-4 py-2 text-sm text-[var(--sub-text)] hover:bg-[var(--highlight-text-box)] hover:text-[var(--judul)]">Template Presentasi</a>
       </div>
     </div>

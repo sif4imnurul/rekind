@@ -24,7 +24,7 @@
         <!-- Button 1 -->
         <div class="h-16 flex justify-center items-center">
             <div class="w-full h-full bg-white rounded-[30px] outline-1 outline-[var(--button)] flex justify-center items-center px-3">
-                <a href="#" class="text-[var(--sub-text)] text-base font-normal text-center">
+                <a href="{{ route('survey.awareness') }}" class="text-[var(--sub-text)] text-base font-normal text-center">
                     Brand Awareness
                 </a>
             </div>
@@ -33,16 +33,16 @@
         <!-- Button 2 -->
         <div class="h-16 flex justify-center items-center">
             <div class="w-full h-full bg-white rounded-[30px] outline-1 outline-[var(--button)] flex justify-center items-center px-3">
-                <a href="#" class="text-[var(--sub-text)] text-base font-normal text-center">
+                <a href="{{ route('survey.position') }}" class="text-[var(--sub-text)] text-base font-normal text-center">
                     Brand Positioning
                 </a>
             </div>
         </div>
 
-        <!-- Button 3 -->
+        <!-- Button 3 (Active) -->
         <div class="h-16 flex justify-center items-center">
             <div class="w-full h-full bg-[var(--button)] rounded-[30px] outline-1 outline-[var(--button)] flex justify-center items-center px-3">
-                <a href="#" class="text-white text-base font-normal text-center">
+                <a href="{{ route('survey.cse') }}" class="text-white text-base font-normal text-center">
                     Customer Satisfaction & Engagement
                 </a>
             </div>
@@ -51,7 +51,7 @@
         <!-- Button 4 -->
         <div class="h-16 flex justify-center items-center">
             <div class="w-full h-full bg-white rounded-[30px] outline-1 outline-[var(--button)] flex justify-center items-center px-3">
-                <a href="#" class="text-[var(--sub-text)] text-base font-normal text-center">
+                <a href="{{ route('survey.skl') }}" class="text-[var(--sub-text)] text-base font-normal text-center">
                     SKL (Survey Kepuasan Layanan)
                 </a>
             </div>
@@ -366,7 +366,7 @@
         </div>
 
         <!-- Link Selengkapnya -->
-        <a href="#" class="flex items-center gap-2 mx-auto mt-4 text-[#4AA0C4] text-base font-roboto font-normal leading-6 tracking-[0.5px]">
+        <a href="{{ route('survey.testimoni') }}" class="flex items-center gap-2 mx-auto mt-4 text-[#4AA0C4] text-base font-roboto font-normal leading-6 tracking-[0.5px]">
             Selengkapnya
             <div class="w-[24px] h-[20px] text-[#7BB7D1]">
                 <svg xmlns="http://www.w3.org/2000/svg" class="fill-current" viewBox="0 0 24 24"><path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"/></svg>

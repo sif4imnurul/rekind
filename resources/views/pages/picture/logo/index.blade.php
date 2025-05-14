@@ -16,13 +16,33 @@
 
             <div class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 justify-items-center">
                 @foreach($logos as $logo)
-                    <img class="w-[150px] h-auto object-contain self-end" 
+                    <img class="w-[150px] h-auto object-contain self-end cursor-pointer" 
                          src="{{ asset('img/' . $logo->foto) }}" 
-                         alt="{{ $logo->nama }}" />
+                         alt="{{ $logo->nama }}"
+                         onclick="window.location.href='{{ asset('img/' . $logo->foto) }}?download=true'" />
                 @endforeach
             </div>
         </div>
     </div>
 </div>
+
+@section('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const logos = document.querySelectorAll('.w-full.grid img');
+        logos.forEach(logo => {
+            logo.addEventListener('click', function(e) {
+                e.preventDefault();
+                const link = document.createElement('a');
+                link.href = this.src;
+                link.download = this.alt;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        });
+    });
+</script>
+@endsection
 
 @endsection

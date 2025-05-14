@@ -20,8 +20,8 @@
         <hr class="border-[2px] text-[var(--line)] rounded-2xl">
     </div>
     <div class="self-stretch h-36 py-px inline-flex justify-start items-center gap-5 overflow-hidden">    
-        <!-- Card 1 -->
-        <div class="w-36 h-36 border-b border-neutral-500 flex justify-center items-center">
+        <!-- Card 1-->
+        <a href="{{ route('agenda.grid') }}" class="w-36 h-36 border-b border-neutral-500 flex justify-center items-center">
             <div class="w-36 h-36 py-1 flex justify-center items-center">
                 <div class="w-36 self-stretch bg-white rounded-[10px] inline-flex flex-col justify-center items-center gap-2.5 overflow-hidden">
                     <div class="self-stretch flex-1 px-3 py-2.5 inline-flex justify-center items-center gap-2">
@@ -35,10 +35,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
 
         <!-- Card 2 -->
-        <div class="w-36 h-36 py-1 border-b border-neutral-500/50 flex justify-center items-center">
+        <a href="{{ route('agenda.list') }}" class="w-36 h-36 py-1 border-b border-neutral-500/50 flex justify-center items-center">
             <div class="w-36 self-stretch bg-white rounded-[10px] inline-flex flex-col justify-center items-center gap-2.5 overflow-hidden">
                 <div class="self-stretch flex-1 px-3 py-2.5 inline-flex justify-center items-center gap-2">
                     <div class="w-6 h-6 relative">
@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
 
     <!-- Header Navigasi Bulan -->
