@@ -114,7 +114,7 @@ Route::get('/list-agenda', [AgendaController::class, 'list'])
 Route::get('/grid-agenda', [AgendaController::class, 'grid'])
     ->middleware(IsUserB::class)
     ->name('agenda.grid');
-Route::get('/show-agenda', [AgendaController::class, 'show'])
+Route::get('/show-agenda/{date?}', [AgendaController::class, 'show'])
     ->middleware(IsUserB::class)
     ->name('agenda.show');
 Route::get('/search-agenda', [AgendaController::class, 'search'])

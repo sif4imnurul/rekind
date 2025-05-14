@@ -1,3 +1,7 @@
+<?php
+    use Carbon\Carbon;
+?>
+
 @extends('layouts.employee')
 
 @section('title', 'Agenda | Rekind')
@@ -11,8 +15,6 @@
             <div class="text-[#1D3A6D] text-[24px] font-bold leading-[32px] tracking-[0.10px] font-montserrat">Agenda Perusahaan</div>
             <div class="text-[#737373] text-[14px] font-normal leading-[20px] tracking-[0.20px] font-montserrat">Jadwal hari-hari dan event penting perusahaan</div>
         </div>
-
-        
     </div>
 
     <!-- line -->
@@ -55,145 +57,82 @@
 
     <!-- Header Navigasi Bulan -->
     <div class="flex items-center justify-center gap-8 py-4">
-    <!-- Tombol Sebelumnya -->
-    <button class="w-6 h-6 rotate-180 text-sky-900">
-        <div class="transform mx-auto">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path></svg>
-        </div>
-    </button>
+        <!-- Tombol Sebelumnya -->
+        <a href="{{ route('agenda.grid', ['month' => $month - 1 < 1 ? 12 : $month - 1, 'year' => $month - 1 < 1 ? $year - 1 : $year]) }}" class="w-6 h-6 rotate-180 text-sky-900">
+            <div class="transform mx-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path></svg>
+            </div>
+        </a>
 
-    <!-- Bulan -->
-    <h2 class="text-base font-bold text-sky-900">November 2025</h2>
+        <!-- Bulan -->
+        <h2 class="text-base font-bold text-sky-900">{{ $currentMonth }}</h2>
 
-    <!-- Tombol Selanjutnya -->
-    <button class="w-6 h-6 text-sky-900">
-        <div class="ransform mx-auto">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path></svg>
-        </div>
-    </button>
+        <!-- Tombol Selanjutnya -->
+        <a href="{{ route('agenda.grid', ['month' => $month + 1 > 12 ? 1 : $month + 1, 'year' => $month + 1 > 12 ? $year + 1 : $year]) }}" class="w-6 h-6 text-sky-900">
+            <div class="ransform mx-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path></svg>
+            </div>
+        </a>
     </div>
 
     <!-- Header Hari -->
     <div class="grid grid-cols-7 gap-0 text-center text-xs font-medium text-zinc-600 mb-2">
-    <div>Senin</div>
-    <div>Selasa</div>
-    <div>Rabu</div>
-    <div>Kamis</div>
-    <div>Jum’at</div>
-    <div>Sabtu</div>
-    <div>Minggu</div>
+        <div>Senin</div>
+        <div>Selasa</div>
+        <div>Rabu</div>
+        <div>Kamis</div>
+        <div>Jum'at</div>
+        <div>Sabtu</div>
+        <div>Minggu</div>
     </div>
 
     <!-- Grid Kalender -->
     <div class="grid grid-cols-7 gap-0 text-center">
-        <!-- contoh kalender sesuaikan  -->
-    <div class="h-36 border border-blue-100 rounded-tl-lg flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-stone-400">31</span>
+        @foreach($calendar as $week)
+            @foreach($week as $day)
+                @php
+                    $dayClass = 'text-sky-900';
+                    if ($day['month'] === 'prev' || $day['month'] === 'next') {
+                        $dayClass = 'text-stone-400';
+                    } elseif (Carbon::now()->month == $month && Carbon::now()->year == $year && Carbon::now()->day == $day['day'] && $day['month'] === 'current') {
+                        $dayClass = 'text-zinc-950 font-bold';
+                    }
+                    
+                    $roundedClass = '';
+                    if ($loop->parent->first && $loop->first) {
+                        $roundedClass = 'rounded-tl-lg';
+                    } elseif ($loop->parent->first && $loop->last) {
+                        $roundedClass = 'rounded-tr-lg';
+                    } elseif ($loop->parent->last && $loop->first) {
+                        $roundedClass = 'rounded-bl-lg';
+                    } elseif ($loop->parent->last && $loop->last) {
+                        $roundedClass = 'rounded-br-lg';
+                    }
+                @endphp
+                
+                <div class="h-36 border border-blue-100 {{ $roundedClass }} flex flex-col items-start p-2 overflow-y-auto">
+                    <a href="{{ route('agenda.show', ['date' => $day['date']]) }}" class="cursor-pointer">
+                        <span class="text-2xl font-medium {{ $dayClass }}">{{ $day['day'] }}</span>
+                    </a>
+                    
+                    @foreach($day['agendas'] as $agenda)
+                        <div class="mt-1 w-full text-left">
+                            <div class="px-2 py-1 bg-{{ 
+                                $agenda->prioritas === 'tinggi' ? 'red' : 
+                                ($agenda->prioritas === 'sedang' ? 'yellow' : 'green')
+                            }}-100 rounded text-xs truncate" title="{{ $agenda->nama_agenda }}">
+                                {{ $agenda->nama_agenda }}
+                            </div>
+                            <div class="text-xs text-gray-500 mt-1">
+                                {{ Carbon::parse($agenda->tanggal_mulai)->format('H:i') }} - 
+                                {{ Carbon::parse($agenda->tanggal_deadline)->format('H:i') }}
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endforeach
+        @endforeach
     </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-sky-900">1</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-sky-900">2</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-sky-900">3</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-sky-900">4</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-sky-900">5</span>
-    </div>
-    <div class="h-36 border border-blue-100 rounded-tr-lg flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-sky-900">6</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-sky-900">7</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-sky-900">8</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-sky-900">9</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-sky-900">10</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-sky-900">11</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-sky-900">12</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-sky-900">13</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-zinc-950">14</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-zinc-950">15</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-zinc-950">16</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-zinc-950">17</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-zinc-950">18</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-zinc-950">19</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-zinc-950">21</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-zinc-950">22</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-zinc-950">23</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-zinc-950">24</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-zinc-950">25</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-zinc-950">26</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-zinc-950">27</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-zinc-950">28</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2 rounded-bl-lg">
-        <span class="text-2xl font-medium text-zinc-950">29</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-zinc-950">30</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-stone-400">1</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-stone-400">2</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-stone-400">3</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2">
-        <span class="text-2xl font-medium text-stone-400">4</span>
-    </div>
-    <div class="h-36 border border-blue-100 flex flex-col items-start p-2 rounded-br-lg">
-        <span class="text-2xl font-medium text-stone-400">5</span>
-    </div>
-    </div>
-
 
     <div class="w-full flex justify-center mt-8">
         @include('components.pagination')
