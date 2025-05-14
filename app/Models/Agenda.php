@@ -11,6 +11,7 @@ class Agenda extends Model
     
     protected $fillable = [
         'nama_agenda',
+        'divisi',
         'id_user',
         'status',
         'tanggal_mulai',
