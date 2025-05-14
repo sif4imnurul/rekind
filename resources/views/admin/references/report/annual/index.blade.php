@@ -17,7 +17,7 @@
                         <div class="flex-1 h-full flex items-center justify-start gap-[10px]">
                             <input type="text" name="search" value="{{ request()->get('search', '') }}" 
                                 class="w-full outline-none text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px]"
-                                placeholder="Hinted search text">
+                                placeholder="Cari laporan tahunan...">
                         </div>
                         <button type="submit" class="flex items-center justify-end">
                             <div class="w-[48px] h-[48px] inline-flex flex-col items-center justify-center gap-[10px]">
@@ -61,7 +61,7 @@
                     <tr>
                         <td class="px-4 py-3">{{ ($annualReports->currentPage() - 1) * $annualReports->perPage() + $index + 1 }}</td>
                         <td class="px-4 py-3">{{ $report->nama }}</td>
-                        <td class="px-4 py-3">{{ $report->tipe }}</td>
+                        <td class="px-4 py-3">{{ $report->tahun }}</td>
                         <td class="px-4 py-3">{{ $report->deskripsi }}</td>
                         <td class="px-4 py-3">
                             <div class="flex flex-row">

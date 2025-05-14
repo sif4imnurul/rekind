@@ -34,6 +34,7 @@
             <li><a href="/admin/reference/annual-report" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Annual Report</a></li>
             <li><a href="/admin/reference/sustain-report" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Sustainability Report</a></li>
             <li><a href="/admin/reference/buku" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Buku Terbitan Corporate</a></li>
+            <li><a href="/admin/reference/buletin" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Buletin</a></li>
             <li><a href="/admin/reference/agenda" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Agenda Perusahaan</a></li>
             <li><a href="/admin/reference/media-monitoring" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Media Monitoring</a></li>
             <li><a href="/admin/reference/presentasi" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Template Presentasi</a></li>

@@ -160,7 +160,7 @@
     <div class="bg-white rounded-xl shadow p-6">
         <h2 class="text-xl font-semibold text-[var(--judul)] mb-4">Aksi Cepat</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <a href="#" class="bg-[var(--button)] hover:bg-[var(--sub-judul)] text-white p-4 rounded-xl text-center font-semibold transition flex items-center justify-center gap-2">
+            <a href="{{ route('admin.photo.create') }}" class="bg-[var(--button)] hover:bg-[var(--sub-judul)] text-white p-4 rounded-xl text-center font-semibold transition flex items-center justify-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z"></path>
                 </svg>

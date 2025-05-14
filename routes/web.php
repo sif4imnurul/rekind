@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\AnnualController as AdminAnnualController;
 use App\Http\Controllers\Admin\SustainController as AdminSustainController;
 use App\Http\Controllers\Admin\BukuController as AdminBukuController;
+use App\Http\Controllers\Admin\BuletinController as AdminBuletinController;
 use App\Http\Controllers\Admin\AgendaController as AdminAgendaController;
 use App\Http\Controllers\Admin\MediaMonitoringController as AdminMediaMonitoringController;
 use App\Http\Controllers\Admin\PresentasiController as AdminPresentasiController;
@@ -292,6 +293,18 @@ Route::delete('/admin/reference/buku/{id}', [AdminBukuController::class, 'delete
 Route::get('admin/buku/search', [AdminBukuController::class, 'search'])
     ->name('admin.buku.search')
     ->middleware(IsAdmin::class);
+
+// Tampilan Buletin Admin
+Route::prefix('admin/reference/buletin')->middleware(IsAdmin::class)->group(function () {
+    Route::get('/', [AdminBuletinController::class, 'index'])->name('admin.buletin.index');
+    Route::get('/create', [AdminBuletinController::class, 'create'])->name('admin.buletin.create');
+    Route::post('/', [AdminBuletinController::class, 'store'])->name('admin.buletin.store');
+    Route::get('/search', [AdminBuletinController::class, 'search'])->name('admin.buletin.search');
+    Route::get('/{id}', [AdminBuletinController::class, 'show'])->name('admin.buletin.show');
+    Route::get('/{id}/edit', [AdminBuletinController::class, 'edit'])->name('admin.buletin.edit');
+    Route::put('/{id}', [AdminBuletinController::class, 'update'])->name('admin.buletin.update');
+    Route::delete('/{id}', [AdminBuletinController::class, 'delete'])->name('admin.buletin.delete');
+});
 
 // Tampilan Agenda
 Route::prefix('admin/reference/agenda')->middleware(IsAdmin::class)->group(function () {
