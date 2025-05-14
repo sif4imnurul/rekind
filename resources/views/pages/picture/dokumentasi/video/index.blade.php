@@ -61,22 +61,68 @@
     <div class="w-full flex justify-center">
         <div class="flex flex-wrap justify-center gap-6 max-w-screen-xl">
             @foreach ($videos as $video)
-                <div class="relative group border border-[#7BB7D1] w-full h-full overflow-hidden">
-                    <video controls class="w-full h-full object-cover">
-                        <source src="{{ asset($video->foto) }}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <div class="absolute inset-0 bg-[var(--button)]/90 flex flex-col items-center justify-center text-center opacity-0 group-hover:opacity-100 transition duration-300">
-                        <h3 class="text-white text-lg font-semibold mb-1">{{ $video->nama }}</h3>
-                        <p class="text-white text-sm">{{ $video->deskripsi }}</p>
+                <div class="relative group border border-[#7BB7D1] w-full md:w-[360px] overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="aspect-video bg-black relative">
+                        <video id="video-{{ $loop->index }}" class="w-full h-full object-cover" controls preload="metadata">
+                            <source src="{{ asset('files/' . $video->foto) }}" type="video/mp4">
+                            Browser Anda tidak mendukung tag video.
+                        </video>
+                        
+                        <!-- Modified: Top-left title overlay -->
+                        <div class="absolute top-0 left-0 bg-black/60 p-2 m-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <h3 class="text-white text-lg font-semibold">{{ $video->nama }}</h3>
+                        </div>
                     </div>
                 </div>
             @endforeach
         </div>
     </div>
 
-    @include('components.pagination')
-
+    <!-- Pagination -->
+    <div class="w-full flex justify-center mt-8">
+        {{ $videos->appends(request()->query())->links('components.pagination') }}
+    </div>
 </div>
+
+<style>
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+</style>
+
+<script>
+    // Memastikan semua video dalam keadaan terjeda saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', function() {
+        const videos = document.querySelectorAll('video');
+        videos.forEach(video => {
+            // Pastikan video terjeda
+            video.pause();
+            
+            // Tambahkan penanganan untuk kontrol volume yang lebih baik
+            video.addEventListener('volumechange', function() {
+                // Simpan preferensi volume di localStorage
+                localStorage.setItem('videoVolume', video.volume);
+            });
+            
+            // Muat preferensi volume dari localStorage jika ada
+            const savedVolume = localStorage.getItem('videoVolume');
+            if (savedVolume !== null) {
+                video.volume = parseFloat(savedVolume);
+            }
+            
+            // Pause other videos when one is played
+            video.addEventListener('play', function() {
+                videos.forEach(v => {
+                    if (v !== video && !v.paused) {
+                        v.pause();
+                    }
+                });
+            });
+        });
+    });
+</script>
 
 @endsection
