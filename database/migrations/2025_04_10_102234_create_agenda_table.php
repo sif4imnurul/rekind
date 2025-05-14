@@ -13,7 +13,8 @@ return new class extends Migration
         Schema::create('agenda', function (Blueprint $table) {
             $table->id('id_agenda'); 
             $table->string('nama_agenda', 255);
-            $table->unsignedBigInteger('id_user'); 
+            $table->unsignedBigInteger('id_user');
+            $table->string('divisi', 255); 
             $table->enum('status', ['selesai', 'proses', 'pending']);
             $table->dateTime('tanggal_mulai');
             $table->dateTime('tanggal_deadline');

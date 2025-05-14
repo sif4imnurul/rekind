@@ -37,7 +37,7 @@ class SustainReportSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'nama' => 'Annual Report 2021',
+                'nama' => 'Sustain Report 2021',
                 'url' => 'https://example.com/files/sustain-report-2021.pdf',
                 'deskripsi' => 'Laporan keberlanjutan untuk tahun 2021.',
                 'foto' => 'sustain/images/book-3.jpg',

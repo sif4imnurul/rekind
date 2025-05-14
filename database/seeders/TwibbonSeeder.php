@@ -19,7 +19,7 @@ class TwibbonSeeder extends Seeder
                 'nama' => 'Twibbon HUT Rekind',
                 'url' => 'https://twibbonize.com/hutrekind40thn',
                 'deskripsi' => 'Twibbon untuk memperingati Hari Ulang Tahun Rekind.',
-                'foto' => 'twibbon-hutrekind.png', // thumbnail yang disimpan lokal
+                'foto' => 'twibbon/images/twibbon.png', // thumbnail yang disimpan lokal
                 'tipe' => 'image',
                 'tahun' => date('Y'),
                 'kategori' => 'twibbon',
@@ -31,7 +31,7 @@ class TwibbonSeeder extends Seeder
                 'nama' => 'Twibbon Bulan K3',
                 'url' => 'https://twibbonize.com/bulank3',
                 'deskripsi' => 'Twibbon untuk mendukung Bulan K3 Nasional.',
-                'foto' => 'twibbon-k3.png',
+                'foto' => 'twibbon/images/twibbon.png',
                 'tipe' => 'image',
                 'tahun' => date('Y'),
                 'kategori' => 'twibbon',
@@ -43,7 +43,7 @@ class TwibbonSeeder extends Seeder
                 'nama' => 'Twibbon Hari Kemerdekaan',
                 'url' => 'https://twibbonize.com/rekind17agustus',
                 'deskripsi' => 'Twibbon perayaan Hari Kemerdekaan RI.',
-                'foto' => 'twibbon-merdeka.png',
+                'foto' => 'twibbon/images/twibbon.png',
                 'tipe' => 'image',
                 'tahun' => date('Y'),
                 'kategori' => 'twibbon',
