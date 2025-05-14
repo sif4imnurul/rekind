@@ -8,11 +8,10 @@
     <div class="max-w-full flex justify-between items-start">
         <!-- Kiri -->
         <div class="w-[662px] overflow-hidden flex flex-col justify-start items-start gap-[10px]">
-        <div class="text-[#1D3A6D] text-[24px] font-bold leading-[32px] tracking-[0.10px] font-montserrat">Annual Report & Sustainability Report</div>
-        <div class="text-[#737373] text-[14px] font-normal leading-[20px] tracking-[0.20px] font-montserrat">Dokumen tahunan dan keberlanjutan terbaru.</div>
+            <div class="text-[#1D3A6D] text-[24px] font-bold leading-[32px] tracking-[0.10px] font-montserrat">Annual Report & Sustainability Report</div>
+            <div class="text-[#737373] text-[14px] font-normal leading-[20px] tracking-[0.20px] font-montserrat">Dokumen tahunan dan keberlanjutan terbaru.</div>
         </div>
 
-        
         <!-- Kanan -->
         <div class="w-[207px] h-[48px] flex justify-end items-center">
             <!-- Left Button -->
@@ -61,6 +60,7 @@
         <!-- Kiri: Search Box -->
         <div class="w-full max-w-[510px] h-[62px] flex items-center gap-[10px]">
             <form action="{{ route('sustain.grid') }}" method="GET" class="w-full">
+                <input type="hidden" name="sort" value="{{ request('sort', 'newest') }}">
                 <div class="w-full h-[56px] min-w-[280px] max-w-[720px] bg-[#D6E4F5] overflow-hidden rounded-full flex items-center justify-center gap-[4px]">
                     <div class="flex-1 h-full flex items-center gap-[4px] px-[4px]">
                         <div class="w-[22px] h-[48px] inline-flex flex-col items-center justify-center gap-[10px]"></div>
@@ -69,36 +69,35 @@
                                 name="search" 
                                 value="{{ request('search') }}"
                                 placeholder="Cari laporan..."
-                                class="w-full bg-transparent text-[#737373] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px] focus:outline-none" />
+                                class="w-full bg-transparent border-none outline-none text-[#737373] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px]" />
                         </div>
-                        <button type="submit" class="w-[48px] h-[48px] flex items-center justify-center">
-                            <div class="w-[24px] h-[24px] text-[#737373]">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
-                                    <path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path>
-                                </svg>
+                        <button type="submit" class="w-[48px] h-[48px] cursor-pointer flex items-center justify-center rounded-full hover:bg-[#C5D7EB] transition-colors">
+                            <div class="p-[8px] flex items-center justify-center">
+                                <div class="w-[24px] h-[24px] text-[#737373]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current">
+                                        <path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path>
+                                    </svg>
+                                </div>
                             </div>
                         </button>
                     </div>
                 </div>
-                <!-- Hidden sort input to maintain sort when searching -->
-                <input type="hidden" name="sort" value="{{ request('sort', 'newest') }}" />
             </form>
         </div>
 
         <!-- Kanan: Sort Box -->
         <div class="w-full max-w-[510px] overflow-hidden rounded-full flex items-center justify-end gap-[4px]">
-            <form action="{{ request()->url() }}" method="GET" class="w-[130px] h-[56px]">
-                <!-- Preserve search parameter if exists -->
-                @if(request('search'))
-                    <input type="hidden" name="search" value="{{ request('search') }}" />
-                @endif
-                <select name="sort" 
-                        onchange="this.form.submit()"
-                        class="w-full h-full px-4 bg-transparent text-[#737373] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px] focus:outline-none cursor-pointer">
-                    <option value="newest" {{ request('sort', 'newest') === 'newest' ? 'selected' : '' }}>Terbaru</option>
-                    <option value="oldest" {{ request('sort') === 'oldest' ? 'selected' : '' }}>Terlama</option>
+            <div class="w-[130px] h-[56px] p-[4px] flex items-center justify-start gap-[4px]">
+                <div class="w-[22px] h-[48px] inline-flex flex-col items-center justify-center gap-[10px]"></div>
+                <select id="sort-select" class="bg-transparent border-none text-[#737373] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px] cursor-pointer">
+                    <option value="newest" {{ (request('sort') == 'newest' || !request('sort')) ? 'selected' : '' }}>Terbaru</option>
+                    <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>Terlama</option>
                 </select>
-            </form>
+                <div class="w-[16px] h-[20px] text-[#737373]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M8 16H4l6 6V2H8zm6-11v17h2V8h4l-6-6z"></path></svg>
+                </div>
+            </div>
+            <div class="w-[24px] h-[24px] relative"></div>
         </div>
     </div>
 
@@ -133,7 +132,7 @@
             @foreach ($sustainReports as $report)
                 <div class="flex flex-col items-center gap-2">
                     <!-- Tahun di atas card -->
-                    <div class="text-[#1D3A6D] text-3xl font-bold text-center">{{ $report->created_at->format('Y') ?? 'N/A' }}</div>
+                    <div class="text-[#1D3A6D] text-3xl font-bold text-center">{{ $report->tahun ?? 'N/A' }}</div>
 
                     <!-- Card -->
                     <div class="bg-white rounded-[20px] outline-1 outline-[#7BB7D1] p-4 flex flex-col gap-2 w-full max-w-[320px]">
@@ -171,5 +170,38 @@
     </div>
 
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle sort functionality
+        const sortSelect = document.getElementById('sort-select');
+        
+        sortSelect.addEventListener('change', function() {
+            const sortValue = this.value;
+            const currentUrl = new URL(window.location.href);
+            
+            // Simpan parameter search jika ada
+            const searchParam = currentUrl.searchParams.get('search');
+            
+            // Set parameter sort baru
+            currentUrl.searchParams.set('sort', sortValue);
+            
+            // Pastikan parameter search tetap ada
+            if (searchParam) {
+                currentUrl.searchParams.set('search', searchParam);
+            }
+            
+            window.location.href = currentUrl.toString();
+        });
+                
+        // Mengurutkan berdasarkan dropdown 
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentSort = urlParams.get('sort');
+
+        if (currentSort) {
+            sortSelect.value = currentSort;
+        }
+    });
+</script>
 
 @endsection

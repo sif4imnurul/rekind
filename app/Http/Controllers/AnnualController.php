@@ -16,16 +16,16 @@ class AnnualController extends Controller
             $search = $request->search;
             $query->where(function($q) use ($search) {
                 $q->where('nama', 'like', "%{$search}%")
-                  ->orWhereYear('created_at', 'like', "%{$search}%");
+                  ->orWhereYear('tahun', 'like', "%{$search}%");
             });
         }
 
         // Sort functionality
         $sort = $request->get('sort', 'newest'); // default to newest
         if ($sort === 'oldest') {
-            $query->orderBy('created_at', 'asc');
+            $query->orderBy('tahun', 'asc');
         } else {
-            $query->orderBy('created_at', 'desc');
+            $query->orderBy('tahun', 'desc');
         }
 
         $annualReports = $query->paginate(12);
@@ -41,16 +41,16 @@ class AnnualController extends Controller
             $search = $request->search;
             $query->where(function($q) use ($search) {
                 $q->where('nama', 'like', "%{$search}%")
-                  ->orWhereYear('created_at', 'like', "%{$search}%");
+                  ->orWhereYear('tahun', 'like', "%{$search}%");
             });
         }
 
         // Sort functionality
         $sort = $request->get('sort', 'newest'); // default to newest
         if ($sort === 'oldest') {
-            $query->orderBy('created_at', 'asc');
+            $query->orderBy('tahun', 'asc');
         } else {
-            $query->orderBy('created_at', 'desc');
+            $query->orderBy('tahun', 'desc');
         }
 
         $annualReports = $query->paginate(12);

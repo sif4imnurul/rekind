@@ -48,7 +48,7 @@
                 @foreach($logos as $logo)
                     <div class="relative group w-[150px] h-[150px]">
                         <img class="w-full h-full object-contain" 
-                             src="{{ asset('img/' . $logo->foto) }}" 
+                             src="{{ asset('files/' . $logo->foto) }}" 
                              alt="{{ $logo->nama }}" />
                         <!-- Download button overlay -->
                         <a href="{{ asset('img/' . $logo->foto) }}" download 

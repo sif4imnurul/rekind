@@ -26,50 +26,52 @@
         <!-- Kiri: Search Box -->
         <div class="w-full max-w-[510px] h-[62px] flex items-center gap-[10px]">
             <form action="{{ route('twibbon.index') }}" method="GET" class="w-full">
+                <input type="hidden" name="sort" value="{{ request('sort', 'newest') }}">
                 <div class="w-full h-[56px] min-w-[280px] max-w-[720px] bg-[var(--highlight-text-box)] overflow-hidden rounded-full flex items-center justify-center gap-[4px]">
                     <div class="flex-1 h-full flex items-center gap-[4px] px-[4px]">
                         <div class="w-[22px] h-[48px] inline-flex flex-col items-center justify-center gap-[10px]"></div>
                         <div class="flex-1 h-full flex items-center justify-start gap-[10px]">
-                            <input type="text" name="search" value="{{ $search ?? '' }}" placeholder="Cari Twibbon..." class="w-full h-full bg-transparent border-0 focus:outline-none text-[var(--sub-text)] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px]">
+                            <input type="text" 
+                                   name="search" 
+                                   value="{{ request('search') }}"
+                                   placeholder="Cari Twibbon..."
+                                   class="w-full bg-transparent border-none outline-none text-[var(--sub-text)] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px]" />
                         </div>
-                        <div class="flex items-center justify-end">
-                            <button type="submit" class="w-[48px] h-[48px] inline-flex flex-col items-center justify-center gap-[10px]">
-                                <div class="overflow-hidden rounded-full flex items-center justify-center gap-[10px]">
-                                    <div class="p-[8px] flex items-center justify-center gap-[10px]">
-                                        <div class="w-[24px] h-[24px] relative">
-                                            <div class="absolute text-[var(--sub-text)]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path></svg>
-                                            </div>
-                                        </div>
+                        <button type="submit" class="w-[48px] h-[48px] cursor-pointer flex items-center justify-center rounded-full hover:bg-[#C5D7EB] transition-colors">
+                            <div class="p-[8px] flex items-center justify-center">
+                                <div class="w-[24px] h-[24px] relative">
+                                    <div class="absolute text-[var(--sub-text)]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path></svg>
                                     </div>
                                 </div>
-                            </button>
-                        </div>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </form>
         </div>
 
         <!-- Kanan: Sort Box -->
-        <div class="w-full max-w-[510px] overflow-hidden flex items-center justify-end gap-[4px]">
-            <form id="sortForm" action="{{ route('twibbon.index') }}" method="GET" class="flex items-center">
-                @if($search)
-                    <input type="hidden" name="search" value="{{ $search }}">
-                @endif
-                <select name="sort" id="sortSelect" onchange="document.getElementById('sortForm').submit()" class="px-4 py-2 bg-white border border-gray-300 rounded-full text-[var(--sub-text)] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px] focus:outline-none">
-                    <option value="newest" {{ ($sort ?? '') == 'newest' ? 'selected' : '' }}>Terbaru</option>
-                    <option value="oldest" {{ ($sort ?? '') == 'oldest' ? 'selected' : '' }}>Terlama</option>
-                    <option value="name_asc" {{ ($sort ?? '') == 'name_asc' ? 'selected' : '' }}>Nama (A-Z)</option>
-                    <option value="name_desc" {{ ($sort ?? '') == 'name_desc' ? 'selected' : '' }}>Nama (Z-A)</option>
+        <div class="w-full max-w-[510px] overflow-hidden rounded-full flex items-center justify-end gap-[4px]">
+            <div class="w-[130px] h-[56px] p-[4px] flex items-center justify-start gap-[4px]">
+                <div class="w-[22px] h-[48px] inline-flex flex-col items-center justify-center gap-[10px]"></div>
+                <select id="sort-select" class="bg-transparent border-none text-[var(--sub-text)] text-[16px] font-roboto font-normal leading-[24px] tracking-[0.5px] cursor-pointer">
+                    <option value="newest" {{ (request('sort') == 'newest' || !request('sort')) ? 'selected' : '' }}>Terbaru</option>
+                    <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>Terlama</option>
+                    <option value="name_asc" {{ request('sort') == 'name_asc' ? 'selected' : '' }}>Nama (A-Z)</option>
+                    <option value="name_desc" {{ request('sort') == 'name_desc' ? 'selected' : '' }}>Nama (Z-A)</option>
                 </select>
-            </form>
+                <div class="w-[16px] h-[20px] text-[var(--sub-text)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M8 16H4l6 6V2H8zm6-11v17h2V8h4l-6-6z"></path></svg>
+                </div>
+            </div>
+            <div class="w-[24px] h-[24px] relative"></div>
         </div>
     </div>
 
     <!-- Grid -->
     <div class="w-full px-4 py-6">
         <div class="mx-auto grid place-items-center grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-6 max-w-screen-xl">
-            
             @foreach ($twibbons as $twibbon)
                 <div class="w-[240px] h-[300px] px-[10px] py-[11px] bg-white rounded-[15px] flex flex-col items-center gap-[10px]">
                     <img src="{{ $twibbon->preview_image }}" alt="{{ $twibbon->nama }}" class="w-[220px] h-[220px] rounded-[5px] object-cover" />
@@ -79,16 +81,47 @@
                     </a>
                 </div>
             @endforeach
-
-
         </div>
     </div>
 
     <!-- Pagination -->
     <div class="w-full flex justify-center mt-6">
-        {{ $twibbons->appends(['search' => $search ?? null, 'sort' => $sort ?? null])->links() }}
+        {{ $twibbons->appends(request()->query())->links() }}
     </div>
 
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle sort functionality
+        const sortSelect = document.getElementById('sort-select');
+        
+        sortSelect.addEventListener('change', function() {
+            const sortValue = this.value;
+            const currentUrl = new URL(window.location.href);
+            
+            // Simpan parameter search jika ada
+            const searchParam = currentUrl.searchParams.get('search');
+            
+            // Set parameter sort baru
+            currentUrl.searchParams.set('sort', sortValue);
+            
+            // Pastikan parameter search tetap ada
+            if (searchParam) {
+                currentUrl.searchParams.set('search', searchParam);
+            }
+            
+            window.location.href = currentUrl.toString();
+        });
+                
+        // Mengurutkan berdasarkan dropdown 
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentSort = urlParams.get('sort');
+
+        if (currentSort) {
+            sortSelect.value = currentSort;
+        }
+    });
+</script>
 
 @endsection

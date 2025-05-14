@@ -28,7 +28,7 @@ class PhotoController extends Controller
             $query->orderBy('created_at', 'desc');
         }
 
-        $photos = $query->paginate(1);
+        $photos = $query->paginate(12);
         return view('pages.picture.dokumentasi.photo.index', compact('photos'));
     }
 }
