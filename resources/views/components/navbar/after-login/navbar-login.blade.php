@@ -94,7 +94,7 @@
                   Anda tidak memiliki hak akses untuk menu ini. Hubungi Corporate Communication Department atau ajukan permohonan akses.
                 </p>
                 <div class="flex justify-center gap-4 pt-2">
-                  <button @click="showAlert = false" class="px-6 py-2 bg-[#7BB7D1] text-white rounded-lg hover:bg-[#68a5c2] transition">
+                  <button @click="showAlert = false" class="cursor-pointer px-6 py-2 bg-[#7BB7D1] text-white rounded-lg hover:bg-[#68a5c2] transition">
                     Tutup
                   </button>
                   <a href="{{ route('crm.permohonan') }}" class="px-6 py-2 bg-[#7BB7D1] text-white rounded-lg hover:bg-[#68a5c2] transition text-center">

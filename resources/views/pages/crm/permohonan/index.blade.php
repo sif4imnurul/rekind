@@ -121,10 +121,10 @@
 
                     <!-- Button Section -->
                     <div class="w-full px-4 flex justify-end gap-3">
-                        <button type="submit" class="bg-[var(--button)] text-white font-semibold py-2 px-6 rounded-xl hover:bg-[#65A6C6] transition">
+                        <button type="submit" class="cursor-pointer bg-[var(--button)] text-white font-semibold py-2 px-6 rounded-xl hover:bg-[#65A6C6] transition">
                             Submit
                         </button>
-                        <button type="reset" class="bg-[var(--line)] text-white font-semibold py-2 px-6 rounded-xl hover:bg-[#cc6512] transition">
+                        <button type="reset" class="cursor-pointer bg-[var(--line)] text-white font-semibold py-2 px-6 rounded-xl hover:bg-[#cc6512] transition">
                             Cancel
                         </button>
                     </div>
