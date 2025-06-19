@@ -118,7 +118,7 @@
     <div x-data="{ dropdownOpen: false }" class="relative mt-2 md:mt-0">
       <button @click="dropdownOpen = !dropdownOpen" class="w-[50px] h-[50px] rounded-full flex justify-center items-center text-[var(--button)] focus:outline-none hover:cursor-pointer">
         @if(auth()->user()->image_url)
-            <img src="{{ asset(auth()->user()->image_url) }}" alt="User Avatar" class="w-[50px] h-[50px] rounded-full object-cover">
+            <img src="{{asset('files/' . auth()->user()->image_url) }}" alt="User Avatar" class="w-[50px] h-[50px] rounded-full object-cover">
         @else
           <div class="w-[50px] h-[50px] rounded-full flex justify-center items-center text-[var(--button)]">
             <svg xmlns="http://www.w3.org/2000/svg" class="fill-current" viewBox="0 0 24 24" width="28" height="28">
