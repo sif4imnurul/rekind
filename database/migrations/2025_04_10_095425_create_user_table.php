@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('npk');
             $table->string('divisi');
+            $table->text('image_url')->nullable();
             $table->enum('role', ['admin', 'userb', 'userk']);
             $table->string('telepon')->nullable();
             $table->text('alamat')->nullable();

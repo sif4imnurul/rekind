@@ -20,6 +20,7 @@ use App\Http\Controllers\CompanyProfileController;
 use App\Http\Controllers\DokumentasiController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\AnnualController as AdminAnnualController;
@@ -53,6 +54,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 
+//Profil edit user
+Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
 // Tampilan Laporan
 Route::get('/reference/annual-report/grid', [AnnualController::class, 'grid'])

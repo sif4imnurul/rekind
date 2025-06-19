@@ -117,11 +117,17 @@
     @auth
     <div x-data="{ dropdownOpen: false }" class="relative mt-2 md:mt-0">
       <button @click="dropdownOpen = !dropdownOpen" class="w-[50px] h-[50px] rounded-full flex justify-center items-center text-[var(--button)] focus:outline-none hover:cursor-pointer">
-        <svg xmlns="http://www.w3.org/2000/svg" class="fill-current" viewBox="0 0 24 24" width="28" height="28">
-          <path
-            d="M12 2C6.579 2 2 6.579 2 12s4.579 10 10 10 10-4.579 10-10S17.421 2 12 2zm0 5c1.727 0 3 1.272 3 3s-1.273 3-3 3c-1.726 0-3-1.272-3-3s1.274-3 3-3zm-5.106 9.772c.897-1.32 2.393-2.2 4.106-2.2h2c1.714 0 3.209.88 4.106 2.2C15.828 18.14 14.015 19 12 19s-3.828-.86-5.106-2.228z">
-          </path>
-        </svg>
+        @if(auth()->user()->image_url)
+            <img src="{{ asset(auth()->user()->image_url) }}" alt="User Avatar" class="w-[50px] h-[50px] rounded-full object-cover">
+        @else
+          <div class="w-[50px] h-[50px] rounded-full flex justify-center items-center text-[var(--button)]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="fill-current" viewBox="0 0 24 24" width="28" height="28">
+              <path
+                d="M12 2C6.579 2 2 6.579 2 12s4.579 10 10 10 10-4.579 10-10S17.421 2 12 2zm0 5c1.727 0 3 1.272 3 3s-1.273 3-3 3c-1.726 0-3-1.272-3-3s1.274-3 3-3zm-5.106 9.772c.897-1.32 2.393-2.2 4.106-2.2h2c1.714 0 3.209.88 4.106 2.2C15.828 18.14 14.015 19 12 19s-3.828-.86-5.106-2.228z">
+              </path>
+            </svg>
+          </div>
+        @endif
       </button>
 
       <div
@@ -129,6 +135,9 @@
         @click.away="dropdownOpen = false"
         class="absolute right-0 mt-2 w-36 bg-white shadow-lg py-2 z-50"
       >
+          <a href="{{ route('profile.edit') }}" class="block w-full text-left px-4 py-2 text-sm text-[var(--sub-text)] hover:text-[var(--judul)] hover:bg-[var(--highlight-text-box)] hover:cursor-pointer">
+            Edit Profil
+          </a>
         <form method="POST" action="/logout">
           @csrf
           <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-[var(--sub-text)] hover:text-[var(--judul)] hover:bg-[var(--highlight-text-box)] hover:cursor-pointer">
