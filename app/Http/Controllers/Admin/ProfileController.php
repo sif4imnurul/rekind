@@ -5,21 +5,24 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Models\UserModel;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
 {
     public function edit()
     {
         return view('admin.profile.edit', [
-            'user' => auth()->user()
+            'user' => Auth::user()
         ]);
     }
 
     public function update(Request $request)
     {
-        $user = auth()->user();
-        
+        $user = Auth::user();
+
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'email' => 'required|email|unique:user,email,'.$user->id_user.',id_user',
@@ -31,33 +34,37 @@ class ProfileController extends Controller
             'tanggal_lahir' => 'required|date',
             'current_password' => 'required_with:new_password',
             'new_password' => 'nullable|min:8|confirmed',
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
 
-        // If changing password, verify current password
-        if ($request->filled('new_password')) {
-            if (!Hash::check($validated['current_password'], $user->password)) {
-                return back()->withErrors([
-                    'current_password' => 'Password saat ini tidak sesuai'
-                ]);
+         $userData = $request->only([
+            'nama', 
+            'email', 
+            'npk', 
+            'unit', 
+            'divisi', 
+            'telepon', 
+            'tanggal_lahir', 
+            'alamat'
+        ]);
+
+        if ($request->filled('npk')) {
+            if ($user->npk !== $request->npk || !$user->password) {
+                $userData['password'] = Hash::make($request->npk);
             }
-            $user->password = Hash::make($validated['new_password']);
         }
 
-        // Update other fields
-        $user->fill([
-            'nama' => $validated['nama'],
-            'email' => $validated['email'],
-            'unit' => $validated['unit'],
-            'npk' => $validated['npk'],
-            'divisi' => $validated['divisi'],
-            'telepon' => $validated['telepon'],
-            'alamat' => $validated['alamat'],
-            'tanggal_lahir' => $validated['tanggal_lahir'],
-        ]);
 
-        $user->save();
+        if ($request->hasFile('image')) {
+            if ($user->image_url && Storage::disk('public')->exists($user->image_url)) {
+                Storage::disk('public')->delete($user->image_url);
+            }
+            $path = $request->file('image')->store('profile', 'public');
+            $userData['image_url'] = $path;
+        }
 
-        return redirect()->route('admin.dashboard.index')
-            ->with('success', 'Profil berhasil diperbarui');
+        $user->update($userData);
+
+        return redirect()->route('admin.profile.edit')->with('success', 'Profil berhasil diperbarui.');
     }
 }

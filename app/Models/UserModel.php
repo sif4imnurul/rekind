@@ -22,7 +22,9 @@ class UserModel extends Authenticatable
         'role',
         'telepon',
         'alamat',
-        'image_url'
+        'image_url',
+        'password',
+        'tanggal_lahir',
     ];
     
     protected $hidden = [

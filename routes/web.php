@@ -37,6 +37,8 @@ use App\Http\Controllers\Admin\VideoController as AdminVideoController;
 use App\Http\Controllers\Admin\FlyerController as AdminFlyerController;
 use App\Http\Controllers\Admin\DataClientController as AdminDataClientController;
 use App\Http\Controllers\Admin\CRMController as AdminCRMController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\SurveyController as AdminSurveyController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsUserB;
 use App\Http\Middleware\IsUserK;
@@ -572,4 +574,27 @@ Route::put('/admin/crm/permohonan/{id}/approve', [AdminCRMController::class, 'ap
 
 Route::put('/admin/crm/permohonan/{id}/reject', [AdminCRMController::class, 'reject'])
     ->name('admin.crm.permohonan.reject')
+    ->middleware(IsAdmin::class);
+
+// Admin User Management
+Route::prefix('admin')->name('admin.')->middleware(IsAdmin::class)->group(function () {
+    Route::resource('users', AdminUserController::class)->except(['show']);
+    Route::get('users/{user}', [AdminUserController::class, 'show'])->name('users.show');
+});
+
+// Tampilan Survey
+Route::get('/admin/reference/survey/', [AdminSurveyController::class, 'index'])
+    ->name('admin.survey.index')
+    ->middleware(IsAdmin::class);
+Route::get('/admin/reference/survey/create', [AdminSurveyController::class, 'create'])
+    ->name('admin.survey.create')
+    ->middleware(IsAdmin::class);
+Route::get('/admin/reference/survey/show', [AdminSurveyController::class, 'show'])
+    ->name('admin.survey.show')
+    ->middleware(IsAdmin::class);
+Route::get('/admin/reference/survey/{id}/edit', [AdminSurveyController::class, 'edit'])
+    ->name('admin.survey.edit')
+    ->middleware(IsAdmin::class);
+Route::get('/admin/reference/survey/destroy', [AdminSurveyController::class, 'destroy'])
+    ->name('admin.survey.destroy')
     ->middleware(IsAdmin::class);

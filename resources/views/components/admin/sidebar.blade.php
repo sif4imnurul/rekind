@@ -18,6 +18,17 @@
         </a>
       </li>
 
+      <!-- User Management -->
+      <li>
+        <a href="{{ route('admin.users.index') }}" 
+           class="flex items-center px-4 py-2 rounded-lg transition hover:bg-blue-50 hover:text-[var(--judul)] {{ (request()->routeIs('admin.users.index') || request()->routeIs('admin.users.create') || request()->routeIs('admin.users.edit')) ? 'bg-blue-50 text-[var(--judul)] font-semibold' : '' }}">
+          <svg class="w-5 h-5 mr-3 text-[var(--judul)]" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+            <path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          </svg>
+          User Management
+        </a>
+      </li>
+
       <!-- Reference Menu -->
       <li>
         <div>
@@ -38,6 +49,7 @@
             <li><a href="/admin/reference/agenda" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Agenda Perusahaan</a></li>
             <li><a href="/admin/reference/media-monitoring" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Media Monitoring</a></li>
             <li><a href="/admin/reference/presentasi" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Template Presentasi</a></li>
+            <li><a href="/admin/reference/survey" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Hasil Survey Brand</a></li>
           </ul>
         </div>
       </li>

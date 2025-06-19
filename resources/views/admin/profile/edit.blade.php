@@ -11,7 +11,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.profile.update') }}" method="POST">
+        <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             
@@ -155,6 +155,30 @@
                     </div>
                 </div>
 
+                <!-- Profile Picture -->
+                <div class="w-full md:w-1/2 p-4">
+                    <div class="w-full p-6 bg-white rounded-[20px] outline-1 outline-[var(--button)] flex flex-col gap-3">
+                        <label class="text-[var(--judul)] text-lg font-bold leading-[22px]">Profile Picture</label>
+                        
+                        <!-- Display current profile picture -->
+                        @if(auth()->user()->image_url)
+                            <img src="{{ asset('storage/' . auth()->user()->image_url) }}" alt="Profile Picture" class="w-32 h-32 rounded-full object-cover mb-4">
+                        @endif
+
+                        <div class="relative w-full h-14">
+                            <div class="bg-[var(--highlight-text-box)] px-4 py-1 rounded-t-md flex items-center h-12">
+                                <input type="file" 
+                                    name="image"
+                                    class="w-full bg-transparent text-[var(--judul)] text-base tracking-wide font-normal focus:outline-none" />
+                            </div>
+                            <hr class="border-[1px] text-[var(--judul)]">
+                        </div>
+                        @error('image')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
                 <!-- Alamat -->
                 <div class="w-full p-4">
                     <div class="w-full p-6 bg-white rounded-[20px] outline-1 outline-[var(--button)] flex flex-col gap-3">
@@ -170,52 +194,6 @@
                         @error('alamat')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
-                    </div>
-                </div>
-
-                <!-- Password Fields -->
-                <div class="w-full p-4">
-                    <div class="w-full p-6 bg-white rounded-[20px] outline-1 outline-[var(--button)] flex flex-col gap-4">
-                        <h3 class="text-[var(--judul)] text-lg font-bold leading-[22px]">Change Password (Optional)</h3>
-                        
-                        <!-- Current Password -->
-                        <div class="relative w-full h-20 mt-2">
-                            <label class="text-[var(--judul)] text-sm font-medium mb-2 block">Current Password</label>
-                            <div class="bg-[var(--highlight-text-box)] px-4 py-1 rounded-t-md flex items-center h-14">
-                                <input type="password" 
-                                    name="current_password"
-                                    class="w-full bg-transparent text-[var(--judul)] text-base tracking-wide font-normal focus:outline-none" />
-                            </div>
-                            <hr class="border-[1px] text-[var(--judul)]">
-                            @error('current_password')
-                                <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <!-- New Password -->
-                        <div class="relative w-full h-20">
-                            <label class="text-[var(--judul)] text-sm font-medium mb-2 block">New Password</label>
-                            <div class="bg-[var(--highlight-text-box)] px-4 py-1 rounded-t-md flex items-center h-14">
-                                <input type="password" 
-                                    name="new_password"
-                                    class="w-full bg-transparent text-[var(--judul)] text-base tracking-wide font-normal focus:outline-none" />
-                            </div>
-                            <hr class="border-[1px] text-[var(--judul)]">
-                            @error('new_password')
-                                <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <!-- Confirm New Password -->
-                        <div class="relative w-full h-20">
-                            <label class="text-[var(--judul)] text-sm font-medium mb-2 block">Confirm New Password</label>
-                            <div class="bg-[var(--highlight-text-box)] px-4 py-1 rounded-t-md flex items-center h-14">
-                                <input type="password" 
-                                    name="new_password_confirmation"
-                                    class="w-full bg-transparent text-[var(--judul)] text-base tracking-wide font-normal focus:outline-none" />
-                            </div>
-                            <hr class="border-[1px] text-[var(--judul)]">
-                        </div>
                     </div>
                 </div>
 
