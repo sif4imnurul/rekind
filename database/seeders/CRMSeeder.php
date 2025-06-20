@@ -28,7 +28,7 @@ class CRMSeeder extends Seeder
 
         $permohonan = [
             [
-                'id_user' => $users->random()->id_user,
+                'id_user' => 2,
                 'nama' => 'John Doe',
                 'npk' => '12345',
                 'unit' => 'IT',
@@ -40,7 +40,7 @@ class CRMSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
             [
-                'id_user' => $users->random()->id_user,
+                'id_user' => 2,
                 'nama' => 'Jane Smith',
                 'npk' => '12346',
                 'unit' => 'HR',
@@ -52,7 +52,7 @@ class CRMSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
             [
-                'id_user' => $users->random()->id_user,
+                'id_user' => 2,
                 'nama' => 'Bob Johnson',
                 'npk' => '12347',
                 'unit' => 'Finance',
