@@ -112,6 +112,9 @@ Route::get('/hasil-survey/skl', [HasilSurveyController::class, 'skl'])
 Route::get('/hasil-survey/testimoni', [HasilSurveyController::class, 'testimoni'])
     ->middleware(IsUserB::class)
     ->name('survey.testimoni');
+Route::get('/hasil-survey/dokumen_survey', [HasilSurveyController::class, 'dokumen_survey'])
+    ->middleware(IsUserB::class)
+    ->name('survey.dokumen_survey');
     
 // Tampilan Agenda
 Route::get('/list-agenda', [AgendaController::class, 'list'])
