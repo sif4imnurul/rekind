@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('foto', 255);
             $table->integer('tahun')->nullable();
             $table->enum('tipe', ['pdf', 'ppt', 'pptx', 'video', 'image']);
-            $table->enum('kategori', ['zoom_background', 'buku', 'template_presentasi','logo','twibbon', 'laporanA', 'laporanS', 'dokum_foto', 'dokum_video', 'flyer', 'buletin' , 'dsb']);
+            $table->enum('kategori', ['zoom_background', 'buku', 'template_presentasi','logo','twibbon', 'laporanA', 'laporanS', 'dokum_foto', 'dokum_video', 'flyer', 'buletin' , 'survey_hasil' , 'dsb']);
             $table->timestamps(); 
         });
     }
