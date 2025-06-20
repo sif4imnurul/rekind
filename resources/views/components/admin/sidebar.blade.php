@@ -49,7 +49,7 @@
             <li><a href="/admin/reference/agenda" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Agenda Perusahaan</a></li>
             <li><a href="/admin/reference/media-monitoring" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Media Monitoring</a></li>
             <li><a href="/admin/reference/presentasi" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Template Presentasi</a></li>
-            <li><a href="/admin/reference/survey" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Hasil Survey Brand</a></li>
+            <li><a href="{{ route('admin.hasil-survey-brand.index') }}" class="block px-4 py-2 rounded-lg hover:bg-blue-50">Hasil Survey Brand</a></li>
           </ul>
         </div>
       </li>

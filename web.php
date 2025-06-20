@@ -38,7 +38,6 @@ use App\Http\Controllers\Admin\FlyerController as AdminFlyerController;
 use App\Http\Controllers\Admin\DataClientController as AdminDataClientController;
 use App\Http\Controllers\Admin\CRMController as AdminCRMController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
-use App\Http\Controllers\Admin\SurveyController as AdminSurveyController;
 use App\Http\Controllers\Admin\HasilSurveyBrandController;
 use App\Http\Controllers\Admin\SurveyDocumentController;
 use App\Http\Middleware\IsAdmin;
@@ -114,9 +113,6 @@ Route::get('/hasil-survey/skl', [HasilSurveyController::class, 'skl'])
 Route::get('/hasil-survey/testimoni', [HasilSurveyController::class, 'testimoni'])
     ->middleware(IsUserB::class)
     ->name('survey.testimoni');
-Route::get('/hasil-survey/dokumen_survey', [HasilSurveyController::class, 'dokumen_survey'])
-    ->middleware(IsUserB::class)
-    ->name('survey.dokumen_survey');
     
 // Tampilan Agenda
 Route::get('/list-agenda', [AgendaController::class, 'list'])
